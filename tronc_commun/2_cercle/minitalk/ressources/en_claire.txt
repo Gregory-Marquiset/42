@@ -1,0 +1,87 @@
+
+	Minitalk en claire ma gueule:
+
+Pour faire simple il faut pouvoir envoyer une str d'un ou plusieur clients vers un serveur,
+pour ca tu doit utiliser les signaux UNIX, comprendre le binaire et les lib signal.h, sys/types.h...
+Bref on va commencer simplement par faire le tour enssuite je detaillerais uniquement les choses utile pour minitalk.
+
+-Les signaux UNIX en premier
+	Ce sont des mechanisme de communiquation utiliser par l'OS pour communiquer avec avec les "processus",
+	en gros les processus c'est les programmes qui sont en activiter dans ton PC.
+
+	Tu en connait deja quelque-un car certains de ces signaux ton deja servie evidement,
+	comme couper des programmes via des message d'erreur comme le tres utiliser mais meconnue SIGINT(2),
+	qui coupe un programme en cour on l'utilise souvent pour couper une boucle infinie avec Ctrl+c.
+
+	Ils donne des informations sur le fonctionement/disfonctionement d'un programme comme le classique SIGSEGV(11),
+	qui indique un segmentation fault (en gros tu tante d'acceder a un espace memoire interdit).
+
+	Mais on peut aussi ce servire de certains d'entre eux pour echanger des informations puisqu'ils transmette des int;
+	et ertains de c'est signaux sont a notre disposition SIGUSR1(10) et SIGUSR2(12), il sont justement autoriser.
+
+-Le binaire c'est facile
+	En gros c'est le language de ton PC se qui veut dire que chaques informations contenue dans ton PC est en binaire,
+	comme les variables par exemple, je t'explique via un char c'est easy.
+
+	Le binnaire ca ressemble a ca 01100101, ca ce compte de droite a gauche et a partire de 0,
+	dans mon pti binnaire suivant 00000100 le 1 c'est le byte 2, pas 6 ou 3 attention.
+
+	Pour un char c'est 8 fois 1 ou 0 et ca forme en tout 256 combinaison possible,
+	d'ou le char qui vaut de -127 a 127 ou pour que se soit plus claire le unsigned char qui vaut de 0 a 255;
+
+	En binaire on conpte en puissance de 2,
+	je te fait une ptite conversion bytes/decimal en ajoutant un pti point a 4 bytes pour la lisibiliter,
+	et j'ajoute un saut de ligne a chaque puissance, plus quelque coms tu va kiffer.
+
+		bytes		|		decimale		|		coms
+	  0000.0000					0				chaques byte est a 0 la decimal vaut zero en ascii ca vaut '\0' ou NULL.
+	  0000.0001					1				On incremente et le premier byte passe a 1, il vaut 1 en decimal, facile;
+
+	  0000.0010					2				c'est ici que ca peut faire chier, ce qui ce passe en binaire c'est que
+	  0000.0011					3					au decus de 1 y'a plus rien, on devrait passer a 2 mais on peut pas,
+													donc on va faire comme de 9 a 10 en decimale on va recommencer du debut
+	  0000.0100					4					donc de 0, mais a gauche on commence un nouveau contage de 1 a 9.
+	  0000.0101					5					On passe donc de 09 a 10 Et bien ici c'est pareil.
+	  0000.0110					6
+	  0000.0111					7				Une autres facons de voir les choses peut etre ?
+													Pour 0000.0111 ou 7 en decimale mon +1 veut s'ajouter tous a droite,
+	  0000.1000					8					mais impossible, il va donc allez sur le byte de gauche mais impossible,
+	  0000.1001					9					alors encore une fois il continue sur la gauche jusqu'a trouver un 0,
+	  0000.1010					10					pendant qu'il avance vers la gauche a chaque fois qu'il croise un 1
+	  0000.1011					11					il le change en 0, ce qui fait qu'ont passe de 0111 a 1000 le seul
+	  0000.1100					12					0 disponible etant le 4eme byte en partant de la droite.
+	  0000.1101					13
+	  0000.1110					14
+	  0000.1111					15
+
+	  0001.0000					16				Je detaille pas le binaire jusqua 255 c'est inutile tu peut le trouver sur
+	  0010.0000					32					les tables ascii dispo sur le net, je voulais juste souligner que
+	  0100.0000					64					l'ajout d'un 1 sur la gauche se fait par puissance de 2,
+	  1000.0000					128					d'ou le 4, 8, 16, 32, 64, 128, 255, etc...
+	  1111.1111					255
+
+	Je passe maintenant a un point important, choisir et modifier les bytes d'une variable
+
+	pour ce faire on a besoin d'une nouvelle notion les masques et de nouveau opperateur comme >>, <<, &, |, ^ et ~;
+
+	les masques c'est facile c'est une copie temporaire d'un bytes de la variable choisie cree via les (),
+	comprenner les masques les operateurs suivron.
+	Un exemple pour etre plus visuel, a compiler si vous vouler tester:
+
+			int	main(void)
+		{
+			char c = 'a'			\\	'a' donc 97 donc 0110.0001
+
+			printf("%c\n", c);
+
+			c -= (1 << 5);			\\	un masque de c est cree, le bit 5 en partant de droite prend la valeur 1
+
+			printf("%c\n", c);
+			return (0);
+		}
+
+
+
+
+	Vous pouvez donc naviguer dans vos variable pour en verifier chaques bytes et les modifier si besoin avec un += ou un -=;
+	un pti exemple ci-dessous:
