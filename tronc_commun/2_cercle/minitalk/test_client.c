@@ -18,113 +18,114 @@ int	ft_strlen(char *str)
 
 void wcharToEscapedString(const wchar_t *src, char *dst)
 {
+	int shift;
+	char hexDigit;
+
     while (*src != L'\0')
     {
         if (*src >= 32 && *src <= 126)
-        {
-            // Caractères ASCII normaux
-            *dst = (char)(*src);
-            ++dst;
-        }
+            *dst++ = (char)(*src);
         else
         {
-            // Caractères non-ASCII, convertis en séquences d'échappement Unicode
-            *dst = '\\';
-            ++dst;
-            *dst = 'u';
-            ++dst;
-            // Conversion du caractère en séquence hexadécimale
-            for (int shift = 12; shift >= 0; shift -= 4)
+            *dst++ = '\\';
+            *dst++ = 'u';
+			shift = 12;
+            while (shift >= 0)
             {
-                char hexDigit = (*src >> shift) & 0xF;
+                hexDigit = (*src >> shift) & 0xF;
                 *dst = hexDigit < 10 ? '0' + hexDigit : 'A' + (hexDigit - 10);
-                ++dst;
+                dst++;
+				shift -= 4;
             }
         }
-        ++src;
+        src++;
     }
     *dst = '\0';
 }
+
 //		argv to wstr		//
 
 void appendHex(wchar_t wc, char *dst)
 {
     char hex[5];
     int i;
+	int digit;
 
-    for (i = 0; i < 4; ++i)
+	i = 0;
+    while (i < 4)
     {
-        int digit = wc % 16;
+        digit = wc % 16;
         wc /= 16;
-
         if (digit < 10)
             hex[3 - i] = '0' + digit;
         else
             hex[3 - i] = 'A' + (digit - 10);
+			i++;
     }
-
     hex[4] = '\0';
-
     i = 0;
     while (hex[i] != '\0')
-    {
-        *dst = hex[i];
-        ++dst;
-        ++i;
-    }
+        *dst++ = hex[i++];
+}
+
+
+int isASCII(unsigned char c)
+{
+    return c < 0x80;
+}
+
+int isMultiByteStart(unsigned char c)
+{
+	return ((c & 0xE0) == 0xC0 || (c & 0xF0) == 0xE0 || (c & 0xF8) == 0xF0);
+}
+
+wchar_t convertASCIIToWchar(unsigned char c)
+{
+	return (c);
+}
+
+wchar_t convertMultiByteToWchar(const char *input, int len)
+{
+	wchar_t	wc;
+	int	i;
+
+	wc = (unsigned char)input[0] & (0xFF >> (len + 1));
+	i = 1;
+	while (i < len)
+	{
+		wc = wc << 6;
+		wc |= (unsigned char)input[i] & 0x3F;
+		i++;
+	}
+	return (wc);
 }
 
 wchar_t *unitowstr(char *input)
 {
-    int i;
-	int j;
-	int k;
-	int len;
-	unsigned char uc;
-	wchar_t wc;
-	wchar_t	*ws;
+    int i = 0;
+    int j = 0;
+    int len;
+    wchar_t *ws;
 
-	i = 0;
-	j = 0;
-	ws = malloc((ft_strlen(input) + 1) * sizeof(wchar_t));
+    ws = malloc((ft_strlen(input) + 1) * sizeof(wchar_t));
+    if (!ws)
+        return NULL;
     while (input[i] != '\0')
     {
-        uc = (unsigned char)input[i];
-        wc = 0;
-        len = 0;
-        if (uc < 0x80)
+        unsigned char uc = (unsigned char)input[i];
+		i++;
+        if (isASCII(uc))
+            ws[j++] = convertASCIIToWchar(uc);
+        else if (isMultiByteStart(uc))
         {
-            wc = uc;
-            len = 1;
+			i--;
+            len = uc < 0xE0 ? 2 : (uc < 0xF0 ? 3 : 4);
+            ws[j++] = convertMultiByteToWchar(&input[i], len);
+            i += len;
         }
-        else if ((uc & 0xE0) == 0xC0)
-        {
-            wc = uc & 0x1F;
-            len = 2;
-        }
-        else if ((uc & 0xF0) == 0xE0)
-        {
-            wc = uc & 0x0F;
-            len = 3;
-        }
-        else if ((uc & 0xF8) == 0xF0)
-        {
-            wc = uc & 0x07;
-            len = 4;
-        }
-		k = 1;
-        while (k < len)
-        {
-            wc = wc << 6;
-            wc |= (unsigned char)input[i + k] & 0x3F;
-			k++;
-        }
-		ws[j] = wc;
-		j++;
-        i += len;
     }
-	ws[j] = L'\0';
-	return (ws);
+    ws[j] = L'\0';
+    return (ws);
 }
 
 int main(int argc, char **argv)
@@ -138,7 +139,7 @@ int main(int argc, char **argv)
         ws = unitowstr(argv[1]);
 		wprintf(L"wc = %ls\n", ws);
 		wcharToEscapedString(ws, dst);
-		ft_printf("Destination: %s\n", dst);
+		ft_printf("dst: %s\n", dst);
 	}
     return 0;
 }

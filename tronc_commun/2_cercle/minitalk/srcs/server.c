@@ -3,53 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: greg <greg@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 17:34:43 by greg              #+#    #+#             */
-/*   Updated: 2024/01/08 23:35:05 by greg             ###   ########.fr       */
+/*   Updated: 2024/01/18 10:49:20 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/headers/minitalk.h"
 
-int	ft_str_len(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char	*ft_memcpy(char *str, char c)
-{
-	int		len;
-	char	*new;
-	int		i;
-
-	len = ft_str_len(str) + 2;
-	new = malloc(len);
-	if (!new)
-		return (0);
-	i = 0;
-	while (str[i])
-	{
-		new[i] = str[i];
-		i++;
-	}
-	new[i] = c;
-	i++;
-	new[i] = '\0';
-	free(str);
-	return (new);
-}
-
-void	ctoa(char c)
+static void	ctoa(char c)
 {
 	static char	*str;
-	static int	new_str = 0;
 
+	static int (new_str) = 0;
 	if (new_str == 0)
 	{
 		str = malloc(2);
@@ -67,11 +34,10 @@ void	ctoa(char c)
 	}
 }
 
-void	bytoc(int received)
+static void	bytoc(int received)
 {
-	static int	i = 0;
-	static char	c = 0;
-
+	static int (i) = 0;
+	static char (c) = 0;
 	if (received == SIGUSR2)
 		c += 1 << (7 - i);
 	i++;
@@ -82,7 +48,7 @@ void	bytoc(int received)
 		c = 0;
 	}
 }
-/*
+
 int	main(int argc, char **argv)
 {
 	pid_t	pid;
@@ -96,4 +62,3 @@ int	main(int argc, char **argv)
 	while (117)
 		;
 }
-*/
