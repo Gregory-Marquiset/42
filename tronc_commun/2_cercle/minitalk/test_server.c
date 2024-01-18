@@ -1,16 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   server_bonus.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/05 17:34:43 by greg              #+#    #+#             */
-/*   Updated: 2024/01/18 04:35:10 by gmarquis         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
-#include "../../includes/headers/minitalk.h"
+#include "includes/headers/minitalk.h"
+#include <stdio.h>
+
+//		str d'echapement to wstr unicode		//
 
 int	ft_strlen(char *str)
 {
@@ -93,6 +85,9 @@ void ft_putwstr(wchar_t *wstr)
 		i++;
 	}
 }
+
+		//		code hexa to wchar_t		//
+
 wchar_t	hexatowc(char *str)
 {
 	wchar_t	wc;
@@ -115,6 +110,8 @@ wchar_t	hexatowc(char *str)
 	}
 	return (wc);
 }
+
+		//		char * to wchar_t *		//
 
 wchar_t *strtowstr(int len, char *str)
 {
@@ -141,6 +138,8 @@ wchar_t *strtowstr(int len, char *str)
 	wstr[j] = L'\0';
 	return (wstr);
 }
+
+		//					test sequence unicode				//
 
 int	ft_is_hexa(char c)
 {
@@ -171,6 +170,8 @@ int	containe_unicode(char *str)
 	return (0);
 }
 
+		//		char * to print or wchar_t *		//
+
 void strto(char *str)
 {
     int len;
@@ -179,7 +180,7 @@ void strto(char *str)
 	if (!containe_unicode(str))
 	{
 		ft_printf("%s", str);
-		free (str);
+		//free (str);
 		return ;
 	}
 	else
@@ -187,11 +188,13 @@ void strto(char *str)
 		len = ft_strlen(str);
 		wstr = strtowstr(len, str);
 		ft_putwstr(wstr);
-		free(str);
+		//free(str);
 		free (wstr);
 	}
 	return ;
 }
+
+		//		add char at the char * bottom		//
 
 char	*ft_memcpy(char *str, char c)
 {
@@ -216,6 +219,8 @@ char	*ft_memcpy(char *str, char c)
 	return (new);
 }
 
+		//		char to char *		//
+
 void	ctoa_b(char c)
 {
 	static char	*str;
@@ -237,6 +242,8 @@ void	ctoa_b(char c)
 	}
 }
 
+		//		bytes to char		//
+
 void	bytoc_b(int received)
 {
 	static int	i = 0;
@@ -252,29 +259,13 @@ void	bytoc_b(int received)
 		c = 0;
 	}
 }
-static void	print_and_answer(int received, siginfo_t *si, void *ucontext)
-{
-	(void)ucontext;
-	bytoc_b(received);
-	kill(si->si_pid, SIGUSR1);
-}
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	struct sigaction	sa;
-	pid_t	pid;
 	setlocale(LC_ALL, "");
 
-	if (argc > 1 || argv[1])
-		return (ft_printf("Too many arguments !\n"), 0);
-	pid = getpid();
-	ft_printf("The pid of this server is %d\n", pid);
-	sa.sa_sigaction = &print_and_answer;
-	sa.sa_flags = SA_SIGINFO;
-	sigemptyset(&sa.sa_mask);
-	sigaction(SIGUSR2, &sa, NULL);
-	sigaction(SIGUSR1, &sa, NULL);
-	while (117)
-		;
-	return (0);
+	if (argc != 2)
+		return (0);
+	strto(argv[1]);		//	bytoc_b
+    return 0;
 }
