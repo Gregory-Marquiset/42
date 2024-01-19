@@ -6,37 +6,27 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 11:14:52 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/01/18 11:52:45 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/01/19 11:10:48 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/headers/minitalk.h"
 
-void	wctoestr(const wchar_t *src, char *dst)
+int	ft_uclen(unsigned char uc)
 {
-	int		shift;
-	char	hexa_digit;
+	int	len;
 
-	while (*src != L'\0')
+	len = 0;
+	if (uc < 0xE0)
+		len = 2;
+	else
 	{
-		if (*src >= 32 && *src <= 126)
-			*dst++ = (char)(*src);
+		if (uc < 0xF0)
+			len = 3;
 		else
-		{
-			*dst++ = '\\';
-			*dst++ = 'u';
-			shift = 12;
-			while (shift >= 0)
-			{
-				hexa_digit = (*src >> shift) & 0xF;
-				*dst = hexa_digit < 10 ? '0' + hexa_digit : 'A' + (hexa_digit - 10);		//		a virer
-				dst++;
-				shift -= 4;
-			}
-		}
-		src++;
+			len = 4;
 	}
-	*dst = '\0';
+	return (len);
 }
 
 int	ft_is_ascii(unsigned char c)

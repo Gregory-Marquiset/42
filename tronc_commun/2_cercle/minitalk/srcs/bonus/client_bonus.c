@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:22:07 by greg              #+#    #+#             */
-/*   Updated: 2024/01/18 11:39:47 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/01/19 11:12:14 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,41 @@ static wchar_t	*unitowstr(char *input)
 		else if (ft_is_multi_byte(uc))
 		{
 			i--;
-			len = uc < 0xE0 ? 2 : (uc < 0xF0 ? 3 : 4);		//		a virer		//
+			len = ft_uclen(uc);
 			ws[j++] = mbytowc(&input[i], len);
 			i += len;
 		}
 	}
 	return (ws[j] = L'\0', ws);
+}
+
+static void	wctoestr(const wchar_t *src, char *dst)
+{
+	int		shift;
+	char	hexa_digit;
+
+	while (*src != L'\0')
+	{
+		if (*src >= 32 && *src <= 126)
+			*dst++ = (char)(*src);
+		else
+		{
+			*dst++ = '\\';
+			*dst++ = 'u';
+			shift = 12;
+			while (shift >= 0)
+			{
+				hexa_digit = (*src >> shift) & 0xF;
+				if (hexa_digit < 10)
+					*dst++ = '0' + hexa_digit;
+				else
+					*dst++ = 'A' + (hexa_digit - 10);
+				shift -= 4;
+			}
+		}
+		src++;
+	}
+	*dst = '\0';
 }
 
 int	main(int argc, char **argv)

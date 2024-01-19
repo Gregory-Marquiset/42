@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:16:38 by greg              #+#    #+#             */
-/*   Updated: 2024/01/18 11:17:02 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/01/19 11:11:58 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_is_space(char c);
 int		ft_atoi(char *str);
 
 //		client_b_utils.c	//
-void	wctoestr(const wchar_t *src, char *dst);
+int		ft_uclen(unsigned char uc);
 int		ft_is_ascii(unsigned char c);
 int		ft_is_multi_byte(unsigned char c);
 wchar_t	asciitowc(unsigned char c);
