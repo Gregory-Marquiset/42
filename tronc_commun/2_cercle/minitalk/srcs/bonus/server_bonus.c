@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 17:34:43 by greg              #+#    #+#             */
-/*   Updated: 2024/01/18 11:21:30 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/01/23 08:27:43 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/headers/minitalk.h"
+#include "../../includes/minitalk.h"
 
 static void	ctoa_b(char c)
 {

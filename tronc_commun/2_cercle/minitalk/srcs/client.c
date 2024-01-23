@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:22:07 by greg              #+#    #+#             */
-/*   Updated: 2024/01/18 10:50:34 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/01/23 08:28:20 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/headers/minitalk.h"
+#include "../includes/minitalk.h"
 
 int	main(int argc, char **argv)
 {

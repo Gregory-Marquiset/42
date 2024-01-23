@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:33:46 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/01/18 11:41:21 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/01/23 08:28:13 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/headers/minitalk.h"
+#include "../../includes/minitalk.h"
 
 int	ft_strlen(char *str)
 {

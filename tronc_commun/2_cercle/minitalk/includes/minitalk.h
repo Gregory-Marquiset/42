@@ -6,14 +6,14 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:16:38 by greg              #+#    #+#             */
-/*   Updated: 2024/01/19 11:11:58 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/01/19 12:21:12 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITALK_H
 # define MINITALK_H
 
-# include "ft_printf.h"
+# include "printf/includes/ft_printf.h"
 # include <locale.h>
 # include <signal.h>
 # include <stdlib.h>

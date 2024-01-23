@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:27:19 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/01/18 10:47:58 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/01/23 08:27:50 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/headers/minitalk.h"
+#include "../../includes/minitalk.h"
 
 int	ft_is_digit(char c)
 {

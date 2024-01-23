@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:43:21 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/01/18 11:45:46 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/01/23 08:28:01 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/headers/minitalk.h"
+#include "../../includes/minitalk.h"
 
 int	ft_wctobu_110000(char *s, wchar_t wc)
 {

@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:39:37 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/01/18 11:43:59 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/01/23 08:28:07 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/headers/minitalk.h"
+#include "../../includes/minitalk.h"
 
 void	ft_putwchar(wchar_t wc)
 {

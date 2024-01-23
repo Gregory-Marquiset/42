@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:22:07 by greg              #+#    #+#             */
-/*   Updated: 2024/01/19 11:12:14 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/01/23 08:27:28 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/headers/minitalk.h"
+#include "../../includes/minitalk.h"
 
 static void	valid_send(int i)
 {

@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 11:14:52 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/01/19 11:10:48 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/01/23 08:27:55 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/headers/minitalk.h"
+#include "../../includes/minitalk.h"
 
 int	ft_uclen(unsigned char uc)
 {
