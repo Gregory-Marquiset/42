@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:22:07 by greg              #+#    #+#             */
-/*   Updated: 2024/01/23 08:27:28 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/01/23 14:55:07 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	wctoestr(const wchar_t *src, char *dst)
 
 	while (*src != L'\0')
 	{
-		if (*src >= 32 && *src <= 126)
+		if (*src >= 0 && *src <= 126)
 			*dst++ = (char)(*src);
 		else
 		{
@@ -84,7 +84,29 @@ static void	wctoestr(const wchar_t *src, char *dst)
 		}
 		src++;
 	}
-	*dst = '\0';
+}
+
+static char	*wcmallocstr(wchar_t *ws)
+{
+	int		len;
+	int		i;
+	char	*dst;
+
+	i = 0;
+	while (ws[i])
+	{
+		if (ws[i] >= 0 && ws[i] <= 126)
+			len++;
+		else
+			len += 6;
+		i++;
+	}
+	dst = malloc(len + 1);
+	if (!dst)
+		return (0);
+	dst[len + 1] = '\0';
+	ft_printf("%d\n", len);
+	return (dst);
 }
 
 int	main(int argc, char **argv)
@@ -92,26 +114,27 @@ int	main(int argc, char **argv)
 	pid_t	pid;
 	int		i;
 	wchar_t	*ws;
-	char	dst[1024];
+	char	*dst;
 
 	setlocale(LC_ALL, "");
 	if (argc != 3)
 		return (ft_printf("The correct format is ./client pid array\n"), 0);
 	pid = ft_atoi(argv[1]);
 	if (pid == 0)
-	{
-		ft_printf("Invalide pid !\n");
-		return (0);
-	}
-	i = 0;
+		return (ft_printf("Invalide pid !\n"), 0);
 	signal(SIGUSR1, valid_send);
 	ws = unitowstr(argv[2]);
+	dst = wcmallocstr(ws);
 	wctoestr(ws, dst);
+	free(ws);
+	i = 0;
+	ft_printf("%s\n", dst);
 	while (dst[i])
-	{
-		client_send_char(dst[i], pid);
-		i++;
-	}
+		client_send_char(dst[i++], pid);
 	client_send_char('\0', pid);
+	free (dst);
 	return (0);
 }
+
+// "Hello 42✓✓"
+// "Hello 42\u2713\u2713"
