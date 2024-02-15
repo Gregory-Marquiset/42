@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: greg <greg@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 20:03:21 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/01/09 01:11:36 by greg             ###   ########.fr       */
+/*   Updated: 2024/02/14 10:18:27 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,11 @@ void	get_index(t_stack *stack_a, int size)
 		if (highest != NULL)
 			highest->index = size;
 	}
+}
+
+int	nb_abs(int nbr)
+{
+	if (nbr < 0)
+		return (nbr * -1);
+	return (nbr);
 }

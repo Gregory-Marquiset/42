@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sorting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: greg <greg@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 13:29:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/01/09 01:11:28 by greg             ###   ########.fr       */
+/*   Updated: 2024/02/14 10:52:55 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,25 @@ static void	push_b_keep_three(t_stack **stack_a, t_stack **stack_b, int size)
 
 }
 
+static void	shift_stack(t_stack **stack_a)
+{
+	int	lowest_pos;
+	int	stack_size;
+
+	stack_size = stack_size(*stack_a);
+	lowest_pos = get_lower_index_position(stack_a);
+}
+
 void	do_sorting(t_stack **stack_a, t_stack **stack_b, int size)
 {
 	push_b_keep_three(stack_a, stack_b, size);
 	do_triad_sorting(stack_a);
+	while (*stack_b)
+	{
+		get_target_position(stack_a, stack_b);
+		get_cost(stack_a, stack_b);
+		do_cheapest_move(stack_a, stack_b);
+	}
+	if (!sorted_stack(*stack_a))
+		shift_stack(stack_a);
 }

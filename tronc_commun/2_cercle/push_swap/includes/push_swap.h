@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 20:57:03 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/01/04 13:49:21 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/02/14 09:34:02 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ typedef struct s_stack
 //		initialisation.c	//
 t_stack				*new_element(char *value);
 t_stack				*make_stack_a(char **list);
+
+//		position.c			//
+static void			get_pos(t_stack **stack);
+static int			get_target(t_stack **stack_a, int index_b, int target_index, int target_position);
+void				get_target_position(t_stack **stack_a, t_stack **stack_b);
 
 //		main.c				//
 int					sorted_stack(t_stack *stack_a);

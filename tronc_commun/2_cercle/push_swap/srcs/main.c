@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: greg <greg@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 01:42:14 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/01/05 01:04:01 by greg             ###   ########.fr       */
+/*   Updated: 2024/02/14 10:48:15 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/push_swap.h"
+#include "../includes/push_swap.h"
 
-int	sorted_stack(t_stack *stack_a)
+int	sorted_stack(t_stack *stack)
 {
-	while (stack_a->next != NULL)
+	while (stack->next != NULL)
 	{
-		if (stack_a->value > stack_a->next->value)
+		if (stack->value > stack->next->value)
 			return (0);
-		stack_a = stack_a->next;
+		stack = stack->next;
 	}
 	return (1);
 }
