@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 20:57:03 by gmarquis          #+#    #+#             */
-/*   Updated: 2023/12/21 02:46:50 by gmarquis         ###   ########.fr       */
+/*   Updated: 2023/12/14 17:57:30 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,49 +101,8 @@ int	zero_digit_di(long long nbr, int n);
 int	zero_digit_u(long long nbr, int n);
 
 //		fonction_13_bonus.c		//
+
 int	space_digit_s(char *str, int n);
-int	digit_dot_digit_c(int c, int n1, int n2);
-int	digit_dot_digit_s(char *str, int n1, int n2);
-int	digit_dot_digit_diu(long long nbr, int n1, int n2);
-int	digit_dot_digit_diu_2(long long nbr, int n);
-
-//		fonction_14_bonus.c		//
-int	put_espace_p(unsigned long long adrs);
-int	zero_digit_c(int c, int n);
-int	zero_digit_s(char *str, int n);
-int	put_plus_p(unsigned long long adrs);
-int	minus_digit_dot_c(int c, int n);
-
-//		fonction_15_bonus.c		//
-int	digit_dot_digit_x(unsigned long long nbr, int n1, int n2);
-int	digit_dot_digit_uppx(unsigned long long nbr, int n1, int n2);
-int	minus_digit_dot_digit_c(int c, int n1, int n2);
-int	dot_zero_flag(char *str, long long nbr);
-int	dot_p(va_list args, int n);
-
-//		fonction_16_bonus.c		//
-int	digit_dot_digit_p(unsigned long long nbr, int n1, int n2);
-int	digit_dot_digit_p2(int i, int n);
-int	zero_dot_digit_p(unsigned long long nbr, int n);
-int	minus_digit_dot_p(unsigned long long nbr, int n);
-int	minus_digit_dot_digit_p(unsigned long long nbr, int n1, int n2);
-
-//		fonction_17_bonus.c		//
-int	minus_dot_digit_p(unsigned long long nbr, int n);
-int	digit_dot_p(unsigned long long nbr, int n);
-int	zero_digit_dot_p(unsigned long long nbr, int n);
-int	zero_digit_dot_digit_p(unsigned long long nbr, int n1, int n2);
-int	zero_digit_dot_zero_p(unsigned long long nbr, int n);
-
-//		fonction_18_bonus.c		//
-int	zero_digit_p(unsigned long long nbr, int n);
-int	dot_zero_digit(va_list args, char *str);
-int	dot_zero_digit_flag(va_list args, char *str, int n);
-int	dot_zero_digit_s(char *str, int n);
-int	dot_zero_digit_di(long long nbr, int n);
-
-//		fonction_19_bonus.c		//
-int	dot_zero_digit_p(unsigned long long nbr, int n);
 
 //		fonction_digit_bonus.c		//
 int	a_to_i(char *str);
@@ -185,7 +144,7 @@ int	put_char(int c);
 int	put_str(char *str);
 int	put_nbr(long long nbr);
 int	put_espace_di(int nbr);
-int	put_plus_di(int nbr);
+int	put_plus(int nbr);
 
 //		fonction_symbol_bonus.c		//
 int	sharp(va_list args, char *str);

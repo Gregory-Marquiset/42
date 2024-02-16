@@ -6,7 +6,7 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 17:10:22 by gmarquis          #+#    #+#              #
-#    Updated: 2024/02/16 05:03:39 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/02/16 09:25:12 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ OBJS_BNS = $(notdir $(SRCS_BNS:.c=.o))
 OBJS_BNS_PREF = $(addprefix $(OBJS_DIR_BNS), $(OBJS_BNS))
 
 NAME = libft.a
-NAME_BNS = libft.a
+NAME_BNS = libft_bns.a
 
 MK = mkdir
 CC = cc
