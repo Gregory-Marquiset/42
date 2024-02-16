@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:39 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/02/14 09:18:24 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/02/16 02:02:52 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,32 @@ static void	get_pos(t_stack **stack)
 	i = 0;
 	while (tempo)
 	{
-		tempo->pos = i;
+		tempo->position = i;
 		tempo = tempo->next;
 		i++;
 	}
+}
+
+int	get_lowest_index_position(t_stack **stack)
+{
+	t_stack	*tmp;
+	int		lowest_index;
+	int		lowest_pos;
+
+	tmp = *stack;
+	lowest_index = INT_MAX;
+	get_pos(stack);
+	lowest_pos = tmp->position;
+	while (tmp)
+	{
+		if (tmp->index < lowest_index)
+		{
+			lowest_index = tmp->index;
+			lowest_pos = tmp->position;
+		}
+		tmp = tmp->next;
+	}
+	return (lowest_pos);
 }
 
 /* get_target:
@@ -66,7 +88,7 @@ static int	get_target(t_stack **stack_a, int index_b, int target_index, int targ
 		if (tempo_a->index > index_b && tempo_a->index < target_index)
 		{
 			target_index = tempo_a->index;
-			target_position = tempo_a->pos;
+			target_position = tempo_a->position;
 		}
 		tempo_a = tempo_a->next;
 	}
@@ -78,7 +100,7 @@ static int	get_target(t_stack **stack_a, int index_b, int target_index, int targ
 		if (tempo_a->index < target_index)
 		{
 			target_index = tempo_a->index;
-			target_position = tempo_a->pos;
+			target_position = tempo_a->position;
 		}
 		tempo_a = tempo_a->next;
 	}
@@ -99,7 +121,7 @@ void	get_target_position(t_stack **stack_a, t_stack **stack_b)
 	while (tempo_b)
 	{
 		target_position = get_target(stack_a, tempo_b->index, target_index, target_position);
-		tempo_b->target_pos = target_position;
+		tempo_b->target_position = target_position;
 		tempo_b = tempo_b->next;
 	}
 }

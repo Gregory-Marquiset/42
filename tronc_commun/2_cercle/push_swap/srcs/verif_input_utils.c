@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_input_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: greg <greg@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 15:51:35 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/01/09 01:11:46 by greg             ###   ########.fr       */
+/*   Updated: 2024/02/16 02:06:30 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,23 +80,23 @@ char	*ft_join(char **input, char set)
 	int		count_char;
 	int		index;
 	int		i;
-	int		pos;
+	int		position;
 
 	count_char = ft_count(input);
 	str = malloc(count_char);
 	if (!str)
 		return (0);
 	index = 1;
-	pos = 0;
+	position = 0;
 	while (input[index])
 	{
 		i = 0;
 		while (input[index][i])
-			str[pos++] = input[index][i++];
-		if (pos + 1 < count_char)
-			str[pos++] = set;
+			str[position++] = input[index][i++];
+		if (position + 1 < count_char)
+			str[position++] = set;
 		++index;
 	}
-	str[pos] = '\0';
+	str[position] = '\0';
 	return (str);
 }

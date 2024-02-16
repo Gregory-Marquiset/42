@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   initialisation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: greg <greg@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 17:19:05 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/01/09 01:11:11 by greg             ###   ########.fr       */
+/*   Updated: 2024/02/16 02:08:45 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-t_stack	*new_element(char *value)
+static t_stack	*ft_new_element(char *value)
 {
 	int		nbr;
 	t_stack	*new;
@@ -23,15 +23,15 @@ t_stack	*new_element(char *value)
 	nbr = ft_atoi(value);
 	new->value = nbr;
 	new->index = 0;
-	new->pos = -1;
-	new->target_pos = -1;
+	new->position = -1;
+	new->target_position = -1;
 	new->cost_a = -1;
 	new->cost_b = -1;
 	new->next = NULL;
 	return (new);
 }
 
-t_stack	*make_stack_a(char **list)
+t_stack	*ft_make_stack_a(char **list)
 {
 	t_stack	*stack;
 	int		i;
@@ -39,10 +39,10 @@ t_stack	*make_stack_a(char **list)
 	if (!list || !list[0])
 		return (0);
 	i = 0;
-	stack = new_element(list[i++]);
+	stack = ft_new_element(list[i++]);
 	while (list[i])
 	{
-		add_bottom(&stack, new_element(list[i]));
+		add_bottom(&stack, ft_new_element(list[i]));
 		i++;
 	}
 	ft_le_xav(list);

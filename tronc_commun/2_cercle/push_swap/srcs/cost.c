@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:40:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/02/14 10:17:09 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/02/16 02:01:30 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 *	If the element is in the bottom half of the stack, the cost will be negative,
 *	if it is in the top half, the cost is positive.
 */
-void	get_cost(t_stack **stack_a, t_stack **stack_b)
+void	ft_calculates_cost(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*tempo_a;
 	t_stack	*tempo_b;
@@ -30,16 +30,16 @@ void	get_cost(t_stack **stack_a, t_stack **stack_b)
 
 	tempo_a = *stack_a;
 	tempo_b = *stack_b;
-	size_a = stack_size(tempo_a);
-	size_b = stack_size(tempo_b);
+	size_a = ft_stack_size(tempo_a);
+	size_b = ft_stack_size(tempo_b);
 	while (tempo_b)
 	{
-		tempo_b->cost_b = tempo_b->pos;
-		if (tempo_b->pos > size_b / 2)
-			tempo_b->cost_b = (size_b - tempo_b->pos) * -1;
-		tempo_b->cost_a = tempo_b->target_pos;
-		if (tempo_b->target_pos > size_a / 2)
-			tempo_b->cost_a = (size_a - tempo_b->target_pos) * -1;
+		tempo_b->cost_b = tempo_b->position;
+		if (tempo_b->position > size_b / 2)
+			tempo_b->cost_b = (size_b - tempo_b->position) * -1;
+		tempo_b->cost_a = tempo_b->target_position;
+		if (tempo_b->target_position > size_a / 2)
+			tempo_b->cost_a = (size_a - tempo_b->target_position) * -1;
 		tempo_b = tempo_b->next;
 	}
 }
@@ -59,9 +59,9 @@ void	do_cheapest_move(t_stack **stack_a, t_stack **stack_b)
 	cheapest = 2147483647;
 	while (tempo_b)
 	{
-		if (nb_abs(tempo_b->cost_a) + nb_abs(tempo_b->cost_b) < nb_abs(cheapest))
+		if (ft_absolute_nbr(tempo_b->cost_a) + ft_absolute_nbr(tempo_b->cost_b) < ft_absolute_nbr(cheapest))
 		{
-			cheapest = nb_abs(tempo_b->cost_b) + nb_abs(tempo_b->cost_a);
+			cheapest = ft_absolute_nbr(tempo_b->cost_b) + ft_absolute_nbr(tempo_b->cost_a);
 			cost_a = tempo_b->cost_a;
 			cost_b = tempo_b->cost_b;
 		}

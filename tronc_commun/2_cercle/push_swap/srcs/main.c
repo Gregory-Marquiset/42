@@ -6,13 +6,13 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 01:42:14 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/02/14 10:48:15 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/02/16 01:51:59 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	sorted_stack(t_stack *stack)
+int	ft_stack_a_is_sorted(t_stack *stack)
 {
 	while (stack->next != NULL)
 	{
@@ -23,7 +23,7 @@ int	sorted_stack(t_stack *stack)
 	return (1);
 }
 
-static void	pour_les_tests(t_stack *stack_a, t_stack *stack_b, int size)
+static void	for_tests(t_stack *stack_a, t_stack *stack_b, int size)
 {
 	int (i) = 1;
 	t_stack	*(tempo_a) = stack_a;
@@ -53,7 +53,7 @@ static void	pour_les_tests(t_stack *stack_a, t_stack *stack_b, int size)
 		ft_printf("\033[32;01m\t| stack_b %2d =\033[00m %11d \033[32;01m|\033[00m \033[33;01midx = %2d\033[00m\n", i, tempo_b->value, tempo_b->index);
 	else if (!tempo_b)
 		ft_printf("\n");
-	if (!sorted_stack(stack_a))
+	if (!ft_stack_a_is_sorted(stack_a))
 		ft_printf("\033[31;01m|  Stack_a not sorted  !!  |\033[00m\n");
 	else
 		ft_printf("\033[32;01m|    Stack_a sorted  !!    |\033[00m\n");
@@ -62,11 +62,11 @@ static void	pour_les_tests(t_stack *stack_a, t_stack *stack_b, int size)
 
 void	push_swap(t_stack **stack_a, t_stack **stack_b, int size)
 {
-	if (size == 2 && !sorted_stack(*stack_a))
+	if (size == 2 && !ft_stack_a_is_sorted(*stack_a))
 		do_sa(stack_a);
-	else if (size == 3 && !sorted_stack(*stack_a))
+	else if (size == 3 && !ft_stack_a_is_sorted(*stack_a))
 		do_triad_sorting(stack_a);
-	else if (size > 3 && !sorted_stack(*stack_a))
+	else if (size > 3 && !ft_stack_a_is_sorted(*stack_a))
 		do_sorting(stack_a, stack_b, size);
 	return ;
 }
@@ -80,20 +80,20 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		return (0);
-	list = check_input(argv);
+	list = ft_check_input(argv);
 	if (list == NULL)
 		ft_error(NULL, NULL);
-	stack_a = make_stack_a(list);
+	stack_a = ft_make_stack_a(list);
 	stack_b = NULL;
-	size = stack_size(stack_a);
-	get_index(stack_a, size + 1);
+	size = ft_stack_size(stack_a);
+	ft_get_index(stack_a, size + 1);
 
-	pour_les_tests(stack_a, stack_b, size);
+	for_tests(stack_a, stack_b, size);
 	push_swap(&stack_a, &stack_b, size);
-	pour_les_tests(stack_a, stack_b, size);
+	for_tests(stack_a, stack_b, size);
 
-	ft_le_xav_stack(&stack_b);
-	ft_le_xav_stack(&stack_a);
+	ft_xav_the_stack(&stack_b);
+	ft_xav_the_stack(&stack_a);
 	return (0);
 }
 

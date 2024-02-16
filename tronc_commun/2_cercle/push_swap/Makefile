@@ -3,24 +3,28 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: greg <greg@student.42.fr>                  +#+  +:+       +#+         #
+#    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/18 22:14:21 by gmarquis          #+#    #+#              #
-#    Updated: 2024/01/09 01:10:15 by greg             ###   ########.fr        #
+#    Updated: 2024/02/16 01:01:04 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = srcs/initialisation.c \
-srcs/push.c \
-srcs/reverse_rotate.c \
-srcs/rotate.c \
-srcs/sorting.c \
-srcs/stack_navigation.c \
-srcs/stack_utils.c \
-srcs/swap.c \
-srcs/triad_sorting.c \
-srcs/verif_input.c \
-srcs/verif_input_utils.c \
+SRCS = srcs/cost.c $\
+srcs/do_move $\
+srcs/initialisation.c $\
+srcs/main.c $\
+srcs/position $\
+srcs/push.c $\
+srcs/reverse_rotate.c $\
+srcs/rotate.c $\
+srcs/sorting.c $\
+srcs/stack_navigation.c $\
+srcs/stack_utils.c $\
+srcs/swap.c $\
+srcs/triad_sorting.c $\
+srcs/verif_input_utils.c $\
+srcs/verif_input.c
 
 OBJS_DIR = objs/
 OBJS = $(SRCS:.c=.o)

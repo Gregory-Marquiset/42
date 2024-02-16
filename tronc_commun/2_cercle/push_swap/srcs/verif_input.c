@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   verif_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: greg <greg@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 14:16:49 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/01/09 01:11:49 by greg             ###   ########.fr       */
+/*   Updated: 2024/02/16 01:43:38 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	input_countain_double(char **clean_input)
+static int	ft_input_countain_double(char **clean_input)
 {
 	int	i;
 	int	j;
@@ -38,7 +38,7 @@ int	input_countain_double(char **clean_input)
 	return (0);
 }
 
-int	input_is_int(char *clean_input)
+static int	ft_input_is_int(char *clean_input)
 {
 	long	nbr;
 
@@ -51,7 +51,7 @@ int	input_is_int(char *clean_input)
 		return (0);
 }
 
-int	input_is_digit(char *clean_input)
+static int	ft_input_is_digit(char *clean_input)
 {
 	int	i;
 
@@ -71,7 +71,7 @@ int	input_is_digit(char *clean_input)
 	return (1);
 }
 
-char	**check_input(char **input)
+char	**ft_check_input(char **input)
 {
 	int		i;
 	char	*str;
@@ -85,11 +85,11 @@ char	**check_input(char **input)
 	i = 1;
 	while (clean_input[i])
 	{
-		if (!input_is_digit(clean_input[i]) || !input_is_int(clean_input[i]))
+		if (!ft_input_is_digit(clean_input[i]) || !ft_input_is_int(clean_input[i]))
 			return (ft_le_xav(clean_input), NULL);
 		i++;
 	}
-	if (input_countain_double(clean_input))
+	if (ft_input_countain_double(clean_input))
 		return (ft_le_xav(clean_input), NULL);
 	return (clean_input);
 }

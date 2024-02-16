@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   stack_navigation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: greg <greg@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:52:06 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/01/09 01:11:32 by greg             ###   ########.fr       */
+/*   Updated: 2024/02/16 01:31:13 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-int		stack_size(t_stack *stack_a)
-{
-	int	size;
-
-	size = 0;
-	if (!stack_a)
-		return (0);
-	while (stack_a)
-	{
-		stack_a = stack_a->next;
-		size++;
-	}
-	return (size);
-}
 
 t_stack	*get_bottom(t_stack *stack)
 {

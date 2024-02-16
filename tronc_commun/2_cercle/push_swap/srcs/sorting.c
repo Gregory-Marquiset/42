@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 13:29:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/02/14 10:52:55 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/02/16 02:04:30 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,27 @@ static void	push_b_keep_three(t_stack **stack_a, t_stack **stack_b, int size)
 
 static void	shift_stack(t_stack **stack_a)
 {
-	int	lowest_pos;
-	int	stack_size;
+	int	lowest_position;
+	int	size;
 
-	stack_size = stack_size(*stack_a);
-	lowest_pos = get_lower_index_position(stack_a);
+	size = ft_stack_size(*stack_a);
+	lowest_position = get_lowest_index_position(stack_a);
+	if (lowest_position > size / 2)
+	{
+		while (lowest_position < size)
+		{
+			do_rra(stack_a);
+			lowest_position++;
+		}
+	}
+	else
+	{
+		while (lowest_position > 0)
+		{
+			do_ra(stack_a);
+			lowest_position--;
+		}
+	}
 }
 
 void	do_sorting(t_stack **stack_a, t_stack **stack_b, int size)
@@ -54,9 +70,9 @@ void	do_sorting(t_stack **stack_a, t_stack **stack_b, int size)
 	while (*stack_b)
 	{
 		get_target_position(stack_a, stack_b);
-		get_cost(stack_a, stack_b);
+		ft_calculates_cost(stack_a, stack_b);
 		do_cheapest_move(stack_a, stack_b);
 	}
-	if (!sorted_stack(*stack_a))
+	if (!ft_stack_a_is_sorted(*stack_a))
 		shift_stack(stack_a);
 }
