@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:40:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/02/16 02:01:30 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/02/16 02:47:28 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,18 @@ void	ft_calculates_cost(t_stack **stack_a, t_stack **stack_b)
 	}
 }
 
-/* do_cheapest_move:
+static int	ft_absolute_nbr(int nbr)
+{
+	if (nbr < 0)
+		return (nbr * -1);
+	return (nbr);
+}
+
+/* ft_cheapest_move:
 *	Finds the element in stack B with the cheapest cost to move to stack A
 *	and moves it to the correct position in stack A.
 */
-void	do_cheapest_move(t_stack **stack_a, t_stack **stack_b)
+void	ft_cheapest_move(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*tempo_b;
 	int		cheapest;
@@ -67,5 +74,5 @@ void	do_cheapest_move(t_stack **stack_a, t_stack **stack_b)
 		}
 		tempo_b = tempo_b->next;
 	}
-	do_move(stack_a, stack_b, cost_a, cost_b);
+	ft_move(stack_a, stack_b, cost_a, cost_b);
 }

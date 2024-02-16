@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: greg <greg@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:25:49 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/01/09 01:11:39 by greg             ###   ########.fr       */
+/*   Updated: 2024/02/16 02:50:34 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ static void	swap(t_stack **stack)
 	*stack = tempo1;
 }
 
-void	do_sa(t_stack **stack_a)
+void	ft_sa(t_stack **stack_a)
 {
 	swap(stack_a);
 	ft_printf("sa\n");
 }
 
-void	do_sb(t_stack **stack_b)
+void	ft_sb(t_stack **stack_b)
 {
 	swap(stack_b);
 	ft_printf("sb\n");
 }
 
-void	do_ss(t_stack **stack_a, t_stack **stack_b)
+void	ft_ss(t_stack **stack_a, t_stack **stack_b)
 {
 	swap(stack_a);
 	swap(stack_b);

@@ -1,37 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/03 21:39:31 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/02/16 02:49:56 by gmarquis         ###   ########.fr       */
+/*   Created: 2023/11/21 14:11:35 by gmarquis          #+#    #+#             */
+/*   Updated: 2023/11/21 14:11:36 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
-
-static void	push(t_stack **src, t_stack **dst)
+int	ft_toupper(int c)
 {
-	t_stack	*tmp;
-
-	if (*src == NULL)
-		return ;
-	tmp = (*src)->next;
-	(*src)->next = *dst;
-	*dst = *src;
-	*src = tmp;
-}
-
-void	ft_pa(t_stack **stack_a, t_stack **stack_b)
-{
-	push(stack_b, stack_a);
-	ft_printf("pa\n");
-}
-
-void	ft_pb(t_stack **stack_a, t_stack **stack_b)
-{
-	push(stack_a, stack_b);
-	ft_printf("pb\n");
+	if (c >= 97 && c <= 122)
+		c -= 32;
+	return (c);
 }

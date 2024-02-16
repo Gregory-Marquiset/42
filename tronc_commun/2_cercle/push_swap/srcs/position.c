@@ -6,13 +6,13 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:39 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/02/16 02:02:52 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/02/16 02:54:17 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static void	get_pos(t_stack **stack)
+static void	ft_give_position(t_stack **stack)
 {
 	t_stack	*tempo;
 	int		i;
@@ -27,26 +27,26 @@ static void	get_pos(t_stack **stack)
 	}
 }
 
-int	get_lowest_index_position(t_stack **stack)
+int	ft_get_lowest_index_position(t_stack **stack)
 {
 	t_stack	*tmp;
 	int		lowest_index;
-	int		lowest_pos;
+	int		lowest_position;
 
 	tmp = *stack;
 	lowest_index = INT_MAX;
-	get_pos(stack);
-	lowest_pos = tmp->position;
+	ft_give_position(stack);
+	lowest_position = tmp->position;
 	while (tmp)
 	{
 		if (tmp->index < lowest_index)
 		{
 			lowest_index = tmp->index;
-			lowest_pos = tmp->position;
+			lowest_position = tmp->position;
 		}
 		tmp = tmp->next;
 	}
-	return (lowest_pos);
+	return (lowest_position);
 }
 
 /* get_target:
@@ -78,7 +78,7 @@ int	get_lowest_index_position(t_stack **stack)
 *	So target_pos needs to be the position of index 3, since that is
 *	the "end" of the stack.*/
 
-static int	get_target(t_stack **stack_a, int index_b, int target_index, int target_position)
+static int	ft_give_target(t_stack **stack_a, int index_b, int target_index, int target_position)
 {
 	t_stack	*tempo_a;
 
@@ -107,20 +107,20 @@ static int	get_target(t_stack **stack_a, int index_b, int target_index, int targ
 	return (target_position);
 }
 
-void	get_target_position(t_stack **stack_a, t_stack **stack_b)
+void	ft_get_target_position(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*tempo_b;
 	int		target_position;
 	int		target_index;
 
-	get_pos(stack_a);
-	get_pos(stack_b);
+	ft_give_position(stack_a);
+	ft_give_position(stack_b);
 	tempo_b = *stack_b;
 	target_position = 0;
 	target_index = 2147483647;
 	while (tempo_b)
 	{
-		target_position = get_target(stack_a, tempo_b->index, target_index, target_position);
+		target_position = ft_give_target(stack_a, tempo_b->index, target_index, target_position);
 		tempo_b->target_position = target_position;
 		tempo_b = tempo_b->next;
 	}

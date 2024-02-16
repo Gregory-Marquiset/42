@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 01:42:14 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/02/16 01:51:59 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/02/16 02:46:35 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,41 @@ static void	for_tests(t_stack *stack_a, t_stack *stack_b, int size)
 void	push_swap(t_stack **stack_a, t_stack **stack_b, int size)
 {
 	if (size == 2 && !ft_stack_a_is_sorted(*stack_a))
-		do_sa(stack_a);
+		ft_sa(stack_a);
 	else if (size == 3 && !ft_stack_a_is_sorted(*stack_a))
-		do_triad_sorting(stack_a);
+		ft_triad_sorting(stack_a);
 	else if (size > 3 && !ft_stack_a_is_sorted(*stack_a))
-		do_sorting(stack_a, stack_b, size);
+		ft_sorting(stack_a, stack_b, size);
 	return ;
+}
+
+static void	ft_give_index(t_stack *stack_a, int size)
+{
+	t_stack	*tempo_a;
+	t_stack	*highest;
+	int		value;
+
+	while (--size > 0)
+	{
+		tempo_a = stack_a;
+		highest = NULL;
+		value = -2147483648;
+		while (tempo_a)
+		{
+			if (tempo_a->value == -2147483648 && tempo_a->index == 0)
+				tempo_a->index = 1;
+			if (tempo_a->value > value && tempo_a->index == 0)
+			{
+				highest = tempo_a;
+				value = tempo_a->value;
+				tempo_a = stack_a;
+			}
+			else
+				tempo_a = tempo_a->next;
+		}
+		if (highest != NULL)
+			highest->index = size;
+	}
 }
 
 int	main(int argc, char **argv)
@@ -86,7 +115,7 @@ int	main(int argc, char **argv)
 	stack_a = ft_make_stack_a(list);
 	stack_b = NULL;
 	size = ft_stack_size(stack_a);
-	ft_get_index(stack_a, size + 1);
+	ft_give_index(stack_a, size + 1);
 
 	for_tests(stack_a, stack_b, size);
 	push_swap(&stack_a, &stack_b, size);

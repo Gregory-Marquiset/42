@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: greg <greg@student.42.fr>                  +#+  +:+       +#+         #
+#    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/20 16:45:40 by greg              #+#    #+#              #
-#    Updated: 2024/01/09 00:43:12 by greg             ###   ########.fr        #
+#    Updated: 2024/01/23 07:42:36 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ srcs/fonction_verif_bonus.c $\
 srcs/ft_printf.c
 
 OBJS_DIR = objs/
-OBJS = $(SRCS:.c=.o)
+OBJS = $(notdir $(SRCS:.c=.o))
 OBJS_PREF = $(addprefix $(OBJS_DIR), $(OBJS))
 
 NAME = libftprintf.a
@@ -43,7 +43,7 @@ MK = mkdir
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-$(OBJS_DIR)%.o : %.c includes/ft_printf.h
+$(OBJS_DIR)%.o : srcs/%.c includes/ft_printf.h
 	$(MK) -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 

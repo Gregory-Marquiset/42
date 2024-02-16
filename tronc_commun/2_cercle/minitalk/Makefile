@@ -6,7 +6,7 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 16:01:55 by greg              #+#    #+#              #
-#    Updated: 2024/01/23 13:52:08 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/02/16 05:04:43 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,6 @@ mandatory : libftprintf $(OBJS_PREF_U) $(OBJS_PREF) $(NAME) $(NAME_S)
 bonus : libftprintf $(OBJS_PREF_U) $(OBJS_PREF_B) $(NAME_CB) $(NAME_SB)
 
 all : mandatory bonus
-
 
 $(OBJS_DIR)%.o : srcs/%.c Makefile includes/minitalk.h includes/printf/libftprintf.a
 	$(MK) -p $(OBJS_DIR)

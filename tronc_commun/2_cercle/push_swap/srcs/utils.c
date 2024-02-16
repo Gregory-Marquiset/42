@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 20:03:21 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/02/16 01:49:33 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/02/16 02:42:14 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,35 +37,6 @@ void	ft_error(t_stack **stack_a, t_stack **stack_b)
 	exit (1);
 }
 
-void	ft_get_index(t_stack *stack_a, int size)
-{
-	t_stack	*tempo_a;
-	t_stack	*highest;
-	int		value;
-
-	while (--size > 0)
-	{
-		tempo_a = stack_a;
-		highest = NULL;
-		value = -2147483648;
-		while (tempo_a)
-		{
-			if (tempo_a->value == -2147483648 && tempo_a->index == 0)
-				tempo_a->index = 1;
-			if (tempo_a->value > value && tempo_a->index == 0)
-			{
-				highest = tempo_a;
-				value = tempo_a->value;
-				tempo_a = stack_a;
-			}
-			else
-				tempo_a = tempo_a->next;
-		}
-		if (highest != NULL)
-			highest->index = size;
-	}
-}
-
 int		ft_stack_size(t_stack *stack)
 {
 	int	size;
@@ -81,9 +52,39 @@ int		ft_stack_size(t_stack *stack)
 	return (size);
 }
 
-int	ft_absolute_nbr(int nbr)
+static t_stack	*ft_new_element(char *value)
 {
-	if (nbr < 0)
-		return (nbr * -1);
-	return (nbr);
+	int		nbr;
+	t_stack	*new;
+
+	new = malloc(sizeof * new);
+	if (!new)
+		return (0);
+	nbr = ft_atoi(value);
+	new->value = nbr;
+	new->index = 0;
+	new->position = -1;
+	new->target_position = -1;
+	new->cost_a = -1;
+	new->cost_b = -1;
+	new->next = NULL;
+	return (new);
+}
+
+t_stack	*ft_make_stack_a(char **list)
+{
+	t_stack	*stack;
+	int		i;
+
+	if (!list || !list[0])
+		return (0);
+	i = 0;
+	stack = ft_new_element(list[i++]);
+	while (list[i])
+	{
+		ft_add_bottom(&stack, ft_new_element(list[i]));
+		i++;
+	}
+	ft_le_xav(list);
+	return (stack);
 }

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 22:41:41 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/02/16 01:24:14 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/02/16 02:50:44 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	ft_find_highest_index(t_stack *stack)
 	return (index);
 }
 
-void	do_triad_sorting(t_stack **stack_a)
+void	ft_triad_sorting(t_stack **stack_a)
 {
 	int		highest;
 
@@ -34,9 +34,9 @@ void	do_triad_sorting(t_stack **stack_a)
 		return ;
 	highest = ft_find_highest_index(*stack_a);
 	if ((*stack_a)->index == highest)
-		do_ra(stack_a);
+		ft_ra(stack_a);
 	else if ((*stack_a)->next->index == highest)
-		do_rra(stack_a);
+		ft_rra(stack_a);
 	if ((*stack_a)->index > (*stack_a)->next->index)
-		do_sa(stack_a);
+		ft_sa(stack_a);
 }
