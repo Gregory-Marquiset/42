@@ -6,14 +6,14 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/18 22:14:21 by gmarquis          #+#    #+#              #
-#    Updated: 2024/02/16 09:25:28 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/02/21 18:03:57 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = srcs/cost.c $\
 srcs/main.c $\
-srcs/move $\
-srcs/position $\
+srcs/move.c $\
+srcs/position.c $\
 srcs/push.c $\
 srcs/reverse_rotate.c $\
 srcs/rotate.c $\
@@ -25,21 +25,16 @@ srcs/utils.c $\
 srcs/verif_input_utils.c $\
 srcs/verif_input.c
 
-NAME = push_swap.a
-
-CC = cc
-
-CFLAGS = -Wall -Wextra -Werror
-
-MK = mkdir
-
-RM = rm -f
-
 LIBFT_PATH = includes/libft/
 PRINTF_PATH = includes/printf/
 
-OBJS_DIR = objs/
+NAME = push_swap
 
+MK = mkdir
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+
+OBJS_DIR = objs/
 OBJS = $(notdir $(SRCS:.c=.o))
 OBJS_PREF = $(addprefix $(OBJS_DIR), $(OBJS:.c=.o))
 
@@ -53,12 +48,12 @@ all : libft libftprintf $(OBJS_PREF) $(NAME)
 
 bonus : all
 
-$(OBJS_DIR)%.o : srcs/%.c Makefile includes/push_swap.h includes/printf/libftprintf.a includes/libtf/libft_bns.a
+$(OBJS_DIR)%.o : srcs/%.c
 	$(MK) -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJS_PREF)
-	@ar r $@ $^
+	$(CC) $(CFLAGS) $^ -o $@ $(LIBFT_PATH)libft_bns.a $(PRINTF_PATH)libftprintf.a
 
 clean :
 	@make clean -C $(LIBFT_PATH)
@@ -68,7 +63,7 @@ clean :
 fclean :
 	@make fclean -C $(LIBFT_PATH)
 	@make fclean -C $(PRINTF_PATH)
-	$(RM) $(NAME)
+	rm -f $(NAME)
 	rm -rf objs/
 
 re : fclean all

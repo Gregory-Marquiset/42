@@ -6,7 +6,7 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 16:01:55 by greg              #+#    #+#              #
-#    Updated: 2024/02/16 05:04:43 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/02/21 17:41:12 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,9 @@ NAME_S = server
 NAME_CB = client_bonus
 NAME_SB = server_bonus
 
-CC = cc
-
-CFLAGS = -Wall -Werror -Wextra
-
 MK = mkdir
+CC = cc
+CFLAGS = -Wall -Werror -Wextra
 
 RM = rm -f
 
