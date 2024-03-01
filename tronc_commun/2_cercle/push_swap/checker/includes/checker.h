@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 17:20:14 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/02/27 17:29:56 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/01 20:46:07 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #  define BUFFER_SIZE 5
 # endif
 
+# include "../../includes/printf/includes/ft_printf.h"
+# include "../../includes/libft/includes/libft.h"
 # include <ctype.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -26,14 +28,26 @@
 # include <sys/types.h>
 # include <unistd.h>
 
-//		get_next_line.c		//
-char	*get_next_line(int fd);
+typedef struct s_stack
+{
+	int				value;
+	int				index;
+	int				position;
+	int				target_position;
+	int				cost_a;
+	int				cost_b;
+	struct s_stack	*next;
+}					t_stack;
 
-//		get_next_line_utils.c		//
-int		ft_strlen(char *str);
-char	*ft_strdup(char *s, int len);
-char	*ft_strjoin(char *s1, char *s2);
-int		contain_n(char *str);
-char	*print_line(char **tempo);
+//		verif_input_utils.c	//
+void				ft_xav_the_stack(t_stack **stack);
+void				ft_error(t_stack **stack_a, t_stack **stack_b);
+void				ft_le_xav(char **clean_input);
+long				ft_atol(char *clean_input);
+int					ft_count(char **input);
+char				*ft_join(char **input, char set);
+
+//		verif_input.c		//
+char				**ft_check_input(char **input);
 
 #endif
