@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 17:38:34 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/01 21:14:59 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/04 22:35:40 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ static int ft_input_countain_double(char **clean_input)
 	if (!clean_input || !clean_input[0])
 		return (0);
 	i = 0;
-	while (ft_input_is_digit(clean_input[i]))
+	while (clean_input[i] && ft_input_is_digit(clean_input[i]))
 	{
 		j = 1;
 		nbr1 = ft_atoi(clean_input[i]);
-		while (clean_input[j])
+		while (clean_input[j] && ft_input_is_digit(clean_input[j]))
 		{
 			nbr2 = ft_atoi(clean_input[j]);
 			if (i != j && nbr1 == nbr2)
@@ -89,25 +89,23 @@ static int ft_input_countain_double(char **clean_input)
 
 char **ft_check_input(char **input)
 {
-	char *str;
-	char **clean_input;
-	int i;
+	int		i;
+	char	*str;
+	char	**clean_input;
 
 	if (!input || !input[0])
 		return (NULL);
 	str = ft_join(input, ' ');
 	clean_input = ft_split(str, ' ');
 	free(str);
-	i = 0;
-	while (ft_input_is_digit(clean_input[i]))
+	i = 1;
+	while (clean_input[i] && ft_input_is_digit(clean_input[i]))
 	{
 		if (!ft_input_is_int(clean_input[i]))
 			return (ft_le_xav(clean_input), NULL);
 		i++;
 	}
-	ft_printf("ici 1\n");
 	if (ft_input_countain_double(clean_input))
 		return (ft_le_xav(clean_input), NULL);
-	ft_printf("ici 2\n");
 	return (clean_input);
 }

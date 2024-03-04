@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 16:50:49 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/01/09 00:54:36 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/04 22:51:32 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	ft_printf(const char *s, ...)
 	char	*str;
 	va_list	args;
 
+	if (!s)
+		return (0);
 	len = 0;
 	va_start(args, s);
 	str = (char *)s;
