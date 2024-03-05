@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 17:20:14 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/01 20:46:07 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/05 01:02:50 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int					ft_count(char **input);
 char				*ft_join(char **input, char set);
 
 //		verif_input.c		//
+int					ft_input_is_instuction(char **clean_input);
 char				**ft_check_input(char **input);
 
 #endif

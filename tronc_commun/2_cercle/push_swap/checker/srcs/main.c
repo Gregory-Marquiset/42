@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:23:29 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/01 20:43:42 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/05 08:15:10 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@ int	main(int argc, char **argv)
 	clean_input = ft_check_input(argv);
 	if (clean_input == NULL)
 		ft_error(NULL, NULL);
-	while (clean_input[i])
-	{
-		ft_printf("%s\n", clean_input[i]);
-		i++;
-	}
+	if (!ft_input_is_instuction(clean_input))
+		ft_error(NULL, NULL);
+
 	ft_le_xav(clean_input);
 	return (0);
 }
