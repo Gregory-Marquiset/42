@@ -6,26 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 17:38:22 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/01 20:45:57 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/06 00:19:32 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
-
-void	ft_xav_the_stack(t_stack **stack)
-{
-	t_stack	*swap;
-
-	if (!stack || !(*stack))
-		return ;
-	while (*stack)
-	{
-		swap = (*stack)->next;
-		free(*stack);
-		*stack = swap;
-	}
-	*stack = NULL;
-}
 
 void	ft_error(t_stack **stack_a, t_stack **stack_b)
 {

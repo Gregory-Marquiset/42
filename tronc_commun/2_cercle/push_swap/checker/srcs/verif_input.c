@@ -6,12 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 17:38:34 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/05 01:03:33 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/06 00:22:33 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
-
 
 static int ft_input_is_int(char *clean_input)
 {
@@ -26,7 +25,7 @@ static int ft_input_is_int(char *clean_input)
 		return (0);
 }
 
-static int ft_input_is_digit(char *clean_input)
+int ft_input_is_digit(char *clean_input)
 {
 	int i;
 

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 17:20:14 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/05 01:02:50 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/06 00:22:28 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ typedef struct s_stack
 	struct s_stack	*next;
 }					t_stack;
 
-//		verif_input_utils.c	//
+//		utils.c				//
 void				ft_xav_the_stack(t_stack **stack);
+t_stack				*ft_make_stack_a(char **list);
+
+//		verif_input_utils.c	//
 void				ft_error(t_stack **stack_a, t_stack **stack_b);
 void				ft_le_xav(char **clean_input);
 long				ft_atol(char *clean_input);
@@ -48,6 +51,7 @@ int					ft_count(char **input);
 char				*ft_join(char **input, char set);
 
 //		verif_input.c		//
+int					ft_input_is_digit(char *clean_input);
 int					ft_input_is_instuction(char **clean_input);
 char				**ft_check_input(char **input);
 
