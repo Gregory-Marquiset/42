@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 20:03:21 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/02/16 02:42:14 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/11 23:26:07 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	ft_error(t_stack **stack_a, t_stack **stack_b)
 	if (stack_b == NULL || *stack_b != NULL)
 		ft_xav_the_stack(stack_b);
 	write(2, "Error\n", 6);
-	exit (1);
+	exit(1);
 }
 
-int		ft_stack_size(t_stack *stack)
+int	ft_stack_size(t_stack *stack)
 {
 	int	size;
 

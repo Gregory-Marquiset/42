@@ -28,6 +28,8 @@
 		"__bit_reference": "c",
 		"__node_handle": "c",
 		"__memory": "c",
-		"limits": "c"
+		"limits": "c",
+		"ranges": "c",
+		"span": "c"
 	}
 }

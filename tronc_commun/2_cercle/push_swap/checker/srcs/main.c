@@ -6,110 +6,101 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:23:29 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/06 05:32:08 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/12 09:09:03 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
 
-static int	ft_stack_a_is_sorted(t_stack *stack)
+static int	ft_stack_a_is_sorted(t_stack **stack_a)
 {
-	while (stack->next != NULL)
+	t_stack	*tmp;
+
+	tmp = *stack_a;
+	while (tmp->next != NULL)
 	{
-		if (stack->value > stack->next->value)
+		if (tmp->value > tmp->next->value)
 			return (0);
-		stack = stack->next;
+		tmp = tmp->next;
 	}
 	return (1);
 }
 
-static void	for_tests(t_stack *stack_a, t_stack *stack_b, int size)
+void	ft_error(t_stack **stack_a, t_stack **stack_b, char *command)
 {
-	int (i) = 1;
-	t_stack	*(tempo_a) = stack_a;
-	t_stack *(tempo_b) = stack_b;
-
-	ft_printf("\033[35;01m| Stack_a valid !  size %2d |\033[00m\n", size);
-	while (i < size)
-	{
-		if (tempo_a)
-		{
-			ft_printf("\033[34;01m| stack_a %2d =\033[00m %11d \033[34;01m|\033[00m \033[36;01midx = %2d\033[00m", i, tempo_a->value, tempo_a->index);
-			tempo_a = tempo_a->next;
-		}
-		else if (!tempo_a)
-			ft_printf("%37c", ' ');
-		if (tempo_b)
-		{
-			ft_printf("\033[32;01m\t| stack_b %2d =\033[00m %11d \033[32;01m|\033[00m \033[33;01midx = %2d\033[00m\n", i, tempo_b->value, tempo_b->index);
-			tempo_b = tempo_b->next;
-		}
-		else if (!tempo_b)
-			ft_printf("\n");
-		i++;
-	}
-	ft_printf("\033[34;01m| stack_a %2d =\033[00m %11d \033[34;01m|\033[00m \033[36;01midx = %2d\033[00m", i, tempo_a->value, tempo_a->index);
-	if(tempo_b)
-		ft_printf("\033[32;01m\t| stack_b %2d =\033[00m %11d \033[32;01m|\033[00m \033[33;01midx = %2d\033[00m\n", i, tempo_b->value, tempo_b->index);
-	else if (!tempo_b)
-		ft_printf("\n");
-	if (!ft_stack_a_is_sorted(stack_a))
-		ft_printf("\033[31;01m|  Stack_a not sorted  !!  |\033[00m\n");
-	else
-		ft_printf("\033[32;01m|    Stack_a sorted  !!    |\033[00m\n");
-	return ;
+	if (stack_a == NULL || *stack_a != NULL)
+		ft_xav_the_stack(stack_a);
+	if (stack_b == NULL || *stack_b != NULL)
+		ft_xav_the_stack(stack_b);
+	if (command != NULL)
+		free(command);
+	write(2, "Error\n", 6);
+	exit(1);
 }
 
-static int		ft_stack_size(t_stack *stack)
+static void	exec_command(t_stack **stack_a, t_stack **stack_b, char *command)
 {
-	int	size;
-
-	size = 0;
-	if (!stack)
-		return (0);
-	while (stack)
-	{
-		stack = stack->next;
-		size++;
-	}
-	return (size);
-}
-
-void	do_move(t_stack **stack_a, t_stack **stack_b, char **input)
-{
-	if (size == 2 && !ft_stack_a_is_sorted(*stack_a))
+	if (*stack_a && (*stack_a)->next && !ft_strncmp(command, "sa\n", 4))
 		ft_sa(stack_a);
-	else if (size == 3 && !ft_stack_a_is_sorted(*stack_a))
-		ft_triad_sorting(stack_a);
-	else if (size > 3 && !ft_stack_a_is_sorted(*stack_a))
-		ft_sorting(stack_a, stack_b, size);
-	return ;
+	else if (*stack_b && (*stack_b)->next && !ft_strncmp(command, "sb\n", 4))
+		ft_sb(stack_b);
+	else if (*stack_a && (*stack_a)->next && *stack_b && (*stack_b)->next
+		&& !ft_strncmp(command, "ss\n", 4))
+		ft_ss(stack_a, stack_b);
+	else if (*stack_a && !ft_strncmp(command, "pb\n", 4))
+		ft_pb(stack_a, stack_b);
+	else if (*stack_a && *stack_b && !ft_strncmp(command, "pa\n", 4))
+		ft_pa(stack_a, stack_b);
+	else if (*stack_a && (*stack_a)->next && !ft_strncmp(command, "ra\n", 4))
+		ft_ra(stack_a);
+	else if (*stack_b && (*stack_b)->next && !ft_strncmp(command, "rb\n", 4))
+		ft_rb(stack_b);
+	else if (*stack_a && (*stack_a)->next && *stack_b && (*stack_b)->next
+		&& !ft_strncmp(command, "rr\n", 4))
+		ft_rr(stack_a, stack_b);
+	else if (*stack_a && (*stack_a)->next && !ft_strncmp(command, "rra\n", 5))
+		ft_rra(stack_a);
+	else if (*stack_b && (*stack_b)->next && !ft_strncmp(command, "rrb\n", 5))
+		ft_rrb(stack_b);
+	else if (*stack_a && (*stack_a)->next && *stack_b && (*stack_b)->next
+		&& !ft_strncmp(command, "rrr\n", 5))
+		ft_rrr(stack_a, stack_b);
+}
+
+static void	wait_commands(t_stack **stack_a, t_stack **stack_b)
+{
+	char	*command;
+
+	command = get_next_line(0);
+	while (command)
+	{
+		exec_command(stack_a, stack_b, command);
+		free(command);
+		command = get_next_line(0);
+	}
+	if (command)
+		free (command);
 }
 
 int	main(int argc, char **argv)
 {
-	int		size;
 	char	**clean_input;
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 
-	if (argc < 4)
+	if (argc < 2)
 		return (0);
 	clean_input = ft_check_input(argv);
 	if (clean_input == NULL)
-		ft_error(NULL, NULL);
-	if (!ft_input_is_instuction(clean_input))
-		ft_error(NULL, NULL);
+		ft_error(NULL, NULL, NULL);
 	stack_a = ft_make_stack_a(clean_input);
 	stack_b = NULL;
-	size = ft_stack_size(stack_a);
-
-	for_tests(stack_a, stack_b, size);
-	do_move(&stack_a, &stack_b, clean_input);
-	for_tests(stack_a, stack_b, size);
-
-	ft_le_xav(clean_input);
-	ft_xav_the_stack(&stack_b);
+	wait_commands(&stack_a, &stack_b);
+	if (!stack_b && ft_stack_a_is_sorted(&stack_a))
+		ft_printf("\033[32;01mOK\n\033[00m");
+	else
+		ft_printf("\033[31;01mKO\n\033[00m");
 	ft_xav_the_stack(&stack_a);
+	ft_xav_the_stack(&stack_b);
 	return (0);
 }

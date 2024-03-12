@@ -6,20 +6,27 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 17:38:22 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/06 00:19:32 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/12 09:09:39 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
 
-void	ft_error(t_stack **stack_a, t_stack **stack_b)
+void	ft_xav_the_stack(t_stack **stack)
 {
-	if (stack_a == NULL || *stack_a != NULL)
-		ft_xav_the_stack(stack_a);
-	if (stack_b == NULL || *stack_b != NULL)
-		ft_xav_the_stack(stack_b);
-	write(2, "Error\n", 6);
-	exit (1);
+	t_stack	*swap;
+	t_stack *current;
+
+	if (!stack || !(*stack))
+		return ;
+	current = *stack;
+	while (current)
+	{
+		swap = current->next;
+		free(current);
+		current = swap;
+	}
+	*stack = NULL;
 }
 
 void	ft_le_xav(char **clean_input)

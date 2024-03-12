@@ -6,15 +6,15 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 17:38:34 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/06 00:22:33 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/11 23:51:54 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
 
-static int ft_input_is_int(char *clean_input)
+static int	ft_input_is_int(char *clean_input)
 {
-	long nbr;
+	long	nbr;
 
 	if (!clean_input)
 		return (0);
@@ -25,9 +25,9 @@ static int ft_input_is_int(char *clean_input)
 		return (0);
 }
 
-int ft_input_is_digit(char *clean_input)
+int	ft_input_is_digit(char *clean_input)
 {
-	int i;
+	int	i;
 
 	if (!clean_input)
 		return (0);
@@ -45,17 +45,17 @@ int ft_input_is_digit(char *clean_input)
 	return (1);
 }
 
-static int ft_input_countain_double(char **clean_input)
+static int	ft_input_countain_double(char **clean_input)
 {
-	int i;
-	int j;
-	int nbr1;
-	int nbr2;
+	int	i;
+	int	j;
+	int	nbr1;
+	int	nbr2;
 
 	if (!clean_input || !clean_input[0])
 		return (0);
 	i = 0;
-	while (clean_input[i] && ft_input_is_digit(clean_input[i]))
+	while (clean_input[i])
 	{
 		j = 1;
 		nbr1 = ft_atoi(clean_input[i]);
@@ -71,32 +71,27 @@ static int ft_input_countain_double(char **clean_input)
 	return (0);
 }
 
-int ft_input_is_instuction(char **clean_input)
+int	ft_input_is_instuction(char *command)
 {
-	int	i;
-
-	if (!clean_input || !clean_input[0])
+	if (!command)
 		return (0);
-	i = 0;
-	while (clean_input[i] && ft_input_is_digit(clean_input[i]))
-		i++;
-	while (clean_input[i])
-	{
-		if (clean_input[i][0] == 's' && (clean_input[i][1] == 'a' || clean_input[i][1] == 'b' || clean_input[i][1] == 's') && clean_input[i][2] == '\n')
-			i++;
-		else if (clean_input[i][0] == 'p' && (clean_input[i][1] == 'a' || clean_input[i][1] == 'b') && clean_input[i][2] == '\n')
-			i++;
-		else if (clean_input[i][0] == 'r' && (clean_input[i][1] == 'a' || clean_input[i][1] == 'b' || clean_input[i][1] == 'r') && clean_input[i][2] == '\n')
-			i++;
-		else if (clean_input[i][0] == 'r' && clean_input[i][1] == 'r' && (clean_input[i][2] == 'a' || clean_input[i][2] == 'b' || clean_input[i][2] == 'r') && clean_input[i][3] == '\n')
-			i++;
-		else
-			return (0);
-	}
-	return (1);
+	if (command[0] == 'p' && (command[1] == 'a' || command[1] == 'b')
+		&& command[2] == '\n')
+		return (1);
+	else if (command[0] == 's' && (command[1] == 'a' || command[1] == 'b'
+			|| command[1] == 's') && command[2] == '\n')
+		return (1);
+	else if (command[0] == 'r' && (command[1] == 'a' || command[1] == 'b'
+			|| command[1] == 'r') && command[2] == '\n')
+		return (1);
+	else if (command[0] == 'r' && command[1] == 'r' && (command[2] == 'a'
+			|| command[2] == 'b' || command[2] == 'r') && command[3] == '\n')
+		return (1);
+	else
+		return (0);
 }
 
-char **ft_check_input(char **input)
+char	**ft_check_input(char **input)
 {
 	int		i;
 	char	*str;
@@ -105,12 +100,17 @@ char **ft_check_input(char **input)
 	if (!input || !input[0])
 		return (NULL);
 	str = ft_join(input, ' ');
+	if (!str)
+		return (NULL);
 	clean_input = ft_split(str, ' ');
+	if (!clean_input)
+		return (NULL);
 	free(str);
 	i = 1;
-	while (clean_input[i] && ft_input_is_digit(clean_input[i]))
+	while (clean_input[i])
 	{
-		if (!ft_input_is_int(clean_input[i]))
+		if (!ft_input_is_digit(clean_input[i])
+			|| !ft_input_is_int(clean_input[i]))
 			return (ft_le_xav(clean_input), NULL);
 		i++;
 	}

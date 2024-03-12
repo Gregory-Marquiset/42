@@ -6,7 +6,7 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 17:10:22 by gmarquis          #+#    #+#              #
-#    Updated: 2024/02/16 09:25:12 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/03/12 10:17:24 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,5 +93,6 @@ clean :
 
 fclean : clean
 	rm -f $(NAME)
+	rm -f $(NAME_BNS)
 
 re : fclean all

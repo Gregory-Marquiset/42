@@ -1,44 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/03 15:43:02 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/11 23:27:12 by gmarquis         ###   ########.fr       */
+/*   Created: 2024/01/03 18:01:38 by gmarquis          #+#    #+#             */
+/*   Updated: 2024/03/07 00:34:38 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/checker.h"
 
-static void	rotate(t_stack **stack)
+static void	reverse_rotate(t_stack **stack)
 {
-	t_stack	*top;
 	t_stack	*bottom;
+	t_stack	*before_bottom;
 
-	top = (*stack)->next;
 	bottom = ft_bikini_bottom(*stack);
+	before_bottom = ft_one_before_bikini_bottom(*stack);
 	bottom->next = *stack;
-	bottom->next->next = NULL;
-	*stack = top;
+	before_bottom->next = NULL;
+	*stack = bottom;
 }
 
-void	ft_ra(t_stack **stack_a)
+void	ft_rra(t_stack **stack_a)
 {
-	rotate(stack_a);
-	ft_printf("ra\n");
+	reverse_rotate(stack_a);
 }
 
-void	ft_rb(t_stack **stack_b)
+void	ft_rrb(t_stack **stack_b)
 {
-	rotate(stack_b);
-	ft_printf("rb\n");
+	reverse_rotate(stack_b);
 }
 
-void	ft_rr(t_stack **stack_a, t_stack **stack_b)
+void	ft_rrr(t_stack **stack_a, t_stack **stack_b)
 {
-	rotate(stack_a);
-	rotate(stack_b);
-	ft_printf("rr\n");
+	reverse_rotate(stack_a);
+	reverse_rotate(stack_b);
 }

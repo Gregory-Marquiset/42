@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 14:16:49 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/02/16 01:43:38 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/11 23:25:53 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,17 @@ char	**ft_check_input(char **input)
 	if (!input || !input[0])
 		return (NULL);
 	str = ft_join(input, ' ');
+	if (!str)
+		return (NULL);
 	clean_input = ft_split(str, ' ');
+	if (!clean_input)
+		return (NULL);
 	free(str);
 	i = 1;
 	while (clean_input[i])
 	{
-		if (!ft_input_is_digit(clean_input[i]) || !ft_input_is_int(clean_input[i]))
+		if (!ft_input_is_digit(clean_input[i])
+			|| !ft_input_is_int(clean_input[i]))
 			return (ft_le_xav(clean_input), NULL);
 		i++;
 	}
@@ -93,8 +98,3 @@ char	**ft_check_input(char **input)
 		return (ft_le_xav(clean_input), NULL);
 	return (clean_input);
 }
-/*
-	verif de l'input:
-		• Verifie que l'input ne contient que des nombres, int seulement,
-			aucun doublons.
-*/

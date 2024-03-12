@@ -6,13 +6,14 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:19:31 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/02/16 02:48:43 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/11 23:26:59 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static void	ft_rev_rotate_both(t_stack **stack_a, t_stack **stack_b, int *cost_a, int *cost_b)
+static void	ft_rev_rotate_both(t_stack **stack_a, t_stack **stack_b,
+		int *cost_a, int *cost_b)
 {
 	while (*cost_a < 0 && *cost_b < 0)
 	{
@@ -22,7 +23,8 @@ static void	ft_rev_rotate_both(t_stack **stack_a, t_stack **stack_b, int *cost_a
 	}
 }
 
-static void	ft_rotate_both(t_stack **stack_a, t_stack **stack_b, int *cost_a, int *cost_b)
+static void	ft_rotate_both(t_stack **stack_a, t_stack **stack_b, int *cost_a,
+		int *cost_b)
 {
 	while (*cost_a > 0 && *cost_b > 0)
 	{
