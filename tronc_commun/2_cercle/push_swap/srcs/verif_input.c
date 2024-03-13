@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 14:16:49 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/11 23:25:53 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:39:16 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	**ft_check_input(char **input)
 	if (!clean_input)
 		return (NULL);
 	free(str);
-	i = 1;
+	i = 0;
 	while (clean_input[i])
 	{
 		if (!ft_input_is_digit(clean_input[i])

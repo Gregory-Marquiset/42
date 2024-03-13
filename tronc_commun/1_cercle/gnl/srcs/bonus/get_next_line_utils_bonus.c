@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: greg <greg@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 04:57:16 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/01/09 00:53:17 by greg             ###   ########.fr       */
+/*   Updated: 2024/03/13 12:19:34 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (str);
 }
 
-int	contain_n(char *str)
+int	contain_n(char *str, char n)
 {
 	int	i;
 
@@ -75,7 +75,7 @@ int	contain_n(char *str)
 		return (0);
 	i = -1;
 	while (str[++i])
-		if (str[i] == 10)
+		if (str[i] == n)
 			return (1);
 	return (0);
 }

@@ -30,6 +30,8 @@
 		"__memory": "c",
 		"limits": "c",
 		"ranges": "c",
-		"span": "c"
+		"span": "c",
+		"unistd.h": "c",
+		"libft.h": "c"
 	}
 }

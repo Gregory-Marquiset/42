@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: greg <greg@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:23:29 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/01/09 00:51:23 by greg             ###   ########.fr       */
+/*   Updated: 2024/03/13 12:11:32 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(void)
 	int		i;
 	int		trigger;
 
-	fd = open("txt/1char.txt", O_RDONLY);
+	fd = open("txt/waterloo.txt", O_RDONLY);
 	i = 0;
 	trigger = 1;
 	printf("\033[36;01m| vv | le texte demarre a la ligne d'en dessou en blanc | vv |\033[00m\n");

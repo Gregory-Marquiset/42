@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 04:57:24 by gmarquis          #+#    #+#             */
-/*   Updated: 2023/12/26 12:11:12 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/13 12:18:49 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*get_next_line(int fd);
 int		ft_strlen(char *str);
 char	*ft_strdup(char *s, int len);
 char	*ft_strjoin(char *s1, char *s2);
-int		contain_n(char *str);
+int		contain_n(char *str, char n);
 char	*print_line(char **tempo);
 
 #endif

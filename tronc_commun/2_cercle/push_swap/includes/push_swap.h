@@ -6,14 +6,13 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 20:57:03 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/06 22:31:48 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:34:48 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "printf/includes/ft_printf.h"
 # include "libft/includes/libft.h"
 # include <limits.h>
 # include <stdlib.h>
@@ -34,11 +33,13 @@ void				ft_calculates_cost(t_stack **stack_a, t_stack **stack_b);
 void				ft_cheapest_move(t_stack **stack_a, t_stack **stack_b);
 
 //		move.c				//
-void				ft_move(t_stack **stack_a, t_stack **stack_b, int cost_a, int cost_b);
+void				ft_move(t_stack **stack_a, t_stack **stack_b, int cost_a,
+						int cost_b);
 
 //		position.c			//
 int					ft_get_lowest_index_position(t_stack **stack);
-void				ft_get_target_position(t_stack **stack_a, t_stack **stack_b);
+void				ft_get_target_position(t_stack **stack_a,
+						t_stack **stack_b);
 
 //		main.c				//
 int					ft_stack_a_is_sorted(t_stack *stack_a);

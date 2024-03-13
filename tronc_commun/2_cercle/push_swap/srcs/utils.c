@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 20:03:21 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/11 23:26:07 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:44:37 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ t_stack	*ft_make_stack_a(char **list)
 		return (0);
 	i = 0;
 	stack = ft_new_element(list[i++]);
+	if (!stack)
+		return (0);
 	while (list[i])
 	{
 		ft_add_bottom(&stack, ft_new_element(list[i]));
