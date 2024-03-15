@@ -6,13 +6,13 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:40:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/11 23:26:43 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/15 08:31:48 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	ft_calculates_cost(t_stack **stack_a, t_stack **stack_b)
+void	ft_calcul_cost(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*tempo_a;
 	t_stack	*tempo_b;
@@ -33,13 +33,6 @@ void	ft_calculates_cost(t_stack **stack_a, t_stack **stack_b)
 			tempo_b->cost_a = (size_a - tempo_b->target_position) * -1;
 		tempo_b = tempo_b->next;
 	}
-}
-
-static int	ft_absolute_nbr(int nbr)
-{
-	if (nbr < 0)
-		return (nbr * -1);
-	return (nbr);
 }
 
 void	ft_cheapest_move(t_stack **stack_a, t_stack **stack_b)

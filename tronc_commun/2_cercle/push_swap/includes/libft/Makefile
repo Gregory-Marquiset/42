@@ -6,7 +6,7 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 17:10:22 by gmarquis          #+#    #+#              #
-#    Updated: 2024/03/13 11:45:02 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/03/15 08:32:46 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,13 @@ srcs/ft_strncmp.c $\
 srcs/ft_strtrim.c $\
 srcs/ft_toupper.c
 
-SRCS_AJT = srcs/ajout/ft_contain_n.c $\
+SRCS_AJT = srcs/ajout/ft_absolute_nbr.c $\
+srcs/ajout/ft_atol.c $\
+srcs/ajout/ft_contain_n.c $\
+srcs/ajout/ft_countain_double.c $\
+srcs/ajout/ft_free_tab2d.c $\
+srcs/ajout/ft_input_is_digit.c $\
+srcs/ajout/ft_isint.c $\
 srcs/ajout/ft_strndup.c
 
 SRCS_BNS = srcs/bonus/ft_lstadd_back_bonus.c $\

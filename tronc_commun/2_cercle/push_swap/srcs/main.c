@@ -6,22 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 01:42:14 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/11 23:26:52 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/15 10:01:37 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-int	ft_stack_a_is_sorted(t_stack *stack)
-{
-	while (stack->next != NULL)
-	{
-		if (stack->value > stack->next->value)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
-}
 
 void	push_swap(t_stack **stack_a, t_stack **stack_b, int size)
 {
@@ -74,13 +63,13 @@ int	main(int argc, char **argv)
 		return (0);
 	list = ft_check_input(argv);
 	if (list == NULL)
-		ft_error(NULL, NULL);
+		ft_error(NULL, NULL, NULL);
 	stack_a = ft_make_stack_a(list);
 	stack_b = NULL;
 	size = ft_stack_size(stack_a);
 	ft_give_index(stack_a, size + 1);
 	push_swap(&stack_a, &stack_b, size);
-	ft_xav_the_stack(&stack_b);
-	ft_xav_the_stack(&stack_a);
+	ft_free_stack(&stack_b);
+	ft_free_stack(&stack_a);
 	return (0);
 }

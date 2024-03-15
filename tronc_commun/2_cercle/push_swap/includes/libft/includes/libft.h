@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:11:44 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/13 13:46:08 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/15 08:32:19 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,13 @@ void				ft_lstadd_front(t_list **lst, t_list *new);
 
 //_______________________Fonction ajouter
 
+int					ft_absolute_nbr(int nbr);
+long				ft_atol(char *input);
 int					ft_contain_n(char *str, char n);
+int					ft_countain_double(char **input);
+void				ft_free_tab2d(char **input);
+int					ft_input_is_digit(char *input);
+int					ft_isint(char *clean_input);
 char				*ft_strndup(char *s, int len);
 
 //_______________________get next line

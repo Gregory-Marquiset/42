@@ -6,23 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:25:49 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/11 23:26:17 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/15 09:21:24 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-static void	swap(t_stack **stack)
-{
-	t_stack	*tempo1;
-	t_stack	*tempo2;
-
-	tempo1 = (*stack)->next;
-	tempo2 = *stack;
-	tempo2->next = tempo1->next;
-	tempo1->next = tempo2;
-	*stack = tempo1;
-}
 
 void	ft_sa(t_stack **stack_a)
 {

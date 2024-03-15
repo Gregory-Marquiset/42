@@ -6,23 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 18:01:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/11 23:27:10 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/15 09:22:38 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-static void	reverse_rotate(t_stack **stack)
-{
-	t_stack	*bottom;
-	t_stack	*before_bottom;
-
-	bottom = ft_bikini_bottom(*stack);
-	before_bottom = ft_one_before_bikini_bottom(*stack);
-	bottom->next = *stack;
-	before_bottom->next = NULL;
-	*stack = bottom;
-}
 
 void	ft_rra(t_stack **stack_a)
 {
