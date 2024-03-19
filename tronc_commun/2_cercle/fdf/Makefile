@@ -6,11 +6,14 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/17 13:36:33 by gmarquis          #+#    #+#              #
-#    Updated: 2024/03/17 17:47:10 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/03/19 05:45:40 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = srcs/*.c
+SRCS = srcs/end.c $\
+srcs/get_info.c $\
+srcs/init.c $\
+srcs/main.c $\
 
 LIBFT_PATH = includes/libft/
 MINILIBX_PATH = includes/minilibx-linux/
@@ -19,7 +22,7 @@ NAME = fdf
 
 MK = mkdir
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O2 -fno-builtin
+CFLAGS = -Wall -Wextra -Werror -g3
 
 OBJS_DIR = objs/
 OBJS = $(notdir $(SRCS:>C=.o))
