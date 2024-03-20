@@ -6,13 +6,13 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:10:03 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/18 15:59:16 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:20:49 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-void	ft_freetab(char **str, unsigned int i)
+static void	ft_freetab(char **str, unsigned int i)
 {
 	unsigned int	j;
 
@@ -26,7 +26,7 @@ void	ft_freetab(char **str, unsigned int i)
 	return ;
 }
 
-char	*ft_strlcpymem(char *s, size_t len)
+static char	*ft_strlcpymem(char *s, size_t len)
 {
 	char			*str;
 	unsigned int	i;
@@ -34,7 +34,7 @@ char	*ft_strlcpymem(char *s, size_t len)
 	i = 0;
 	str = (char *)malloc((len + 1) * sizeof(char));
 	if (!str)
-		return (NULL);
+		return (0);
 	while (i < len)
 	{
 		str[i] = s[i];
@@ -44,24 +44,44 @@ char	*ft_strlcpymem(char *s, size_t len)
 	return (str);
 }
 
-size_t	ft_tabsize(char *s, char c)
+static size_t	ft_tabsize(char *s, char c, char c2)
 {
 	unsigned int	i;
 	unsigned int	tabcount;
 
+	if (!s)
+		return (0);
 	i = 0;
 	tabcount = 0;
-	if (s[i] == c)
+	if (s[i] == c || s[i] == c2)
 		i++;
 	while (s[i] != c && s[i])
 	{
+		if (s[i] == c2)
+			break ;
 		tabcount++;
 		i++;
 	}
 	return (tabcount);
 }
 
-char	**ft_split(char const *s, char c)
+static int	ft_movestr(char *str, char c, char c2)
+{
+	int	i;
+
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i] != c && str[i])
+	{
+		if (str[i] == c2)
+			break ;
+		i++;
+	}
+	return (i);
+}
+
+char	**ft_split(char const *s, char c, char c2)
 {
 	int		i;
 	int		counttab;
@@ -71,20 +91,19 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	if (!s)
 		return (NULL);
-	counttab = ft_countwords((char *)s, c, '\0');
+	counttab = ft_countwords((char *)s, c, c2, '\0');
 	strtemp = (char *)s;
 	str = (char **)malloc((counttab + 1) * sizeof(char *));
 	if (!str)
 		return (NULL);
 	while (i < counttab && strtemp[0] != '\0')
 	{
-		while (*strtemp == c)
+		while (*strtemp == c || *strtemp == c2)
 			strtemp++;
-		str[i] = ft_strlcpymem(strtemp, ft_tabsize(strtemp, c));
+		str[i] = ft_strlcpymem(strtemp, ft_tabsize(strtemp, c, c2));
 		if (!str[i])
 			return (ft_freetab(str, i), NULL);
-		while (*strtemp != c && *strtemp)
-			strtemp++;
+		strtemp += ft_movestr(strtemp, c, c2);
 		i++;
 	}
 	return (str[i] = NULL, str);

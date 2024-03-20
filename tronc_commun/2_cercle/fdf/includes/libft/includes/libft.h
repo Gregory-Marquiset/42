@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:11:44 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/18 16:08:36 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:12:15 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putstr_fd(char *s, int fd);
-char				**ft_split(char const *s, char c);
+char				**ft_split(char const *s, char c, char c2);
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 char				*ft_strjoin(char *s1, char *s2, int flag);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
@@ -93,7 +93,7 @@ long				ft_atol(char *input);
 int					ft_contain_n(char *str, char n);
 int					ft_count_n(char *str, char n);
 int					ft_countain_double(char **input);
-int					ft_countwords(char *str, char set, char end);
+int					ft_countwords(char *str, char set, char set2, char end);
 void				ft_free_tab2d(char **input);
 int					ft_input_is_digit(char *input);
 int					ft_isint(char *clean_input);

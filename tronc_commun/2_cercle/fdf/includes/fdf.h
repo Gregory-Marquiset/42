@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:48:55 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/19 05:59:25 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/20 21:20:29 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,38 +17,35 @@
 #  define BUFFER_SIZE 5
 # endif
 
-typedef struct s_map
+typedef struct s_point
 {
 	int		x;
 	int		y;
 	int		z;
 	int		v;
-}			t_map;
+	struct s_point	*next;
+}			t_point;
 
 typedef struct s_fdf
 {
-	int		fd;
-	char	*one_line;
 	int		width;
 	int		height;
-	t_map	***map;
+	t_point	*map;
 }			t_fdf;
 
 //		end.c			//
-void		ft_free_info(t_fdf **info);
-void		ft_error(t_fdf **info);
+void		ft_free_info(t_fdf *info);
+void		ft_error(t_fdf *info);
 
 //		get_info.c		//
-void		ft_get_l_w_h(t_fdf **info);
-void		ft_get_info(char *filename, t_fdf **info);
+t_fdf		*ft_make_info(int fd);
+t_fdf		*ft_get_info(char *filename);
 
 //		init.c			//
-t_map		*ft_new_point(int y, int x, char *str);
-t_fdf		*ft_new_fdf(void);
-void		ft_make_map(t_fdf **info, char	*line_tmp);
+t_point		*ft_new_point(int y, int x, char *str);
+t_fdf		*ft_new_fdf(char **map_2d, char *one_line);
+void		ft_make_map(t_fdf *info, char	*line_tmp);
 
 # include "libft/includes/libft.h"
-# include "minilibx-linux/mlx.h"
-# include "minilibx-linux/mlx_int.h"
 
 #endif

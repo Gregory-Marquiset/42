@@ -6,14 +6,14 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/17 13:36:33 by gmarquis          #+#    #+#              #
-#    Updated: 2024/03/19 05:45:40 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/03/20 20:28:58 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = srcs/end.c $\
 srcs/get_info.c $\
 srcs/init.c $\
-srcs/main.c $\
+srcs/main.c
 
 LIBFT_PATH = includes/libft/
 MINILIBX_PATH = includes/minilibx-linux/
@@ -34,7 +34,7 @@ libft :
 minilibx :
 	@make all -C $(MINILIBX_PATH)
 
-bonus : libft minilibx $(NAME)
+bonus : libft $(NAME)
 
 all : bonus
 
@@ -43,7 +43,7 @@ $(OBJS_DIR)%.o : srcs/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJS_PREF)
-	$(CC) $(CFLAGS) $^ -o $@ $(LIBFT_PATH)libft_bns.a $(MINILIBX_PATH)libmlx_Linux.a
+	$(CC) $(CFLAGS) $^ -o $@ $(LIBFT_PATH)libft_bns.a
 
 clean :
 	@make clean -C $(LIBFT_PATH)
