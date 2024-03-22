@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:48:55 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/22 04:40:54 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/22 12:59:45 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,37 @@ typedef struct s_point
 	int		y;
 	int		z;
 	int		v;
-	int		c;
+	char	*c;
 }			t_point;
 
 typedef struct s_fdf
 {
+	int		fd;
+	char	*one_line;
+	char	**map_2d;
 	int		width;
 	int		height;
-	t_point	***map;
+	t_point	**map;
+	char	**erreur;
 }			t_fdf;
 
 //		end.c			//
+void		ft_free_map(t_point **map);
 void		ft_exit(char *erreur);
-void		ft_error(char *one_line, char **map_2d, t_fdf *info, char *message);
+void		ft_error(t_fdf *info, char *message);
 
 //		get_info.c		//
-char		*ft_get_one_line(int fd);
-t_fdf		*ft_make_info(char *filename);
-t_fdf		*ft_get_info(char *filename);
+char		*ft_get_color(char *str);
+void		ft_get_one_line(t_fdf *info);
+void		ft_get_info(char *filename, t_fdf *info);
 
 //		init.c			//
-t_point		***ft_make_map(int width, int height, char **map_2d);
+t_point		ft_new_point(int x, int y, char *str);
+void		ft_make_map(t_fdf *info);
+void		ft_new_fdf(t_fdf *info);
 
 //		verif.c			//
+int			ft_verif_cordo(char *str);
 int			ft_verif_extention(char *filename, char *exe);
 
 #endif

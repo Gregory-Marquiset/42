@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:22:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/22 08:26:03 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/22 10:24:47 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ int	ft_isexa(char *code)
 {
 	int		i;
 	int		j;
-	char	low[16];
-	char	upp[16];
+	char	*low;
+	char	*upp;
 
 	if (!code)
 		return (0);
 	if (code[0] != '0' || (code[1] != 'x' && code[1] != 'X'))
-		return (printf("KO.3"), 0);
-	low[16] = "0123456789abcdef";
-	upp[16] = "0123456789ABCDEF";
+		return (0);
+	low = "0123456789abcdef";
+	upp = "0123456789ABCDEF";
 	i = 2;
 	while (code[i])
 	{
@@ -32,7 +32,7 @@ int	ft_isexa(char *code)
 		while (code[i] != low[j] && code[i] != upp[j])
 		{
 			if (!low[j] || !upp[j])
-				return (printf("KO.4"), 0);
+				return (0);
 			j++;
 		}
 		i++;

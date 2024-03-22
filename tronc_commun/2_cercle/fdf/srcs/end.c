@@ -6,28 +6,31 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:19:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/22 02:15:15 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/22 12:16:42 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-/*void	ft_free_info(t_fdf *info)
+void	ft_free_map(t_point **map)
 {
 	int	i;
 	int	j;
 
-	free(info->one_line);
-	i = -1;
-	while ((*info)->map[++i])
+	i = 0;
+	while (map[i])
 	{
-		j = -1;
-		while ((*info)->map[i][++j])
-			free((*info)->map[i][j]);
-		free((*info)->map[i]);
+		j = 0;
+		while (&map[i][j])
+		{
+			free(&map[i][j]);
+			j++;
+		}
+		free(&map[i]);
+		i++;
 	}
-	free(info);
-}*/
+	free(map);
+}
 
 void	ft_exit(char *erreur)
 {
@@ -38,13 +41,16 @@ void	ft_exit(char *erreur)
 	exit(0);
 }
 
-void	ft_error(char *one_line, char **map_2d, t_fdf *info, char *message)
+void	ft_error(t_fdf *info, char *message)
 {
-	if (one_line)
-		free(one_line);
-	if (map_2d)
-		ft_free_tab2d(map_2d);
-	info = NULL;
-	ft_exit(message);
+	if (info->one_line)
+		free(info->one_line);
+	if (info->map_2d)
+		ft_free_tab2d(info->map_2d);
+	if (info->map)
+		ft_free_map(info->map);
+	if (message)
+		info->erreur = message;
+	ft_exit(info->erreur);
 }
 
