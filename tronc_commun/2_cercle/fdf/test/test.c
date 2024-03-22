@@ -1,11 +1,30 @@
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int	ft_verif_cordo(char *str)
+{
+	long	nbr;
+
+	nbr = atol(str);
+	if (nbr >= -2147483648 && nbr <= 2147483647)
+		return ((int)nbr);
+	return (0);
+}
+
+int	main(int argc, char **argv)
+{
+	if (argc != 2)
+		return (0);
+	printf("%d\n", ft_verif_cordo(argv[1]));
+	printf("%s\n", ft_verif_color(argv[1]));
+	return (0);
+}
 
 //			verif						//
 
-int	ft_strlen(char *str)
+/*int	ft_strlen(char *str)
 {
 	int	len;
 
@@ -54,7 +73,7 @@ int	main(int argc,char **argv)
 		return (0);
 	printf("%d\n", ft_verif_extention(argv[1], argv[2]));
 	return (0);
-}
+}*/
 
 //		test tab de tab de struct		//
 
@@ -64,7 +83,7 @@ int	main(int argc,char **argv)
 	int	y;
 	int	z;
 	int	v;
-}	t_map;
+}		t_map;
 
 int	main(int ac, char **av)
 {
@@ -110,7 +129,9 @@ int	main(int ac, char **av)
 		height = -1;
 		while (++height < 3)
 		{
-			printf("map[%d][%d] [x = %2d] [y = %2d] [z = %2d] [v = %2d]\n", width, height, map[width][height]->x, map[width][height]->y, map[width][height]->z ,map[width][height]->v);
+			printf("map[%d][%d] [x = %2d] [y = %2d] [z = %2d] [v = %2d]\n",
+				width, height, map[width][height]->x, map[width][height]->y,
+				map[width][height]->z ,map[width][height]->v);
 		}
 	}
 }*/

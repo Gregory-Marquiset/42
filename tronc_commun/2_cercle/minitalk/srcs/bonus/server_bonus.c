@@ -5,54 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/05 17:34:43 by greg              #+#    #+#             */
-/*   Updated: 2024/01/23 08:27:43 by gmarquis         ###   ########.fr       */
+/*   Created: 2024/01/05 17:34:43 by gmarquis          #+#    #+#             */
+/*   Updated: 2024/01/25 06:53:31 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minitalk.h"
 
-static void	ctoa_b(char c)
-{
-	static char	*str;
-	static int	new_str = 0;
-
-	if (new_str == 0)
-	{
-		str = malloc(2);
-		str[0] = c;
-		str[1] = '\0';
-		new_str = 1;
-	}
-	else if (c >= 32 && c <= 126)
-		str = ft_memcpy(str, c);
-	else if (c == '\0')
-	{
-		strto(str);
-		new_str = 0;
-	}
-}
-
-static void	bytoc_b(int received)
-{
-	static int	i = 0;
-	static char	c = 0;
-
-	if (received == SIGUSR2)
-		c += 1 << (7 - i);
-	i++;
-	if (i == 8)
-	{
-		ctoa_b(c);
-		i = 0;
-		c = 0;
-	}
-}
-
 static void	print_and_answer(int received, siginfo_t *si, void *ucontext)
 {
 	(void)ucontext;
-	bytoc_b(received);
+	bytoc(received);
 	kill(si->si_pid, SIGUSR1);
 }
 
@@ -71,7 +34,7 @@ int	main(int argc, char **argv)
 	sigemptyset(&sa.sa_mask);
 	sigaction(SIGUSR2, &sa, NULL);
 	sigaction(SIGUSR1, &sa, NULL);
-	while (117)
+	while (1)
 		;
 	return (0);
 }

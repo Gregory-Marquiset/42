@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/05 16:22:07 by greg              #+#    #+#             */
-/*   Updated: 2024/01/23 14:55:07 by gmarquis         ###   ########.fr       */
+/*   Created: 2024/01/05 16:22:07 by gmarquis          #+#    #+#             */
+/*   Updated: 2024/01/24 21:32:09 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,112 +29,20 @@ static void	valid_send(int i)
 	}
 }
 
-static wchar_t	*unitowstr(char *input)
-{
-	int				i;
-	int				j;
-	int				len;
-	wchar_t			*ws;
-	unsigned char	uc;
-
-	ws = malloc((ft_strlen(input) + 1) * sizeof(wchar_t));
-	if (!ws)
-		return (0);
-	i = 0;
-	j = 0;
-	while (input[i] != '\0')
-	{
-		uc = (unsigned char)input[i++];
-		if (ft_is_ascii(uc))
-			ws[j++] = asciitowc(uc);
-		else if (ft_is_multi_byte(uc))
-		{
-			i--;
-			len = ft_uclen(uc);
-			ws[j++] = mbytowc(&input[i], len);
-			i += len;
-		}
-	}
-	return (ws[j] = L'\0', ws);
-}
-
-static void	wctoestr(const wchar_t *src, char *dst)
-{
-	int		shift;
-	char	hexa_digit;
-
-	while (*src != L'\0')
-	{
-		if (*src >= 0 && *src <= 126)
-			*dst++ = (char)(*src);
-		else
-		{
-			*dst++ = '\\';
-			*dst++ = 'u';
-			shift = 12;
-			while (shift >= 0)
-			{
-				hexa_digit = (*src >> shift) & 0xF;
-				if (hexa_digit < 10)
-					*dst++ = '0' + hexa_digit;
-				else
-					*dst++ = 'A' + (hexa_digit - 10);
-				shift -= 4;
-			}
-		}
-		src++;
-	}
-}
-
-static char	*wcmallocstr(wchar_t *ws)
-{
-	int		len;
-	int		i;
-	char	*dst;
-
-	i = 0;
-	while (ws[i])
-	{
-		if (ws[i] >= 0 && ws[i] <= 126)
-			len++;
-		else
-			len += 6;
-		i++;
-	}
-	dst = malloc(len + 1);
-	if (!dst)
-		return (0);
-	dst[len + 1] = '\0';
-	ft_printf("%d\n", len);
-	return (dst);
-}
-
 int	main(int argc, char **argv)
 {
 	pid_t	pid;
 	int		i;
-	wchar_t	*ws;
-	char	*dst;
 
-	setlocale(LC_ALL, "");
 	if (argc != 3)
 		return (ft_printf("The correct format is ./client pid array\n"), 0);
 	pid = ft_atoi(argv[1]);
-	if (pid == 0)
+	if (pid <= 0)
 		return (ft_printf("Invalide pid !\n"), 0);
 	signal(SIGUSR1, valid_send);
-	ws = unitowstr(argv[2]);
-	dst = wcmallocstr(ws);
-	wctoestr(ws, dst);
-	free(ws);
 	i = 0;
-	ft_printf("%s\n", dst);
-	while (dst[i])
-		client_send_char(dst[i++], pid);
+	while (argv[2][i])
+		client_send_char(argv[2][i++], pid);
 	client_send_char('\0', pid);
-	free (dst);
 	return (0);
 }
-
-// "Hello 42✓✓"
-// "Hello 42\u2713\u2713"

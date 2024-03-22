@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:33:46 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/01/23 08:28:13 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/01/25 06:54:16 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,36 +45,6 @@ char	*ft_memcpy(char *str, char c)
 	return (new);
 }
 
-int	ft_is_hexa(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	else if (c >= 'a' && c <= 'f')
-		return (1);
-	else if (c >= 'A' && c <= 'F')
-		return (1);
-	return (0);
-}
-
-int	containe_unicode(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\\' && str[i + 1] == 'u')
-		{
-			i += 2;
-			if (ft_is_hexa(str[i]) && ft_is_hexa(str[i + 1])
-				&& ft_is_hexa(str[i + 2]) && ft_is_hexa(str[i + 3]))
-				return (1);
-		}
-		i++;
-	}
-	return (0);
-}
-
 void	client_send_char(char c, pid_t pid)
 {
 	int	i;
@@ -88,5 +58,42 @@ void	client_send_char(char c, pid_t pid)
 			kill(pid, SIGUSR1);
 		usleep(1500);
 		i--;
+	}
+}
+
+void	ctoa(char c)
+{
+	static char	*str;
+	static int	new_str = 0;
+
+	if (new_str == 0)
+	{
+		str = malloc(2);
+		str[0] = c;
+		str[1] = '\0';
+		new_str = 1;
+	}
+	else if (c != '\0')
+		str = ft_memcpy(str, c);
+	else
+	{
+		ft_printf("%s", str);
+		new_str = 0;
+		free(str);
+	}
+}
+
+void	bytoc(int received)
+{
+	static int (i) = 0;
+	static char (c) = 0;
+	if (received == SIGUSR2)
+		c += 1 << (7 - i);
+	i++;
+	if (i == 8)
+	{
+		ctoa(c);
+		i = 0;
+		c = 0;
 	}
 }
