@@ -6,11 +6,13 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:10:30 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/18 16:15:53 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/22 03:26:55 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+
+
 
 char	*ft_strjoin(char *s1, char *s2, int flag)
 {

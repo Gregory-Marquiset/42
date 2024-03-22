@@ -6,14 +6,15 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/17 13:36:33 by gmarquis          #+#    #+#              #
-#    Updated: 2024/03/20 20:28:58 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/03/22 02:21:12 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = srcs/end.c $\
 srcs/get_info.c $\
 srcs/init.c $\
-srcs/main.c
+srcs/main.c $\
+srcs/verif.c
 
 LIBFT_PATH = includes/libft/
 MINILIBX_PATH = includes/minilibx-linux/
