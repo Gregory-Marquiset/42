@@ -6,13 +6,13 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:17:46 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/22 12:54:54 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/23 13:22:47 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-char	*ft_get_color(char *str)
+char	*ft_get_color(char *str) // atoibase pour recuperer la couleur dans un int //
 {
 	char	*color;
 	int		i;
@@ -20,14 +20,14 @@ char	*ft_get_color(char *str)
 
 	i = 0;
 	if (!str)
-		return (NULL);
+		return (C_WHITE);
 	while (str[i] != ',' && str[i])
 		i++;
 	if (str[i] == '\0')
-		return (NULL);
+		return (C_WHITE);
 	color = malloc(9);
 	if (!color)
-		return (NULL);
+		return (C_WHITE);
 	i++;
 	j = 0;
 	while (j < 8)
@@ -35,8 +35,8 @@ char	*ft_get_color(char *str)
 	color[8] = '\0';
 	if (str[i] == '\0' && ft_isexa(color))
 		return (color);
-	free (color);
-	return (NULL);
+	else
+		return (free (color), C_WHITE);
 }
 
 void	ft_get_one_line(t_fdf *info)
@@ -74,7 +74,6 @@ void	ft_get_info(char *filename, t_fdf *info)
 	info->map_2d = ft_split(info->one_line, ' ', '\n');
 	if (!info->map_2d)
 		ft_error(&info, "Erreur : echec creation de map_2d.\n");
-
 	ft_new_fdf(&info);
-	return ;
+
 }

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:19:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/22 12:16:42 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/23 11:11:13 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	ft_error(t_fdf *info, char *message)
 		ft_free_tab2d(info->map_2d);
 	if (info->map)
 		ft_free_map(info->map);
-	if (message)
-		info->erreur = message;
+	if (!info->erreur)
+		 ft_exit(message);
 	ft_exit(info->erreur);
 }
 
