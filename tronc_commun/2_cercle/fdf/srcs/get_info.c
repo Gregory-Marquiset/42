@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:17:46 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/26 17:54:13 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/26 20:54:33 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 char	*ft_get_color(char *str)
 {
 	if (!str)
-		return (C_WHITE);
+		return (C_BASE);
 	while (*str != ',' && *str != '\0')
 		str++;
 	if (ft_isexa(str))
 		return (ft_atoi_base(str, "0123456789ABCDEF"));
 	else
-		return (C_WHITE);
+		return (C_BASE);
 }
 
 void	ft_get_one_line(t_fdf *info)
@@ -50,15 +50,12 @@ void	ft_get_one_line(t_fdf *info)
 
 void	ft_get_info(char *filename, t_fdf *info)
 {
-	ft_verif_extention(filename, "fdf");
+	ft_verif_extention(filename, ".fdf");
 	info->fd = open(filename, O_RDONLY);
 	if (info->fd == -1)
 		ft_exit("Erreur : echec de l'open du fd.\n");
 	ft_get_one_line(&info);
 	close(info->fd);
-	info->map_2d = ft_split(info->one_line, ' ', '\n');
-	if (!info->map_2d)
-		ft_error(&info, "Erreur : echec creation de map_2d.\n");
 	ft_new_fdf(&info);
 
 }

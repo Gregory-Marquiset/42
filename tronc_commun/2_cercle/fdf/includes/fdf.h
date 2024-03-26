@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:48:55 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/26 17:49:21 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/26 20:50:34 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #  define BUFFER_SIZE 5
 # endif
 
-# ifndef C_WHITE
-#  define C_WHITE 16777215
+# ifndef C_BASE
+#  define C_BASE 16777215
 # endif
 
 # include "libft/includes/libft.h"

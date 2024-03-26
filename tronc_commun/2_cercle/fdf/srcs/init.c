@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 14:06:15 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/23 11:33:26 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/26 21:07:59 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_point	ft_new_point(int x, int y, char *str)
 	{
 		new.z = ft_verif_cordo(str);
 		new.v = 1;
-		new.c = ft_get_color(str); // A VOIR //
+		new.c = ft_get_color(str);
 	}
 	else
 	{
@@ -59,6 +59,9 @@ void	ft_new_fdf(t_fdf *info)
 {
 	info->width = ft_countwords(info->one_line, ' ', ' ', '\n');
 	info->height = ft_countwords(info->one_line, '\n', '\n', '\0');
+	info->map_2d = ft_split_des_enfers(info->one_line, ' ', '\n', '\0');
+	if (!info->map_2d)
+		ft_error(&info, "Erreur : echec creation de map_2d.\n");
 	ft_make_map(&info);
 
 }
