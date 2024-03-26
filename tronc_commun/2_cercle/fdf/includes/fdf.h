@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:48:55 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/23 13:22:12 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:49:21 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@
 # endif
 
 # ifndef C_WHITE
-#  define C_WHITE 0xFFFFFF
+#  define C_WHITE 16777215
 # endif
 
 # include "libft/includes/libft.h"
 
 typedef struct s_point
 {
-	int		x;
-	int		y;
-	int		z;
-	int		v;
-	char	*c;
+	int	x;
+	int	y;
+	int	z;
+	int	v;
+	int	c;
 }			t_point;
 
 typedef struct s_fdf

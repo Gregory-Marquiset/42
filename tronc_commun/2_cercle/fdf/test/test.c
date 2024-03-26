@@ -1,9 +1,38 @@
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "libft.h"
 
-int	ft_verif_cordo(char *str)
+# ifndef C_WHITE
+#  define C_WHITE 16777215
+# endif
+
+int	ft_get_color(char *str)
+{
+	if (!str)
+		return (C_WHITE);
+	while (*str != ',' && *str != '\0')
+		str++;
+	str++;
+	if (ft_isexa(str))
+	{
+		str += 2;
+		return (ft_atoi_base(str, "0123456789ABCDEF"));
+	}
+	else
+		return (C_WHITE);
+}
+
+int	main(int argc, char **argv)
+{
+	int	nbr;
+
+	if (argc != 2)
+		return (0);
+	nbr = ft_get_color(argv[1]);
+	ft_printf("%d\n", nbr);
+	return (0);
+}
+
+/*int	ft_verif_cordo(char *str)
 {
 	long	nbr;
 
@@ -20,7 +49,7 @@ int	main(int argc, char **argv)
 	printf("%d\n", ft_verif_cordo(argv[1]));
 	printf("%s\n", ft_verif_color(argv[1]));
 	return (0);
-}
+}*/
 
 //			verif						//
 
