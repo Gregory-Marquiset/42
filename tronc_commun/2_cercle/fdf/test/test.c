@@ -6,29 +6,33 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 21:09:00 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/26 22:13:32 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/27 05:22:41 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-#ifndef C_WHITE
+/*#ifndef C_WHITE
 # define C_WHITE 16777215
-#endif
+#endif*/
 
-void	ft_fill_map(char *one_line, int ***map, char set, char next, char end, int width, int height)
+void	ft_fill_map(char *one_line, int **map, char set, char next, char end, int width, int height)
 {
 	int	i;
 	int	j;
 
 	j = 0;
-	ft_printf("ici\n");
-	while (*one_line += 1 != end && j < height)
+	while (*one_line != end && j < height)
 	{
 		i = 0;
 		while (*one_line != next && *one_line != end && i < width)
 		{
-			*map[i][j] = ft_atoi(one_line);
+			ft_printf("ici\n");
+			while (*one_line == set && *one_line != end)
+				one_line++;
+			ft_printf("%s", one_line);
+			map[i][j] = ft_atoi(one_line);
+			ft_printf("%d\n", map[i][j]);
 			while (*one_line != set && *one_line != next && *one_line != end)
 				one_line++;
 			i++;
@@ -47,14 +51,12 @@ int	**ft_split_des_enfers(char *one_line, char set, char next, char end)
 
 	width = ft_countwords(one_line, set, set, next);
 	height = ft_countwords(one_line, next, next, end);
-	ft_printf("w = %d | h = %d\n", width, height);
 	map = malloc(width * sizeof(int **));
 	if (!map)
 		return (ft_printf("Erreur : map** non malloc.\n"), NULL);
 	i = 0;
 	while (i < width)
 	{
-		ft_printf("map[%d]\n", i);
 		map[i] = malloc(height * sizeof(int *));
 		if(!map[i])
 		{
@@ -65,7 +67,7 @@ int	**ft_split_des_enfers(char *one_line, char set, char next, char end)
 		}
 		i++;
 	}
-	ft_fill_map(one_line, &map, set, next, end, width, height);
+	ft_fill_map(one_line, map, set, next, end, width, height);
 	return (map);
 }
 
@@ -112,7 +114,6 @@ int	main(int argc, char **argv)
 	close(fd);
 	if (!one_line)
 		return (ft_printf("Erreur : one_line inexistant.\n"), 0);
-	ft_printf("%s", one_line);
 	map = ft_split_des_enfers(one_line, ' ', '\n', '\0');
 	free(one_line);
 	while (map[i][j])
