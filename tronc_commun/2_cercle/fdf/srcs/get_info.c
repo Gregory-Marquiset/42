@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:17:46 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/28 04:04:40 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/28 16:58:06 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,20 @@
 
 int	ft_get_color(char *str)
 {
+	int	i;
+
 	if (!str)
 		return (C_BASE);
-	while (*str != ',' && *str != '\0')
-		str++;
-	str++;
-	if (ft_isexa(str))
+	if (!ft_contain_n(str, ','))
+		return (C_BASE);
+	i = 0;
+	while (str[i] != ',' && str[i] != '\0')
+		i++;
+	i++;
+	if (ft_isexa(str + i))
 	{
-		str += 2;
-		return (ft_atoi_base(str, "0123456789ABCDEF"));
+		i += 2;
+		return (ft_atoi_base(str + i, "0123456789ABCDEF"));
 	}
 	else
 		return (C_BASE);

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:22:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/28 03:16:46 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/28 16:45:56 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ int	ft_isexa(char *code)
 	char	*low;
 	char	*upp;
 
-	if (!code || ft_strlen(code) != 8)
+	if (!code)
 		return (0);
-	if (code[0] != '0' || (code[1] != 'x' && code[1] != 'X'))
+	if (code[0] != '0' || (code[1] != 'x' && code[1] != 'X')
+		|| ft_strlen(code) != 8)
 		return (0);
 	low = "0123456789abcdef";
 	upp = "0123456789ABCDEF";

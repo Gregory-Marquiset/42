@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:48:55 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/28 15:21:16 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/28 16:37:59 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,10 @@ typedef struct s_fdf
 	int		width;
 	int		height;
 	t_point	**map;
-	char	*erreur;
 }			t_fdf;
 
 //		end.c			//
-void	ft_free_map(t_point **map, int height, int width);
+void		ft_free_map(t_fdf *info);
 void		ft_free_info(t_fdf *info);
 void		ft_exit(char *erreur);
 void		ft_error(t_fdf *info, char *message);

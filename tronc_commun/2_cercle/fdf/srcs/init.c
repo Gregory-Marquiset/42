@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 14:06:15 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/28 15:14:45 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/28 16:52:48 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,13 @@ t_point	ft_new_point(int x, int y, char *str)
 
 	new.x = x;
 	new.y = y;
-	if (ft_strncmp(str, "V", 1))
+	if (!str)
+	{
+		new.z = 0;
+		new.v = 0;
+		new.c = 0;
+	}
+	else if (ft_strncmp(str, "V", 1))
 	{
 		new.z = ft_verif_cordo(str);
 		new.v = 1;
@@ -41,14 +47,14 @@ void	ft_make_map(t_fdf *info)
 
 	info->map = malloc((info->height) * sizeof(t_point *));
 	if (!info->map)
-		ft_error(info, "Erreu : echec malloc de map[h].\n");
+		ft_error(info, "Erreur : echec malloc de map.\n");
 	h = 0;
 	i = 0;
 	while (h < info->height)
 	{
 		info->map[h] = malloc((info->width) * sizeof(t_point));
 		if (!info->map[h])
-			ft_error(info, "Erreur : echec malloc de map[h][w].\n");
+			ft_error(info, "Erreur : echec malloc de map[h].\n");
 		w = 0;
 		while (w < info->width && info->map_2d[i])
 		{
