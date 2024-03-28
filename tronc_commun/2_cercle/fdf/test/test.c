@@ -6,41 +6,27 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 21:09:00 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/28 03:19:26 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/28 19:39:57 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-#ifndef C_WHITE
-# define C_WHITE 16777215
-#endif
-
-int	ft_get_color(char *str)
-{
-	if (!str)
-		return (C_WHITE);
-	while (*str != ',' && *str != '\0')
-		str++;
-	str++;
-	if (ft_isexa(str))
-	{
-		str += 2;
-		return (ft_atoi_base(str, "0123456789ABCDEF"));
-	}
-	else
-		return (C_WHITE);
-}
-
 int	main(int argc, char **argv)
 {
-	int		nbr;
-	long	nbr;
+	char	**str;
+	int		i;
 
 	if (argc != 2)
 		return (0);
-	nbr = ft_get_color(argv[1]);
-	ft_printf("%d\n", nbr);
+	str = ft_split(argv[1], ' ', '\n');
+	i = 0;
+	while (str[i])
+	{
+		ft_printf("%s\n", str[i]);
+		i++;
+	}
+	ft_free_tab2d(str);
 	return (0);
 }
 
