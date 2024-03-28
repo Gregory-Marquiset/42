@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:48:55 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/26 20:50:34 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/28 02:28:00 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_fdf
 	int		width;
 	int		height;
 	t_point	**map;
-	char	**erreur;
+	char	*erreur;
 }			t_fdf;
 
 //		end.c			//
@@ -49,7 +49,7 @@ void		ft_exit(char *erreur);
 void		ft_error(t_fdf *info, char *message);
 
 //		get_info.c		//
-char		*ft_get_color(char *str);
+int			ft_get_color(char *str);
 void		ft_get_one_line(t_fdf *info);
 void		ft_get_info(char *filename, t_fdf *info);
 
@@ -60,6 +60,6 @@ void		ft_new_fdf(t_fdf *info);
 
 //		verif.c			//
 int			ft_verif_cordo(char *str);
-int			ft_verif_extention(char *filename, char *exe);
+void			ft_verif_extention(char *filename, char *exe);
 
 #endif

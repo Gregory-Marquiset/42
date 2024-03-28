@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:22:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/22 10:24:47 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/28 03:16:46 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_isexa(char *code)
 	char	*low;
 	char	*upp;
 
-	if (!code)
+	if (!code || ft_strlen(code) != 8)
 		return (0);
 	if (code[0] != '0' || (code[1] != 'x' && code[1] != 'X'))
 		return (0);

@@ -6,20 +6,24 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:17:46 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/26 20:54:33 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/28 04:04:40 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-char	*ft_get_color(char *str)
+int	ft_get_color(char *str)
 {
 	if (!str)
 		return (C_BASE);
 	while (*str != ',' && *str != '\0')
 		str++;
+	str++;
 	if (ft_isexa(str))
+	{
+		str += 2;
 		return (ft_atoi_base(str, "0123456789ABCDEF"));
+	}
 	else
 		return (C_BASE);
 }
@@ -43,7 +47,7 @@ void	ft_get_one_line(t_fdf *info)
 		{
 			info->one_line = ft_strjoin(info->one_line, line, 2);
 			if (!info->one_line)
-				ft_error(&info, "Erreur : join non reussi.\n");
+				ft_error(info, "Erreur : join non reussi.\n");
 		}
 	}
 }
@@ -54,8 +58,8 @@ void	ft_get_info(char *filename, t_fdf *info)
 	info->fd = open(filename, O_RDONLY);
 	if (info->fd == -1)
 		ft_exit("Erreur : echec de l'open du fd.\n");
-	ft_get_one_line(&info);
+	ft_get_one_line(info);
 	close(info->fd);
-	ft_new_fdf(&info);
+	ft_new_fdf(info);
 
 }

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 20:01:37 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/26 20:41:27 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/28 02:27:45 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	ft_verif_cordo(char *str)
 {
 	long	nbr;
 
+	if (!str)
+		return(0);
 	nbr = ft_atol(str);
 	if (ft_isint(str))
 		return ((int)nbr);

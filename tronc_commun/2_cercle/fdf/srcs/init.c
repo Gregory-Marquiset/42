@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 14:06:15 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/26 21:07:59 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/28 04:08:13 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,28 @@ void	ft_make_map(t_fdf *info)
 	int	h;
 	int	i;
 
-	info->map = malloc(info->width * sizeof(t_point **));
+	info->map = malloc(info->height * sizeof(t_point **));
 	if (!info->map)
-		ft_error(&info, "Erreu : echec malloc de map **.\n");
-	w = -1;
-	i = -1;
-	while (++w < info->width)
+		ft_error(info, "Erreu : echec malloc de map[h].\n");
+	h = 0;
+	i = 0;
+	ft_printf("height = %2d | width = %2d\n", info->height, info->width);
+	while (h < info->height)
 	{
-		info->map[w] = malloc(info->height * sizeof(t_point *));
-		if (!info->map[w])
-			ft_error(&info, "Erreu : echec malloc de map *.\n");
-		h = -1;
-		while (++h < info->height && info->map_2d[i])
-			info->map[w][h] = ft_new_point(w, h, info->map_2d[++i]);
+		info->map[h] = malloc(info->width * sizeof(t_point *));
+		if (!info->map[h])
+			ft_error(info, "Erreur : echec malloc de map[h][w].\n");
+		w = 0;
+		while (w < info->width && info->map_2d[i])
+		{
+			ft_printf("h = %2d | w = %2d\n", h, w);
+			info->map[h][w] = ft_new_point(w, h, info->map_2d[i]);
+			ft_printf("y = %2d | x = %2d | z = %2d | v = %2d | c = %8d\n\n", info->map[h][w].y, info->map[h][w].x, info->map[h][w].z, info->map[h][w].v, info->map[h][w].c);
+			w++;
+			i++;
+		}
+		ft_printf("hu\n");
+		h++;
 	}
 }
 
@@ -59,9 +68,8 @@ void	ft_new_fdf(t_fdf *info)
 {
 	info->width = ft_countwords(info->one_line, ' ', ' ', '\n');
 	info->height = ft_countwords(info->one_line, '\n', '\n', '\0');
-	info->map_2d = ft_split_des_enfers(info->one_line, ' ', '\n', '\0');
+	info->map_2d = ft_split(info->one_line, ' ', '\n');
 	if (!info->map_2d)
-		ft_error(&info, "Erreur : echec creation de map_2d.\n");
-	ft_make_map(&info);
-
+		ft_error(info, "Erreur : echec creation de map_2d.\n");
+	ft_make_map(info);
 }
