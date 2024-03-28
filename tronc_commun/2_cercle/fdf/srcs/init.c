@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 14:06:15 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/28 16:52:48 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/28 19:23:06 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ void	ft_make_map(t_fdf *info)
 
 	info->map = malloc((info->height) * sizeof(t_point *));
 	if (!info->map)
-		ft_error(info, "Erreur : echec malloc de map.\n");
+		ft_error(info, 1, "Erreur : echec malloc de map.\n");
 	h = 0;
 	i = 0;
 	while (h < info->height)
 	{
 		info->map[h] = malloc((info->width) * sizeof(t_point));
 		if (!info->map[h])
-			ft_error(info, "Erreur : echec malloc de map[h].\n");
+			ft_error(info, 4, "Erreur : echec malloc de map[h].\n");
 		w = 0;
 		while (w < info->width && info->map_2d[i])
 		{
@@ -72,6 +72,6 @@ void	ft_new_fdf(t_fdf *info)
 	info->height = ft_countwords(info->one_line, '\n', '\n', '\0');
 	info->map_2d = ft_split(info->one_line, ' ', '\n');
 	if (!info->map_2d)
-		ft_error(info, "Erreur : echec creation de map_2d.\n");
+		ft_error(info, 1, "Erreur : echec creation de map_2d.\n");
 	ft_make_map(info);
 }

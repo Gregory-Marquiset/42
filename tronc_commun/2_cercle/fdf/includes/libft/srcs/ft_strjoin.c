@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:10:30 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/26 17:44:56 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:06:02 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,10 @@ char	*ft_strjoin(char *s1, char *s2, int flag)
 		str[i] = s1[i];
 	while (s2[j])
 		str[i++] = s2[j++];
-	if (flag == 1)
-		free(s1);
-	else if (flag == 2)
-	{
-		free(s1);
-		free(s2);
-	}
 	str[i] = '\0';
+	if (flag == 1 || flag == 3)
+		free(s1);
+	if (flag == 2 || flag == 3)
+		free(s2);
 	return (str);
 }

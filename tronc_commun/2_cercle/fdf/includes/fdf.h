@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:48:55 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/28 16:37:59 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/28 19:13:25 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FDF_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
+#  define BUFFER_SIZE 50
 # endif
 
 # ifndef C_BASE
@@ -45,8 +45,8 @@ typedef struct s_fdf
 //		end.c			//
 void		ft_free_map(t_fdf *info);
 void		ft_free_info(t_fdf *info);
-void		ft_exit(char *erreur);
-void		ft_error(t_fdf *info, char *message);
+void		ft_exit(char *error);
+void		ft_error(t_fdf *info, int flag, char *message);
 
 //		get_info.c		//
 int			ft_get_color(char *str);

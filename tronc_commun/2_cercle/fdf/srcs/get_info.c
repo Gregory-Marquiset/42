@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:17:46 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/28 16:58:06 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:46:08 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,27 @@ int	ft_get_color(char *str)
 
 void	ft_get_one_line(t_fdf *info)
 {
-	int		trigger;
 	char	*line;
 
 	info->one_line = malloc(1);
 	if (!info->one_line)
 		ft_exit("Erreur : echec malloc pour one_line.\n");
 	info->one_line[0] = '\0';
-	trigger = 1;
-	while (trigger == 1)
+	while (1)
 	{
 		line = get_next_line(info->fd);	//	error du gnl potentiel virer le malloc de la static
 		if (line == NULL)
-			trigger = 0;
+			break;
 		else
 		{
-			info->one_line = ft_strjoin(info->one_line, line, 2);
-			if (!info->one_line)
-				ft_error(info, "Erreur : join non reussi.\n");
+			info->one_line = ft_strjoin(info->one_line, line, 3);
+			if (info->one_line == NULL)
+				ft_error(info, 1, "Erreur : join non reussi.\n");
 		}
 	}
+	close(info->fd);
+	if (info->one_line[0] == '\0')
+		ft_error(info, 1, "Erreur : fichier vide.\n");
 }
 
 void	ft_get_info(char *filename, t_fdf *info)
@@ -64,7 +65,6 @@ void	ft_get_info(char *filename, t_fdf *info)
 	if (info->fd == -1)
 		ft_exit("Erreur : echec de l'open du fd.\n");
 	ft_get_one_line(info);
-	close(info->fd);
 	ft_new_fdf(info);
 
 }
