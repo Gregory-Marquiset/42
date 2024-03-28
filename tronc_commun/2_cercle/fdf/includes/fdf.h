@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:48:55 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/28 02:28:00 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:21:16 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 
 typedef struct s_point
 {
-	int	x;
-	int	y;
-	int	z;
-	int	v;
-	int	c;
+	int		x;
+	int		y;
+	int		z;
+	int		v;
+	int		c;
 }			t_point;
 
 typedef struct s_fdf
@@ -44,7 +44,8 @@ typedef struct s_fdf
 }			t_fdf;
 
 //		end.c			//
-void		ft_free_map(t_point **map);
+void	ft_free_map(t_point **map, int height, int width);
+void		ft_free_info(t_fdf *info);
 void		ft_exit(char *erreur);
 void		ft_error(t_fdf *info, char *message);
 
@@ -60,6 +61,6 @@ void		ft_new_fdf(t_fdf *info);
 
 //		verif.c			//
 int			ft_verif_cordo(char *str);
-void			ft_verif_extention(char *filename, char *exe);
+void		ft_verif_extention(char *filename, char *exe);
 
 #endif

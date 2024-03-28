@@ -6,30 +6,38 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:19:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/23 11:11:13 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:22:19 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	ft_free_map(t_point **map)
+void	ft_free_map(t_point **map, int height, int width)
 {
-	int	i;
-	int	j;
+	int	h;
+	int	w;
 
-	i = 0;
-	while (map[i])
+	h = 0;
+	while (h < height)
 	{
-		j = 0;
-		while (&map[i][j])
+		w = 0;
+		while (w < width)
 		{
-			free(&map[i][j]);
-			j++;
+			free(&map[h][w]);
+			w++;
 		}
-		free(&map[i]);
-		i++;
+		free(&map[h]);
+		h++;
 	}
 	free(map);
+}
+
+void	ft_free_info(t_fdf *info)
+{
+	free (info->one_line);
+	ft_free_tab2d(info->map_2d);
+	ft_free_map(info->map, info->height, info->width);
+	free(info);
 }
 
 void	ft_exit(char *erreur)
@@ -48,7 +56,7 @@ void	ft_error(t_fdf *info, char *message)
 	if (info->map_2d)
 		ft_free_tab2d(info->map_2d);
 	if (info->map)
-		ft_free_map(info->map);
+		ft_free_map(info->map, info->height, info->width);
 	if (!info->erreur)
 		 ft_exit(message);
 	ft_exit(info->erreur);
