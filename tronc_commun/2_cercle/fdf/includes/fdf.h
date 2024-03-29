@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:48:55 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/28 19:13:25 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/29 06:03:53 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,17 @@
 #  define BUFFER_SIZE 50
 # endif
 
+# define WINDOW_WIDTH 800
+# define WINDOW_HEIGHT 600
+# define WINDOW_TITLE "Projet_FdF"
+
 # ifndef C_BASE
 #  define C_BASE 16777215
 # endif
 
+# include "keys.h"
 # include "libft/includes/libft.h"
+# include "minilibx-linux/mlx.h"
 
 typedef struct s_point
 {
@@ -36,10 +42,12 @@ typedef struct s_fdf
 {
 	int		fd;
 	char	*one_line;
-	char	**map_2d;
-	int		width;
 	int		height;
+	int		width;
+	char	**map_2d;
 	t_point	**map;
+	void	*mlx_ptr;
+	void	*win_ptr;
 }			t_fdf;
 
 //		end.c			//
@@ -54,6 +62,9 @@ void		ft_get_one_line(t_fdf *info);
 void		ft_get_info(char *filename, t_fdf *info);
 
 //		init.c			//
+int			ft_key_press(int keycode, t_fdf *info);
+void		ft_set_key_hook(t_fdf *info);
+void		ft_init_window(t_fdf *info);
 t_point		ft_new_point(int x, int y, char *str);
 void		ft_make_map(t_fdf *info);
 void		ft_new_fdf(t_fdf *info);

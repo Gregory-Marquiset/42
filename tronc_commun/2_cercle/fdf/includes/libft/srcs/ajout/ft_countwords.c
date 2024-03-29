@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 20:57:10 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/28 17:22:39 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/28 22:21:12 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_countwords(char *str, char set, char set2, char end)
 	int	check;
 	int	countw;
 
-	if (!str || !set || !set2 || !end || str[0] == '\0')
+	if (!str || !set || !set2 || str[0] == '\0')
 		return (0);
 	i = 0;
 	check = 1;

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:17:46 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/28 18:46:08 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/03/28 22:00:59 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,4 @@ void	ft_get_info(char *filename, t_fdf *info)
 		ft_exit("Erreur : echec de l'open du fd.\n");
 	ft_get_one_line(info);
 	ft_new_fdf(info);
-
 }

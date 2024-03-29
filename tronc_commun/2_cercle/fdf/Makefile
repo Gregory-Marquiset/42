@@ -6,7 +6,7 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/17 13:36:33 by gmarquis          #+#    #+#              #
-#    Updated: 2024/03/22 10:41:22 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/03/29 00:50:27 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ libft :
 minilibx :
 	@make all -C $(MINILIBX_PATH)
 
-bonus : libft $(NAME)
+bonus : libft minilibx $(NAME)
 
 all : bonus
 
@@ -44,10 +44,11 @@ $(OBJS_DIR)%.o : srcs/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJS_PREF)
-	$(CC) $(CFLAGS) $^ -o $@ $(LIBFT_PATH)libft_bns.a
+	$(CC) -lXext -lX11 $(CFLAGS) $^ -o $@ $(LIBFT_PATH)libft_bns.a $(MINILIBX_PATH)libmlx.a
 
 clean :
 	@make clean -C $(LIBFT_PATH)
+	@make clean -C $(MINILIBX_PATH)
 	rm -rf objs/
 
 fclean : clean
