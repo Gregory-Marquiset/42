@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 20:01:37 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/28 02:27:45 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/05 07:31:14 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_verif_extention(char *filename, char *exe)
 	int	j;
 
 	if (!filename || !exe)
-		ft_exit("Erreur : file ou extention maquante.\n");
+		ft_exit(2, "Erreur : file ou extention maquante.\n");
 	i = 0;
 	while (filename[i])
 		i++;
@@ -45,5 +45,5 @@ void	ft_verif_extention(char *filename, char *exe)
 	}
 	if (filename[i] == '\0' && exe[j] == '\0')
 		return ;
-	ft_exit("Erreur : file ou extention invalide.\n");
+	ft_exit(2, "Erreur : file ou extention invalide.\n");
 }

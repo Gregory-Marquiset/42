@@ -6,13 +6,14 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/17 13:36:33 by gmarquis          #+#    #+#              #
-#    Updated: 2024/03/29 00:50:27 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/04/05 07:20:03 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = srcs/end.c $\
 srcs/get_info.c $\
 srcs/init.c $\
+srcs/input.c $\
 srcs/main.c $\
 srcs/verif.c
 

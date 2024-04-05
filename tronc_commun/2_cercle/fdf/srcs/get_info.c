@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:17:46 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/28 22:00:59 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/05 07:34:30 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_get_one_line(t_fdf *info)
 
 	info->one_line = malloc(1);
 	if (!info->one_line)
-		ft_exit("Erreur : echec malloc pour one_line.\n");
+		ft_exit(2, "Erreur : echec malloc pour one_line.\n");
 	info->one_line[0] = '\0';
 	while (1)
 	{
@@ -50,12 +50,12 @@ void	ft_get_one_line(t_fdf *info)
 		{
 			info->one_line = ft_strjoin(info->one_line, line, 3);
 			if (info->one_line == NULL)
-				ft_error(info, 1, "Erreur : join non reussi.\n");
+				ft_free_and_out(info, 1, 2, "Erreur : join non reussi.\n");
 		}
 	}
 	close(info->fd);
 	if (info->one_line[0] == '\0')
-		ft_error(info, 1, "Erreur : fichier vide.\n");
+		ft_free_and_out(info, 1, 2, "Erreur : fichier vide.\n");
 }
 
 void	ft_get_info(char *filename, t_fdf *info)
@@ -63,7 +63,7 @@ void	ft_get_info(char *filename, t_fdf *info)
 	ft_verif_extention(filename, ".fdf");
 	info->fd = open(filename, O_RDONLY);
 	if (info->fd == -1)
-		ft_exit("Erreur : echec de l'open du fd.\n");
+		ft_exit(2, "Erreur : echec de l'open du fd.\n");
 	ft_get_one_line(info);
 	ft_new_fdf(info);
 }
