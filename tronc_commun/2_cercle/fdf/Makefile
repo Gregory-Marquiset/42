@@ -6,16 +6,20 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/17 13:36:33 by gmarquis          #+#    #+#              #
-#    Updated: 2024/04/05 07:20:03 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/04/06 06:46:25 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = srcs/end.c $\
+SRCS = srcs/arrow_events.c $\
+srcs/controls.c $\
+srcs/end.c $\
 srcs/get_info.c $\
 srcs/init.c $\
 srcs/input.c $\
 srcs/main.c $\
-srcs/verif.c
+srcs/rotate_events.c $\
+srcs/verif.c $\
+srcs/zoom_events.c
 
 LIBFT_PATH = includes/libft/
 MINILIBX_PATH = includes/minilibx-linux/
@@ -45,7 +49,7 @@ $(OBJS_DIR)%.o : srcs/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJS_PREF)
-	$(CC) -lXext -lX11 $(CFLAGS) $^ -o $@ $(LIBFT_PATH)libft_bns.a $(MINILIBX_PATH)libmlx.a
+	$(CC) -lm -lXext -lX11 $(CFLAGS) $^ -o $@ $(LIBFT_PATH)libft_bns.a $(MINILIBX_PATH)libmlx.a
 
 clean :
 	@make clean -C $(LIBFT_PATH)

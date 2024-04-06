@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:19:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/05 09:41:17 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/05 22:32:22 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void	ft_exit(int out, char *message)
 
 void	ft_free_and_out(t_fdf *info, int flag, int out, char *message)
 {
-	if (flag == 1 || flag == 4 || flag > 4)
+	if (flag == 1 || flag >= 4)
 		free(info->one_line);
-	if (flag == 2 || flag == 4 || flag > 4)
+	if (flag == 2 || flag >= 4)
 		ft_free_tab2d(info->map_2d);
 	if (flag == 3 || flag > 4)
 		ft_free_map(info);
