@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 10:52:52 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/06 06:34:32 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/08 10:24:46 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 
 # define NUM_PAD_PLUS		65451
 # define NUM_PAD_MINUS		65453
+# define NUM_PAD_MULT		65450
+# define NUM_PAD_DIVIDE		65455
 
 # define MAIN_PAD_I			105
 # define MAIN_PAD_P			112

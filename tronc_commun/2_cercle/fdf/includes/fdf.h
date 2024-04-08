@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:48:55 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/06 07:09:21 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/08 09:34:52 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 //		arrow_events.c	//
 void	ft_arrow_event(int keysym, t_fdf *info);
 
-//		controls.c		//
+//		draw.c		//
 void	ft_draw_map(t_fdf *fdf);
 
 //		end.c			//

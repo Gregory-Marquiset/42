@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:12:37 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/06 05:42:52 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/08 09:48:07 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,20 @@
 
 typedef struct s_drawl
 {
-	int	x_start;
-	int	y_start;
-	int	x_end;
-	int	y_end;
-	int	delta_x;
-	int	delta_y;
-	int	step_x;
-	int	step_y;
-	int	error;
-	int	error2;
+	double	x_start;
+	double	y_start;
+	double	z_start;
+	double	x_end;
+	double	y_end;
+	double	z_end;
+	double	delta_x;
+	double	delta_y;
+	double	delta_z;
+	double	step_x;
+	double	step_y;
+	double	step_z;
+	double	error;
+	double	error2;
 }			t_drawl;
 
 typedef struct s_img
@@ -36,7 +40,7 @@ typedef struct s_img
 	int		line_len;
 }			t_img;
 
-typedef struct s_point
+typedef struct s_pointx
 {
 	int		x;
 	int		y;

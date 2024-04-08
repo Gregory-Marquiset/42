@@ -6,12 +6,12 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/17 13:36:33 by gmarquis          #+#    #+#              #
-#    Updated: 2024/04/06 06:46:25 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/04/08 09:35:01 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = srcs/arrow_events.c $\
-srcs/controls.c $\
+srcs/draw.c $\
 srcs/end.c $\
 srcs/get_info.c $\
 srcs/init.c $\

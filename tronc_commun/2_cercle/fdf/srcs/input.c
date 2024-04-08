@@ -6,17 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 07:17:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/06 07:09:41 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/08 10:24:22 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-void	my_pixel_put(t_img *img, int x, int y, int z, int color)
-{
-	int offset = (img->line_len * y) + (x * (img->bits_per_pixel / 8)) + (z * (img->line_len / WINDOW_WIDTH));
-	*((unsigned int *)(offset + img->img_pixels_ptr)) = color;
-}
 
 int	ft_handle_input(int keysym, t_fdf *info)
 {
@@ -24,7 +18,7 @@ int	ft_handle_input(int keysym, t_fdf *info)
 		|| keysym == MAIN_PAD_S || keysym == MAIN_PAD_W)
 		ft_rotate_event(keysym, info);
 
-	else if (keysym == NUM_PAD_PLUS || keysym == NUM_PAD_MINUS)
+	else if (keysym == NUM_PAD_PLUS || keysym == NUM_PAD_MINUS || keysym == NUM_PAD_MULT || keysym == NUM_PAD_DIVIDE)
 		ft_zoom_event(keysym, info);
 
 	else if (keysym >= ARROW_LEFT && keysym <= ARROW_DOWN)
