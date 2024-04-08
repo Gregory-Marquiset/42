@@ -6,26 +6,24 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 06:01:59 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/06 06:22:31 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:19:03 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static void	ft_arrow_right(t_fdf *info)
+static void	ft_arrow_left(t_fdf *info)
 {
-	int	x_offset;
 	int	h;
 	int	w;
 
-	x_offset = 5;
 	h = 0;
 	w = 0;
 	while (h < info->height)
 	{
 		while (w < info->width)
 		{
-			info->map[h][w].x += x_offset;
+			info->map[h][w].x -= FACTOR;
 			w++;
 		}
 		h++;
@@ -34,20 +32,18 @@ static void	ft_arrow_right(t_fdf *info)
 	ft_draw_map(info);
 }
 
-static void	ft_arrow_left(t_fdf *info)
+static void	ft_arrow_right(t_fdf *info)
 {
-	int	x_offset;
 	int	h;
 	int	w;
 
-	x_offset = 5;
 	h = 0;
 	w = 0;
 	while (h < info->height)
 	{
 		while (w < info->width)
 		{
-			info->map[h][w].x -= x_offset;
+			info->map[h][w].x += FACTOR;
 			w++;
 		}
 		h++;
@@ -58,18 +54,16 @@ static void	ft_arrow_left(t_fdf *info)
 
 static void	ft_arrow_up(t_fdf *info)
 {
-	int	y_offset;
 	int	h;
 	int	w;
 
-	y_offset = 5;
 	h = 0;
 	w = 0;
 	while (h < info->height)
 	{
 		while (w < info->width)
 		{
-			info->map[h][w].y -= y_offset;
+			info->map[h][w].y -= FACTOR;
 			w++;
 		}
 		h++;
@@ -80,18 +74,16 @@ static void	ft_arrow_up(t_fdf *info)
 
 static void	ft_arrow_down(t_fdf *info)
 {
-	int	y_offset;
 	int	h;
 	int	w;
 
-	y_offset = 5;
 	h = 0;
 	w = 0;
 	while (h < info->height)
 	{
 		while (w < info->width)
 		{
-			info->map[h][w].y += y_offset;
+			info->map[h][w].y += FACTOR;
 			w++;
 		}
 		h++;

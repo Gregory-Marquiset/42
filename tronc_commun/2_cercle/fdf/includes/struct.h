@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:12:37 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/08 09:48:07 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/08 14:13:19 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,12 @@ typedef struct s_img
 	int		line_len;
 }			t_img;
 
-typedef struct s_pointx
+typedef struct s_point
 {
 	int		x;
 	int		y;
 	int		z;
+	int		z_base;
 	int		v;
 	int		c;
 }			t_point;

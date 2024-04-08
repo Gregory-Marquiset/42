@@ -3,6 +3,10 @@
         "*.c": "c",
         "mlx.h": "c",
         "fdf.h": "c",
-        "libft.h": "c"
+        "libft.h": "c",
+        "key_signals.h": "c",
+        "struct.h": "c",
+        "math.h": "c",
+        "color.h": "c"
     }
 }

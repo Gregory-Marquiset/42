@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:17:46 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/05 07:34:30 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/08 14:16:20 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_get_one_line(t_fdf *info)
 	info->one_line[0] = '\0';
 	while (1)
 	{
-		line = get_next_line(info->fd);	//	error du gnl potentiel virer le malloc de la static
+		line = get_next_line(info->fd);
 		if (line == NULL)
 			break;
 		else

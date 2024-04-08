@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 06:10:30 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/08 10:24:06 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:18:50 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	ft_zoom_in(t_fdf *info)
 		{
 			info->map[h][w].y *= zoom_factor;
 			info->map[h][w].x *= zoom_factor;
+			info->map[h][w].z *= zoom_factor;
 			w++;
 		}
 		h++;
@@ -51,6 +52,7 @@ static void	ft_zoom_out(t_fdf *info)
 		{
 			info->map[h][w].y *= zoom_factor;
 			info->map[h][w].x *= zoom_factor;
+			info->map[h][w].z *= zoom_factor;
 			w++;
 		}
 		h++;
@@ -61,19 +63,17 @@ static void	ft_zoom_out(t_fdf *info)
 
 static void	ft_up_z(t_fdf *info)
 {
-	double zoom_factor;
 	int h;
 	int w;
 
-	zoom_factor = 2;
 	h = 0;
 	w = 0;
 	while (h < info->height)
 	{
 		while (w < info->width)
 		{
-			if (info->map[h][w].z != 0)
-				info->map[h][w].z *= zoom_factor;
+			if (info->map[h][w].z_base != 0)
+				info->map[h][w].z += FACTOR;
 			w++;
 		}
 		h++;
@@ -84,19 +84,17 @@ static void	ft_up_z(t_fdf *info)
 
 static void	ft_down_z(t_fdf *info)
 {
-	double zoom_factor;
 	int h;
 	int w;
 
-	zoom_factor = 0.5;
 	h = 0;
 	w = 0;
 	while (h < info->height)
 	{
 		while (w < info->width)
 		{
-			if (info->map[h][w].z != 0)
-				info->map[h][w].z *= zoom_factor;
+			if (info->map[h][w].z_base != 0)
+				info->map[h][w].z -= FACTOR;
 			w++;
 		}
 		h++;

@@ -6,13 +6,13 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:05:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/08 10:19:14 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/08 14:27:10 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	my_pixel_put(t_img *img, int x, int y, int z, int color)
+void	ft_pixel_put(t_img *img, int x, int y, int z, int color)
 {
 	int offset;
 
@@ -49,6 +49,10 @@ int	ft_calculate(int start, int end)
 
 static void	ft_draw_line_pixels(t_fdf *info, int h, int w)
 {
+	info->drawl.step_x = ft_calculate(info->drawl.x_start, info->drawl.x_end);
+	info->drawl.step_y = ft_calculate(info->drawl.y_start, info->drawl.y_end);
+	info->drawl.step_z = ft_calculate(info->drawl.z_start, info->drawl.z_end);
+	//info->map[h][w].c += (info->drawl.delta_z * 100); // couleur en fonction de Z
 	info->drawl.delta_x = ft_absolute_nbr(info->drawl.x_end
 			- info->drawl.x_start);
 	info->drawl.delta_y = ft_absolute_nbr(info->drawl.y_end
@@ -56,7 +60,7 @@ static void	ft_draw_line_pixels(t_fdf *info, int h, int w)
 	while (info->drawl.x_start != info->drawl.x_end
 		|| info->drawl.y_start != info->drawl.y_end)
 	{
-		my_pixel_put(&info->img, info->drawl.x_start, info->drawl.y_start, info->drawl.z_start, info->map[h][w].c);
+		ft_pixel_put(&info->img, info->drawl.x_start, info->drawl.y_start, info->drawl.z_start, info->map[h][w].c);
 		info->drawl.error2 = info->drawl.error;
 		if (info->drawl.error2 > -info->drawl.delta_x)
 		{
@@ -91,10 +95,6 @@ void	ft_draw_line(t_fdf *info, int h, int w, int flag)
 	info->drawl.delta_x = ft_absolute_nbr(info->drawl.x_end - info->drawl.x_start);
 	info->drawl.delta_y = ft_absolute_nbr(info->drawl.y_end - info->drawl.y_start);
 	info->drawl.delta_z = ft_absolute_nbr(info->drawl.z_end - info->drawl.z_start);
-	info->drawl.step_x = ft_calculate(info->drawl.x_start, info->drawl.x_end);
-	info->drawl.step_y = ft_calculate(info->drawl.y_start, info->drawl.y_end);
-	info->drawl.step_z = ft_calculate(info->drawl.z_start, info->drawl.z_end);
-	info->map[h][w].c += (info->drawl.delta_z * 100); // couleur en fonction de Z
 	if (info->drawl.delta_x < info->drawl.delta_y)
 		info->drawl.error = -info->drawl.delta_y / 2;
 	else

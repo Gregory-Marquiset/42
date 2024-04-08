@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:48:55 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/08 09:34:52 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:18:34 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define WINDOW_HEIGHT 600
 # define MENU_WIDTH 100
 # define WINDOW_TITLE "Projet_FdF"
-# define ANGLE_INCREMENT 0.1
+# define FACTOR 10
 
 # include "color.h"
 # include "key_signals.h"
