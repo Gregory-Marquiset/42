@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:09:37 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/06 02:23:09 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:56:10 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	main(int argc, char **argv)
 
 	ft_draw_map(&info);
 
-	mlx_key_hook(info.win_ptr, ft_handle_input, &info);
+	mlx_hook(info.win_ptr, 2, 1L << 0, &ft_handle_input, &info);
+	mlx_hook(info.win_ptr, 17, 0L, &ft_handle_cross, &info);
 	mlx_loop(info.mlx_ptr);
-
 	return (0);
 }

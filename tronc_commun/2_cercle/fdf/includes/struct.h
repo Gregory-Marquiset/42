@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:12:37 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/08 14:13:19 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/09 05:11:12 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,24 @@ typedef struct s_drawl
 	double	error2;
 }			t_drawl;
 
+typedef struct s_iso
+{
+	double		iso_x;
+	double		iso_y;
+	double		dpl_x;
+	double		dpl_y;
+	double		tmp_x;
+	double		tmp_y;
+	double		rotation_x;
+	double		rotation_y;
+	double		rotation_z;
+	double		rotated_y_x;
+	double		rotated_z_x;
+	double		rotated_x_y;
+	double		rotated_x_z;
+	double		rotated_y_z;
+}			t_iso;
+
 typedef struct s_img
 {
 	void	*img_ptr;
@@ -42,12 +60,14 @@ typedef struct s_img
 
 typedef struct s_point
 {
-	int		x;
-	int		y;
-	int		z;
-	int		z_base;
-	int		v;
-	int		c;
+	double		x;
+	double		y;
+	double		z;
+	double		x_ori;
+	double		y_ori;
+	double		z_ori;
+	int			v;
+	int			c;
 }			t_point;
 
 typedef struct s_fdf
@@ -60,6 +80,8 @@ typedef struct s_fdf
 	t_point	**map;
 	void	*mlx_ptr;
 	void	*win_ptr;
+	t_iso	iso;
 	t_img	img;
+	double	zoom;
 	t_drawl	drawl;
 }			t_fdf;

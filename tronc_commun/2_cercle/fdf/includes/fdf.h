@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:48:55 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/08 12:18:34 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/09 02:27:19 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,19 @@
 #  define BUFFER_SIZE 50
 # endif
 
-# define WINDOW_WIDTH 800
+# define WINDOW_WIDTH 1000
 # define WINDOW_HEIGHT 600
 # define MENU_WIDTH 100
 # define WINDOW_TITLE "Projet_FdF"
 # define FACTOR 10
 
 # include "color.h"
-# include "key_signals.h"
 # include "libft/includes/libft.h"
 # include "minilibx-linux/mlx.h"
 # include "struct.h"
+# include <X11/keysym.h>
 # include <math.h>
-
-//		arrow_events.c	//
-void	ft_arrow_event(int keysym, t_fdf *info);
+# include <signal.h>
 
 //		draw.c		//
 void	ft_draw_map(t_fdf *fdf);
@@ -48,23 +46,25 @@ void	ft_get_one_line(t_fdf *info);
 void	ft_get_info(char *filename, t_fdf *info);
 
 //		init.c			//
+void	ft_init_iso(t_fdf *info);
 void	ft_init_window(t_fdf *info);
 t_point	ft_new_point(int x, int y, char *str);
 void	ft_make_map(t_fdf *info);
 void	ft_new_fdf(t_fdf *info);
 
 //		input.c			//
-void	my_pixel_put(t_img *img, int x, int y, int z, int color);
+int		ft_handle_cross(t_fdf *info);
 int		ft_handle_input(int keysym, t_fdf *info);
 
-//		rotate_events.c	//
-void	ft_rotate_event(int keysym, t_fdf *info);
+//		keys_events.c	//
+void	ft_move_events(int keysym, t_fdf *info);
+void	ft_zoom_events(int keysym, t_fdf *info);
+void	ft_rotate_events(int keysym, t_fdf *info);
+void	ft_z_events(int keysym, t_fdf *info);
+void	ft_reset_events(t_fdf *info);
 
 //		verif.c			//
 int		ft_verif_cordo(char *str);
 void	ft_verif_extention(char *filename, char *exe);
-
-//		zoom_events.c	//
-void	ft_zoom_event(int keysym, t_fdf *info);
 
 #endif

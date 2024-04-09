@@ -6,18 +6,45 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:05:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/08 14:27:10 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/09 06:52:53 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	ft_pixel_put(t_img *img, int x, int y, int z, int color)
+static void	ft_pixel_put(t_img *img, int x, int y, int z, int color)
 {
-	int offset;
+	int	offset;
 
-	offset = (img->line_len * y) + (x * (img->bits_per_pixel / 8)) + (z * (img->line_len / WINDOW_WIDTH));
+	offset = (img->line_len * y) + (x * (img->bits_per_pixel / 8)) + (z
+			* (img->line_len / WINDOW_WIDTH));
 	*((unsigned int *)(offset + img->img_pixels_ptr)) = color;
+}
+
+
+static void	ft_coordo_in_window(t_fdf *info, int y, int x)
+{
+	info->iso.tmp_x = (x - y) * cos(30 * M_PI / 180) * info->zoom + info->iso.dpl_x;
+	info->iso.tmp_y = -info->map[y][x].z + (x + y) * sin(30 * M_PI / 180) * info->zoom + info->iso.dpl_y;
+	info->iso.rotated_y_x = info->iso.tmp_y * cos(info->iso.rotation_x) - info->map[y][x].z * sin(info->iso.rotation_x);
+	info->iso.rotated_z_x = info->iso.tmp_y * sin(info->iso.rotation_x) + info->map[y][x].z * cos(info->iso.rotation_x);
+	info->iso.rotated_x_y = info->iso.tmp_x * cos(info->iso.rotation_y) + info->iso.rotated_z_x * sin(info->iso.rotation_y);
+	info->iso.rotated_x_z = info->iso.rotated_x_y * cos(info->iso.rotation_z) - info->iso.rotated_y_x * sin(info->iso.rotation_z);
+	info->iso.rotated_y_z = info->iso.rotated_x_y * sin(info->iso.rotation_z) + info->iso.rotated_y_x * cos(info->iso.rotation_z);
+	info->iso.iso_x = info->iso.rotated_x_z;
+	info->iso.iso_y = info->iso.rotated_y_z;
+	info->iso.iso_x += (WINDOW_WIDTH - info->width) / 2;
+	info->iso.iso_y += (WINDOW_HEIGHT - info->height) / 2;
+	if (info->iso.iso_x < 0)
+		info->iso.iso_x = 0;
+	if (info->iso.iso_x >= WINDOW_WIDTH)
+		info->iso.iso_x = WINDOW_WIDTH - 1;
+	if (info->iso.iso_y < 0)
+		info->iso.iso_y = 0;
+	if (info->iso.iso_y >= WINDOW_HEIGHT)
+		info->iso.iso_y = WINDOW_HEIGHT - 1;
+	info->map[y][x].x = info->iso.iso_x;
+	info->map[y][x].y = info->iso.iso_y;
 }
 
 static void	ft_draw_background(t_fdf *info)
@@ -39,89 +66,52 @@ static void	ft_draw_background(t_fdf *info)
 	}
 }
 
-int	ft_calculate(int start, int end)
+void ft_draw_line(t_fdf *info, int x0, int y0, int x1, int y1, int color)
 {
-	if (start < end)
-		return (1);
-	else
-		return (-1);
+    int dx = abs(x1 - x0);
+    int dy = abs(y1 - y0);
+    int sx = x0 < x1 ? 1 : -1;
+    int sy = y0 < y1 ? 1 : -1;
+    int err = (dx > dy ? dx : -dy) / 2;
+    int e2;
+
+    while (x0 != x1 || y0 != y1)
+    {
+        ft_pixel_put(&info->img, x0, y0, info->map[y0][x0].z, color);
+        e2 = err;
+        if (e2 > -dx)
+        {
+            err -= dy;
+            x0 += sx;
+        }
+        if (e2 < dy)
+        {
+            err += dx;
+            y0 += sy;
+        }
+    }
 }
 
-static void	ft_draw_line_pixels(t_fdf *info, int h, int w)
+void ft_draw_map(t_fdf *info)
 {
-	info->drawl.step_x = ft_calculate(info->drawl.x_start, info->drawl.x_end);
-	info->drawl.step_y = ft_calculate(info->drawl.y_start, info->drawl.y_end);
-	info->drawl.step_z = ft_calculate(info->drawl.z_start, info->drawl.z_end);
-	//info->map[h][w].c += (info->drawl.delta_z * 100); // couleur en fonction de Z
-	info->drawl.delta_x = ft_absolute_nbr(info->drawl.x_end
-			- info->drawl.x_start);
-	info->drawl.delta_y = ft_absolute_nbr(info->drawl.y_end
-			- info->drawl.y_start);
-	while (info->drawl.x_start != info->drawl.x_end
-		|| info->drawl.y_start != info->drawl.y_end)
-	{
-		ft_pixel_put(&info->img, info->drawl.x_start, info->drawl.y_start, info->drawl.z_start, info->map[h][w].c);
-		info->drawl.error2 = info->drawl.error;
-		if (info->drawl.error2 > -info->drawl.delta_x)
-		{
-			info->drawl.error -= info->drawl.delta_y;
-			info->drawl.x_start += info->drawl.step_x;
-		}
-		if (info->drawl.error2 < info->drawl.delta_y)
-		{
-			info->drawl.error += info->drawl.delta_x;
-			info->drawl.y_start += info->drawl.step_y;
-		}
-	}
-}
+	int y;
+	int x;
 
-void	ft_draw_line(t_fdf *info, int h, int w, int flag)
-{
-	info->drawl.x_start = info->map[h][w].x;
-	info->drawl.y_start = info->map[h][w].y;
-	info->drawl.z_start = info->map[h][w].z;
-	if (flag == 1)
-	{
-		info->drawl.x_end = info->map[h][w + 1].x;
-		info->drawl.y_end = info->map[h][w + 1].y;
-		info->drawl.z_end = info->map[h][w + 1].z;
-	}
-	else
-	{
-		info->drawl.x_end = info->map[h + 1][w].x;
-		info->drawl.y_end = info->map[h + 1][w].y;
-		info->drawl.z_end = info->map[h + 1][w].z;
-	}
-	info->drawl.delta_x = ft_absolute_nbr(info->drawl.x_end - info->drawl.x_start);
-	info->drawl.delta_y = ft_absolute_nbr(info->drawl.y_end - info->drawl.y_start);
-	info->drawl.delta_z = ft_absolute_nbr(info->drawl.z_end - info->drawl.z_start);
-	if (info->drawl.delta_x < info->drawl.delta_y)
-		info->drawl.error = -info->drawl.delta_y / 2;
-	else
-		info->drawl.error = info->drawl.delta_x / 2;
-	ft_draw_line_pixels(info, h, w);
-}
-
-void	ft_draw_map(t_fdf *info)
-{
-	int	h;
-	int	w;
-
+	y = 0;
 	ft_draw_background(info);
-	h = 0;
-	while (h < info->height)
+	while (y < info->height)
 	{
-		w = 0;
-		while (w < info->width)
+		x = 0;
+		while (x < info->width)
 		{
-			if (w < info->width - 1)
-				ft_draw_line(info, h, w, 1);
-			if (h < info->height - 1)
-				ft_draw_line(info, h, w, 2);
-			w++;
+			ft_coordo_in_window(info, y, x);
+			ft_pixel_put(&info->img, info->iso.iso_x, info->iso.iso_y,
+							info->map[y][x].z, info->map[y][x].c);
+			x++;
 		}
-		h++;
+		y++;
 	}
+
 	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, info->img.img_ptr, 0,
-		0);
+							0);
 }

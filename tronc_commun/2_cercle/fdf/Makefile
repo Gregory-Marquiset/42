@@ -6,20 +6,18 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/17 13:36:33 by gmarquis          #+#    #+#              #
-#    Updated: 2024/04/08 09:35:01 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/04/09 00:34:41 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = srcs/arrow_events.c $\
-srcs/draw.c $\
+SRCS = srcs/draw.c $\
 srcs/end.c $\
 srcs/get_info.c $\
 srcs/init.c $\
 srcs/input.c $\
+srcs/keys_events.c $\
 srcs/main.c $\
-srcs/rotate_events.c $\
-srcs/verif.c $\
-srcs/zoom_events.c
+srcs/verif.c
 
 LIBFT_PATH = includes/libft/
 MINILIBX_PATH = includes/minilibx-linux/
