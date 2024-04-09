@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:05:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/09 08:43:01 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/09 10:33:52 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,36 +66,6 @@ static void	ft_draw_background(t_fdf *info)
 	}
 }
 
-void draw_line(t_fdf *info, int y, int x)
-{
-    // Condition de terminaison de la récursion
-    if (p1->x == p2->x && p1->y == p2->y)
-        return;
-
-    // Dessiner le pixel correspondant à p1
-    ft_pixel_put(img, p1->x, p1->y, p1->z, p1->c);
-
-    // Calculer la pente de la ligne
-    double dx = p2->x - p1->x;
-    double dy = p2->y - p1->y;
-    double steps = fabs(dx) > fabs(dy) ? fabs(dx) : fabs(dy);
-    double increment_x = dx / steps;
-    double increment_y = dy / steps;
-
-    // Déplacer progressivement le long de la ligne
-    double x = p1->x;
-    double y = p1->y;
-    for (int i = 0; i < steps; i++)
-    {
-        x += increment_x;
-        y += increment_y;
-        ft_pixel_put(img, round(x), round(y), p1->z, p1.c);
-    }
-
-    // Appel récursif avec le point suivant
-    draw_line(p2, p3, img);
-}
-
 void ft_draw_map(t_fdf *info)
 {
 	int y;
@@ -109,10 +79,8 @@ void ft_draw_map(t_fdf *info)
 		while (x < info->width)
 		{
 			ft_coordo_in_window(info, y, x);
-			if (x < info->width - 1)
-                draw_line(info, y, x);
-            if (y < info->height - 1)
-                draw_line(info, y, x);
+			ft_pixel_put(&info->img, info->map[y][x].x, info->map[y][x].y,
+							info->map[y][x].z, info->map[y][x].c);
 			x++;
 		}
 		y++;
