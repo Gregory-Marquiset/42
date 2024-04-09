@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:05:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/09 06:52:53 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/09 08:43:01 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,30 +66,34 @@ static void	ft_draw_background(t_fdf *info)
 	}
 }
 
-void ft_draw_line(t_fdf *info, int x0, int y0, int x1, int y1, int color)
+void draw_line(t_fdf *info, int y, int x)
 {
-    int dx = abs(x1 - x0);
-    int dy = abs(y1 - y0);
-    int sx = x0 < x1 ? 1 : -1;
-    int sy = y0 < y1 ? 1 : -1;
-    int err = (dx > dy ? dx : -dy) / 2;
-    int e2;
+    // Condition de terminaison de la récursion
+    if (p1->x == p2->x && p1->y == p2->y)
+        return;
 
-    while (x0 != x1 || y0 != y1)
+    // Dessiner le pixel correspondant à p1
+    ft_pixel_put(img, p1->x, p1->y, p1->z, p1->c);
+
+    // Calculer la pente de la ligne
+    double dx = p2->x - p1->x;
+    double dy = p2->y - p1->y;
+    double steps = fabs(dx) > fabs(dy) ? fabs(dx) : fabs(dy);
+    double increment_x = dx / steps;
+    double increment_y = dy / steps;
+
+    // Déplacer progressivement le long de la ligne
+    double x = p1->x;
+    double y = p1->y;
+    for (int i = 0; i < steps; i++)
     {
-        ft_pixel_put(&info->img, x0, y0, info->map[y0][x0].z, color);
-        e2 = err;
-        if (e2 > -dx)
-        {
-            err -= dy;
-            x0 += sx;
-        }
-        if (e2 < dy)
-        {
-            err += dx;
-            y0 += sy;
-        }
+        x += increment_x;
+        y += increment_y;
+        ft_pixel_put(img, round(x), round(y), p1->z, p1.c);
     }
+
+    // Appel récursif avec le point suivant
+    draw_line(p2, p3, img);
 }
 
 void ft_draw_map(t_fdf *info)
@@ -105,13 +109,14 @@ void ft_draw_map(t_fdf *info)
 		while (x < info->width)
 		{
 			ft_coordo_in_window(info, y, x);
-			ft_pixel_put(&info->img, info->iso.iso_x, info->iso.iso_y,
-							info->map[y][x].z, info->map[y][x].c);
+			if (x < info->width - 1)
+                draw_line(info, y, x);
+            if (y < info->height - 1)
+                draw_line(info, y, x);
 			x++;
 		}
 		y++;
 	}
-
 	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, info->img.img_ptr, 0,
 							0);
 }
