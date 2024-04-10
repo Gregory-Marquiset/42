@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:48:55 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/09 02:27:19 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:51:57 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_draw_map(t_fdf *fdf);
 //		end.c			//
 void	ft_free_map(t_fdf *info);
 void	ft_free_info(t_fdf *info);
-void	ft_exit(int out, char *message);
 void	ft_free_and_out(t_fdf *info, int flag, int out, char *message);
 
 //		get_info.c		//
@@ -64,7 +63,7 @@ void	ft_z_events(int keysym, t_fdf *info);
 void	ft_reset_events(t_fdf *info);
 
 //		verif.c			//
+void	ft_verif_in_window(t_fdf *info, int y, int x);
 int		ft_verif_cordo(char *str);
-void	ft_verif_extention(char *filename, char *exe);
 
 #endif

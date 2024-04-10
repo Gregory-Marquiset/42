@@ -1,42 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isexa.c                                         :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 08:22:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/10 15:44:10 by gmarquis         ###   ########.fr       */
+/*   Created: 2024/04/10 15:51:41 by gmarquis          #+#    #+#             */
+/*   Updated: 2024/04/10 16:06:43 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libft.h"
 
-int	ft_isexa(char *code)
+void	ft_exit(int out, char *message)
 {
-	int		i;
-	int		j;
-	char	*low;
-	char	*upp;
+	int	len;
 
-	if (!code)
-		return (0);
-	if (code[0] != '0' || (code[1] != 'x' && code[1] != 'X')
-		|| ft_strlen(code) != 8)
-		return (0);
-	low = "0123456789abcdef";
-	upp = "0123456789ABCDEF";
-	i = 2;
-	while (code[i])
+	len = ft_strlen(message);
+	if (len == 0 || out > 2 || out < 1)
 	{
-		j = 0;
-		while (code[i] != low[j] && code[i] != upp[j])
-		{
-			if (!low[j] || !upp[j])
-				return (0);
-			j++;
-		}
-		i++;
+		write(2, "Error and undefined message.\n", 29);
+		exit(EXIT_FAILURE);
 	}
-	return (1);
+	if (out == 2)
+	{
+		write(out, message, len);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		write(out, message, len);
+		exit(EXIT_SUCCESS);
+	}
 }

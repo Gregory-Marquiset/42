@@ -6,11 +6,37 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 20:01:37 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/05 07:31:14 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:48:53 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
+void	ft_verif_in_window(t_fdf *info, int y, int x)
+{
+	if (info->map[y][x].x < 0 || info->map[y][x].x >= WINDOW_WIDTH)
+	{
+		if (info->map[y][x].x < 0)
+			info->map[y][x].x = 1;
+		if (info->map[y][x].x >= WINDOW_WIDTH)
+			info->map[y][x].x = WINDOW_WIDTH - 1;
+		info->map[y][x].c = BACKGROUND;
+		if (info->map[y][x].x == 1 && info->map[y][x].x < MENU_WIDTH)
+			info->map[y][x].c = MENU_BACKGROUND;
+	}
+	else if (info->map[y][x].y < 0 || info->map[y][x].y >= WINDOW_HEIGHT)
+	{
+		if (info->map[y][x].y < 0)
+			info->map[y][x].y = 1;
+		if (info->map[y][x].y >= WINDOW_HEIGHT)
+			info->map[y][x].y = WINDOW_HEIGHT - 1;
+		info->map[y][x].c = BACKGROUND;
+		if ((info->map[y][x].y == 1 || info->map[y][x].y == WINDOW_HEIGHT - 1) && info->map[y][x].x < MENU_WIDTH)
+			info->map[y][x].c = MENU_BACKGROUND;
+	}
+	else
+		info->map[y][x].c = info->map[y][x].c_ori;
+}
 
 int	ft_verif_cordo(char *str)
 {
@@ -22,28 +48,4 @@ int	ft_verif_cordo(char *str)
 	if (ft_isint(str))
 		return ((int)nbr);
 	return (0);
-}
-
-void	ft_verif_extention(char *filename, char *exe)
-{
-	int	i;
-	int	j;
-
-	if (!filename || !exe)
-		ft_exit(2, "Erreur : file ou extention maquante.\n");
-	i = 0;
-	while (filename[i])
-		i++;
-	i--;
-	while (filename[i] != '.')
-	i--;
-	j = 0;
-	while (filename[i] == exe[j] && filename[i] && exe[j])
-	{
-		i++;
-		j++;
-	}
-	if (filename[i] == '\0' && exe[j] == '\0')
-		return ;
-	ft_exit(2, "Erreur : file ou extention invalide.\n");
 }

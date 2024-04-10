@@ -6,7 +6,7 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 17:10:22 by gmarquis          #+#    #+#              #
-#    Updated: 2024/03/26 17:21:30 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/04/10 15:53:28 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,11 +54,13 @@ srcs/ajout/ft_contain_n.c $\
 srcs/ajout/ft_count_n.c $\
 srcs/ajout/ft_countain_double.c $\
 srcs/ajout/ft_countwords.c $\
+srcs/ajout/ft_exit.c $\
 srcs/ajout/ft_free_tab2d.c $\
 srcs/ajout/ft_input_is_digit.c $\
 srcs/ajout/ft_isexa.c $\
 srcs/ajout/ft_isint.c $\
-srcs/ajout/ft_strndup.c
+srcs/ajout/ft_strndup.c $\
+srcs/ajout/ft_verif_extension.c
 
 SRCS_BNS = srcs/bonus/ft_lstadd_back_bonus.c $\
 srcs/bonus/ft_lstadd_front_bonus.c $\

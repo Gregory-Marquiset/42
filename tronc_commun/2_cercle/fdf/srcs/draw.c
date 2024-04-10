@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:05:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/10 14:58:28 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:21:52 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,32 +57,6 @@ static void	ft_coodo_in_window(t_fdf *info, int y, int x)
     info->map[y][x].y = info->iso.tmp_y;
     info->map[y][x].x += (WINDOW_WIDTH - info->width * info->zoom) / 2;
     info->map[y][x].y += (WINDOW_HEIGHT - info->height * info->zoom) / 2;
-}
-
-void	ft_verif_in_window(t_fdf *info, int y, int x)
-{
-	if (info->map[y][x].x < 0 || info->map[y][x].x >= WINDOW_WIDTH)
-	{
-		if (info->map[y][x].x < 0)
-			info->map[y][x].x = 0;
-		if (info->map[y][x].x >= WINDOW_WIDTH)
-			info->map[y][x].x = WINDOW_WIDTH - 1;
-		info->map[y][x].c = BACKGROUND;
-		if (info->map[y][x].x == 0 && info->map[y][x].x < MENU_WIDTH)
-			info->map[y][x].c = MENU_BACKGROUND;
-	}
-	else if (info->map[y][x].y < 0 || info->map[y][x].y >= WINDOW_HEIGHT)
-	{
-		if (info->map[y][x].y < 0)
-			info->map[y][x].y = 0;
-		if (info->map[y][x].y >= WINDOW_HEIGHT)
-			info->map[y][x].y = WINDOW_HEIGHT - 1;
-		info->map[y][x].c = BACKGROUND;
-		if (info->map[y][x].y == 0 && info->map[y][x].x < MENU_WIDTH)
-			info->map[y][x].c = MENU_BACKGROUND;
-	}
-	else
-		info->map[y][x].c = info->map[y][x].c_ori;
 }
 
 static void	ft_draw_background(t_fdf *info)

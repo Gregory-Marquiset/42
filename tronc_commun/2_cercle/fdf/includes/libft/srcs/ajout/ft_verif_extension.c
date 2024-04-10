@@ -1,42 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isexa.c                                         :+:      :+:    :+:   */
+/*   ft_verif_extension.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 08:22:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/10 15:44:10 by gmarquis         ###   ########.fr       */
+/*   Created: 2024/04/10 15:47:13 by gmarquis          #+#    #+#             */
+/*   Updated: 2024/04/10 16:02:27 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libft.h"
 
-int	ft_isexa(char *code)
+void	ft_verif_extention(char *filename, char *exe)
 {
-	int		i;
-	int		j;
-	char	*low;
-	char	*upp;
+	int	i;
+	int	j;
 
-	if (!code)
-		return (0);
-	if (code[0] != '0' || (code[1] != 'x' && code[1] != 'X')
-		|| ft_strlen(code) != 8)
-		return (0);
-	low = "0123456789abcdef";
-	upp = "0123456789ABCDEF";
-	i = 2;
-	while (code[i])
-	{
-		j = 0;
-		while (code[i] != low[j] && code[i] != upp[j])
-		{
-			if (!low[j] || !upp[j])
-				return (0);
-			j++;
-		}
+	if (!filename || filename[0] == '\0')
+		ft_exit(2, "Error : missing file.\n");
+	if (!exe)
+		ft_exit(2, "Error : missing extension.\n");
+	i = 0;
+	while (filename[i])
 		i++;
+	i--;
+	while (filename[i] != '.')
+		i--;
+	j = 0;
+	while (filename[i] == exe[j] && filename[i] && exe[j])
+	{
+		i++;
+		j++;
 	}
-	return (1);
+	if (filename[i] == '\0' && exe[j] == '\0')
+		return ;
+	ft_exit(2, "Error : invalid extension.\n");
 }
