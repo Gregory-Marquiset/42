@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 07:17:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/09 02:22:40 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:01:49 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,14 @@ int	ft_handle_cross(t_fdf *info)
 	return (0);
 }
 
+void	ft_iso_view(t_fdf *info)
+{
+	info->iso.active = 1;
+	ft_draw_map(info);
+}
+
 int	ft_handle_input(int keysym, t_fdf *info)
 {
-	ft_printf("%d\n", keysym);
 	if (keysym == XK_Escape)
 		ft_free_and_out(info, 7, 1, "Success : ESC as been pressed\n");
 	if (keysym == XK_KP_Add || keysym == XK_KP_Subtract )
@@ -33,5 +38,7 @@ int	ft_handle_input(int keysym, t_fdf *info)
 		ft_z_events(keysym, info);
 	if (keysym == XK_space)
 		ft_reset_events(info);
+	if (keysym == XK_i)
+		ft_iso_view(info);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:05:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/09 10:33:52 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:58:28 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ static void	ft_pixel_put(t_img *img, int x, int y, int z, int color)
 {
 	int	offset;
 
-	offset = (img->line_len * y) + (x * (img->bits_per_pixel / 8)) + (z
+	offset = (y * img->line_len) + (x * (img->bits_per_pixel / 8)) + (z
 			* (img->line_len / WINDOW_WIDTH));
 	*((unsigned int *)(offset + img->img_pixels_ptr)) = color;
 }
 
 
-static void	ft_coordo_in_window(t_fdf *info, int y, int x)
+static void	ft_coordo_iso(t_fdf *info, int y, int x)
 {
 	info->iso.tmp_x = (x - y) * cos(30 * M_PI / 180) * info->zoom + info->iso.dpl_x;
 	info->iso.tmp_y = -info->map[y][x].z + (x + y) * sin(30 * M_PI / 180) * info->zoom + info->iso.dpl_y;
@@ -35,16 +35,54 @@ static void	ft_coordo_in_window(t_fdf *info, int y, int x)
 	info->iso.iso_y = info->iso.rotated_y_z;
 	info->iso.iso_x += (WINDOW_WIDTH - info->width) / 2;
 	info->iso.iso_y += (WINDOW_HEIGHT - info->height) / 2;
-	if (info->iso.iso_x < 0)
-		info->iso.iso_x = 0;
-	if (info->iso.iso_x >= WINDOW_WIDTH)
-		info->iso.iso_x = WINDOW_WIDTH - 1;
-	if (info->iso.iso_y < 0)
-		info->iso.iso_y = 0;
-	if (info->iso.iso_y >= WINDOW_HEIGHT)
-		info->iso.iso_y = WINDOW_HEIGHT - 1;
 	info->map[y][x].x = info->iso.iso_x;
 	info->map[y][x].y = info->iso.iso_y;
+}
+
+static void	ft_coodo_in_window(t_fdf *info, int y, int x)
+{
+    info->map[y][x].x = x * info->zoom + info->iso.dpl_x;
+    info->map[y][x].y = -info->map[y][x].z + y * info->zoom + info->iso.dpl_y;
+    info->iso.tmp_y = info->map[y][x].y * cos(info->iso.rotation_x) - info->map[y][x].z * sin(info->iso.rotation_x);
+    info->iso.tmp_z = info->map[y][x].y * sin(info->iso.rotation_x) + info->map[y][x].z * cos(info->iso.rotation_x);
+    info->map[y][x].y = info->iso.tmp_y;
+    info->map[y][x].z = info->iso.tmp_z;
+    info->iso.tmp_x = info->map[y][x].x * cos(info->iso.rotation_y) + info->map[y][x].z * sin(info->iso.rotation_y);
+    info->iso.tmp_z = -info->map[y][x].x * sin(info->iso.rotation_y) + info->map[y][x].z * cos(info->iso.rotation_y);
+    info->map[y][x].x = info->iso.tmp_x;
+    info->map[y][x].z = info->iso.tmp_z;
+    info->iso.tmp_x = info->map[y][x].x * cos(info->iso.rotation_z) - info->map[y][x].y * sin(info->iso.rotation_z);
+    info->iso.tmp_y = info->map[y][x].x * sin(info->iso.rotation_z) + info->map[y][x].y * cos(info->iso.rotation_z);
+    info->map[y][x].x = info->iso.tmp_x;
+    info->map[y][x].y = info->iso.tmp_y;
+    info->map[y][x].x += (WINDOW_WIDTH - info->width * info->zoom) / 2;
+    info->map[y][x].y += (WINDOW_HEIGHT - info->height * info->zoom) / 2;
+}
+
+void	ft_verif_in_window(t_fdf *info, int y, int x)
+{
+	if (info->map[y][x].x < 0 || info->map[y][x].x >= WINDOW_WIDTH)
+	{
+		if (info->map[y][x].x < 0)
+			info->map[y][x].x = 0;
+		if (info->map[y][x].x >= WINDOW_WIDTH)
+			info->map[y][x].x = WINDOW_WIDTH - 1;
+		info->map[y][x].c = BACKGROUND;
+		if (info->map[y][x].x == 0 && info->map[y][x].x < MENU_WIDTH)
+			info->map[y][x].c = MENU_BACKGROUND;
+	}
+	else if (info->map[y][x].y < 0 || info->map[y][x].y >= WINDOW_HEIGHT)
+	{
+		if (info->map[y][x].y < 0)
+			info->map[y][x].y = 0;
+		if (info->map[y][x].y >= WINDOW_HEIGHT)
+			info->map[y][x].y = WINDOW_HEIGHT - 1;
+		info->map[y][x].c = BACKGROUND;
+		if (info->map[y][x].y == 0 && info->map[y][x].x < MENU_WIDTH)
+			info->map[y][x].c = MENU_BACKGROUND;
+	}
+	else
+		info->map[y][x].c = info->map[y][x].c_ori;
 }
 
 static void	ft_draw_background(t_fdf *info)
@@ -78,7 +116,11 @@ void ft_draw_map(t_fdf *info)
 		x = 0;
 		while (x < info->width)
 		{
-			ft_coordo_in_window(info, y, x);
+			if (info->iso.active == 1)
+				ft_coordo_iso(info, y, x);
+			else
+				ft_coodo_in_window(info, y, x);
+			ft_verif_in_window(info, y, x);
 			ft_pixel_put(&info->img, info->map[y][x].x, info->map[y][x].y,
 							info->map[y][x].z, info->map[y][x].c);
 			x++;

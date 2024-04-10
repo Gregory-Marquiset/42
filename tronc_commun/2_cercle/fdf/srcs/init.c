@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 14:06:15 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/09 05:11:18 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:46:16 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 void	ft_init_iso(t_fdf *info)
 {
+	info->iso.active = 0;
 	info->iso.iso_x = 0;
 	info->iso.iso_y = 0;
 	info->iso.dpl_x = 0;
 	info->iso.dpl_y = 0;
 	info->iso.tmp_x = 0;
 	info->iso.tmp_y = 0;
+	info->iso.tmp_z = 0;
 	info->iso.rotation_x = 0;
 	info->iso.rotation_y = 0;
 	info->iso.rotation_z = 0;
@@ -54,17 +56,17 @@ t_point	ft_new_point(int x, int y, char *str)
 	if (!str || !ft_strncmp(str, "V", 1))
 	{
 		new.z = 0;
-		new.z_ori = 0;
-		new.v = 0;
 		new.c = 0;
+		new.v = 0;
 	}
 	else
 	{
 		new.z = ft_verif_cordo(str);
-		new.z_ori = new.z;
-		new.v = 1;
 		new.c = ft_get_color(str);
+		new.v = 1;
 	}
+	new.z_ori = new.z;
+	new.c_ori = new.c;
 	return (new);
 }
 
