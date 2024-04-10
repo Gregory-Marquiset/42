@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 06:24:27 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/10 18:23:22 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/10 21:41:24 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,5 @@ void	ft_reset_events(t_fdf *info)
 		y++;
 	}
 	ft_init_modif_view(info);
-	info->modif.active_para = 0;
 	ft_draw_map(info);
 }

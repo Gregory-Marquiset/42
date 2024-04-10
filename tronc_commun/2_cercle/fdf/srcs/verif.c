@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 20:01:37 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/10 17:02:28 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/10 22:20:45 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@ void	ft_verif_in_window(t_fdf *info, int y, int x)
 		if ((info->map[y][x].y == 1 || info->map[y][x].y == WINDOW_HEIGHT - 1) && info->map[y][x].x < MENU_WIDTH)
 			info->map[y][x].c = MENU_BACKGROUND;
 	}
-	else
-		info->map[y][x].c = info->map[y][x].c_ori;
+	if (info->modif.colors_modif == 1)			//		a finir		//
+		info->map[y][x].c_ori += info->map[y][x].c;
 	if (info->map[y][x].x < MENU_WIDTH && info->map[y][x].v == 0)
 		info->map[y][x].c = MENU_BACKGROUND;
-
 }
 
 int	ft_verif_cordo(char *str)

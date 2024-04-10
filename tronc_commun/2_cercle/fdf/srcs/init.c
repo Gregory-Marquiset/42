@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 14:06:15 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/10 18:06:59 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/10 22:04:28 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	ft_init_modif_view(t_fdf *info)
 {
 	info->modif.zoom = 1;
-	info->modif.active_iso = 0;
+	info->modif.colors_modif = 0;
+	info->modif.active_iso = 1;
 	info->modif.active_para = 0;
 	info->modif.dpl_x = 0;
 	info->modif.dpl_y = 0;
@@ -25,23 +26,20 @@ void	ft_init_modif_view(t_fdf *info)
 	info->modif.rotation_x = 0;
 	info->modif.rotation_y = 0;
 	info->modif.rotation_z = 0;
-	info->iso.rotated_y_x = 0;
-	info->iso.rotated_y_z = 0;
-	info->iso.rotated_x_z = 0;
-//		??? inutil ???		//
-	info->iso.rotated_x_y = 0;
-	info->iso.rotated_z_x = 0;
+	info->iso.rotated_y = 0;
+	info->iso.rotated_z = 0;
+	info->iso.rotated_x = 0;
 }
 
 void	ft_init_window(t_fdf *info)
 {
 	info->mlx_ptr = mlx_init();
 	if (info->mlx_ptr == NULL)
-		ft_free_and_out(info, 5, 2, "Erreur : Impossible d'initialiser la connexion avec le serveur graphique.\n");
+		ft_free_and_out(info, 5, 2, "Error: Unable to initialize the connection with the graphics server.\n");
 	info->win_ptr = mlx_new_window(info->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT,
 			WINDOW_TITLE);
 	if (info->win_ptr == NULL)
-		ft_free_and_out(info, 6, 2, "Erreur : window non initialiser.\n");
+		ft_free_and_out(info, 6, 2, "Error: window not initialized.\n");
 	ft_init_modif_view(info);
 }
 
@@ -78,14 +76,14 @@ void	ft_make_map(t_fdf *info)
 
 	info->map = malloc((info->height) * sizeof(t_point *));
 	if (!info->map)
-		ft_free_and_out(info, 1, 2, "Erreur : echec malloc de map.\n");
+		ft_free_and_out(info, 1, 2, "Error: map malloc failure.\n");
 	h = 0;
 	i = 0;
 	while (h < info->height)
 	{
 		info->map[h] = malloc((info->width) * sizeof(t_point));
 		if (!info->map[h])
-			ft_free_and_out(info, 4, 2, "Erreur : echec malloc de map[h].\n");
+			ft_free_and_out(info, 4, 2, "Error: malloc of map[h] failed.\n");
 		w = 0;
 		while (w < info->width && info->map_2d[i])
 		{
@@ -103,6 +101,6 @@ void	ft_new_fdf(t_fdf *info)
 	info->width = ft_countwords(info->one_line, ' ', ' ', '\n');
 	info->map_2d = ft_split(info->one_line, ' ', '\n');
 	if (!info->map_2d)
-		ft_free_and_out(info, 1, 2, "Erreur : echec creation de map_2d.\n");
+		ft_free_and_out(info, 1, 2, "Error: failed creation of map_2d.\n");
 	ft_make_map(info);
 }

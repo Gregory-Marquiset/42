@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:48:55 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/10 18:21:32 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/10 19:51:08 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@
 //		coordo.c	//
 void	ft_coordo_para(t_fdf *info, int y, int x);
 void	ft_coordo_iso(t_fdf *info, int y, int x);
-void	ft_coordo_normal(t_fdf *info, int y, int x);
 
 //		draw.c		//
 void	ft_draw_map(t_fdf *fdf);

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:12:37 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/10 18:07:36 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/10 22:04:01 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,16 @@ typedef struct s_drawl
 
 typedef struct s_iso
 {
-	double		rotated_y_x;
-	double		rotated_x_z;
-	double		rotated_y_z;
-//		??? inutil ???		//
-	double		rotated_x_y;
-	double		rotated_z_x;
+	double		rotated_y;
+	double		rotated_z;
+	double		rotated_x;
 }			t_iso;
 
 typedef struct s_modif
 {
 	int			active_para;
 	int			active_iso;
+	int			colors_modif;
 	double		zoom;
 	double		dpl_x;
 	double		dpl_y;

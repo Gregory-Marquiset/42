@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:09:37 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/08 16:56:10 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/10 19:02:16 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int argc, char **argv)
 	t_fdf	info;
 
 	if (argc != 2)
-		return (ft_exit(2, "Erreur : mauvais format d'argument (./fdf fichier)\n"), 0);
+		return (ft_exit(2, "Error: Bad argument format (./fdf file)\n"), 0);
 	ft_get_info(argv[1], &info);
 
 	ft_init_window(&info);

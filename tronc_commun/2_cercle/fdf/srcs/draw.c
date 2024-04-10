@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:05:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/10 18:13:34 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/10 19:51:23 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ void ft_draw_map(t_fdf *info)
 				ft_coordo_iso(info, y, x);
 			else if (info->modif.active_para == 1)
 				ft_coordo_para(info, y, x);
-			else
-				ft_coordo_normal(info, y, x);
 			ft_verif_in_window(info, y, x);
 			ft_pixel_put(&info->img, info->map[y][x].x, info->map[y][x].y,
 							info->map[y][x].z, info->map[y][x].c);
