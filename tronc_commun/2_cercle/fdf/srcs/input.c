@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 07:17:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/10 14:01:49 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:04:06 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,24 @@ int	ft_handle_cross(t_fdf *info)
 	return (0);
 }
 
+void	ft_normal_view(t_fdf *info)
+{
+	info->modif.active_iso = 0;
+	info->modif.active_para = 0;
+	ft_draw_map(info);
+}
+
 void	ft_iso_view(t_fdf *info)
 {
-	info->iso.active = 1;
+	info->modif.active_iso = 1;
+	info->modif.active_para = 0;
+	ft_draw_map(info);
+}
+
+void	ft_para_view(t_fdf *info)
+{
+	info->modif.active_iso = 0;
+	info->modif.active_para = 1;
 	ft_draw_map(info);
 }
 
@@ -40,5 +55,9 @@ int	ft_handle_input(int keysym, t_fdf *info)
 		ft_reset_events(info);
 	if (keysym == XK_i)
 		ft_iso_view(info);
+	if (keysym == XK_n)
+		ft_normal_view(info);
+	if (keysym == XK_p)
+		ft_para_view(info);
 	return (0);
 }

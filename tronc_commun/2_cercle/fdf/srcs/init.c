@@ -6,31 +6,31 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 14:06:15 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/10 14:46:16 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:06:59 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	ft_init_iso(t_fdf *info)
+void	ft_init_modif_view(t_fdf *info)
 {
-	info->iso.active = 0;
-	info->iso.iso_x = 0;
-	info->iso.iso_y = 0;
-	info->iso.dpl_x = 0;
-	info->iso.dpl_y = 0;
-	info->iso.tmp_x = 0;
-	info->iso.tmp_y = 0;
-	info->iso.tmp_z = 0;
-	info->iso.rotation_x = 0;
-	info->iso.rotation_y = 0;
-	info->iso.rotation_z = 0;
+	info->modif.zoom = 1;
+	info->modif.active_iso = 0;
+	info->modif.active_para = 0;
+	info->modif.dpl_x = 0;
+	info->modif.dpl_y = 0;
+	info->modif.tmp_x = 0;
+	info->modif.tmp_y = 0;
+	info->modif.tmp_z = 0;
+	info->modif.rotation_x = 0;
+	info->modif.rotation_y = 0;
+	info->modif.rotation_z = 0;
 	info->iso.rotated_y_x = 0;
-	info->iso.rotated_z_x = 0;
-	info->iso.rotated_x_y = 0;
-	info->iso.rotated_x_z = 0;
 	info->iso.rotated_y_z = 0;
-	info->zoom = 1;
+	info->iso.rotated_x_z = 0;
+//		??? inutil ???		//
+	info->iso.rotated_x_y = 0;
+	info->iso.rotated_z_x = 0;
 }
 
 void	ft_init_window(t_fdf *info)
@@ -42,7 +42,7 @@ void	ft_init_window(t_fdf *info)
 			WINDOW_TITLE);
 	if (info->win_ptr == NULL)
 		ft_free_and_out(info, 6, 2, "Erreur : window non initialiser.\n");
-	ft_init_iso(info);
+	ft_init_modif_view(info);
 }
 
 t_point	ft_new_point(int x, int y, char *str)

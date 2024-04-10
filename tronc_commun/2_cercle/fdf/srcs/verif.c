@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 20:01:37 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/10 15:48:53 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:02:28 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ void	ft_verif_in_window(t_fdf *info, int y, int x)
 	}
 	else
 		info->map[y][x].c = info->map[y][x].c_ori;
+	if (info->map[y][x].x < MENU_WIDTH && info->map[y][x].v == 0)
+		info->map[y][x].c = MENU_BACKGROUND;
+
 }
 
 int	ft_verif_cordo(char *str)

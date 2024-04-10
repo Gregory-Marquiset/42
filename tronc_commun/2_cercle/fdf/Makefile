@@ -6,11 +6,12 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/17 13:36:33 by gmarquis          #+#    #+#              #
-#    Updated: 2024/04/09 00:34:41 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/04/10 17:07:04 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = srcs/draw.c $\
+SRCS = srcs/coordo.c $\
+srcs/draw.c $\
 srcs/end.c $\
 srcs/get_info.c $\
 srcs/init.c $\

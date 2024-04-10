@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:12:37 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/10 14:43:42 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:07:36 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,19 @@ typedef struct s_drawl
 
 typedef struct s_iso
 {
-	int			active;
-	double		iso_x;
-	double		iso_y;
+	double		rotated_y_x;
+	double		rotated_x_z;
+	double		rotated_y_z;
+//		??? inutil ???		//
+	double		rotated_x_y;
+	double		rotated_z_x;
+}			t_iso;
+
+typedef struct s_modif
+{
+	int			active_para;
+	int			active_iso;
+	double		zoom;
 	double		dpl_x;
 	double		dpl_y;
 	double		tmp_x;
@@ -44,12 +54,8 @@ typedef struct s_iso
 	double		rotation_x;
 	double		rotation_y;
 	double		rotation_z;
-	double		rotated_y_x;
-	double		rotated_z_x;
-	double		rotated_x_y;
-	double		rotated_x_z;
-	double		rotated_y_z;
-}			t_iso;
+}			t_modif;
+
 
 typedef struct s_img
 {
@@ -83,8 +89,8 @@ typedef struct s_fdf
 	t_point	**map;
 	void	*mlx_ptr;
 	void	*win_ptr;
+	t_modif	modif;
 	t_iso	iso;
 	t_img	img;
-	double	zoom;
 	t_drawl	drawl;
 }			t_fdf;

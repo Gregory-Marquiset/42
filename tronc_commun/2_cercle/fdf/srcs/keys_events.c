@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 06:24:27 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/09 02:27:35 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:23:22 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,22 @@
 void	ft_move_events(int keysym, t_fdf *info)
 {
 	if (keysym == XK_w)
-		info->iso.dpl_y -= FACTOR;
+		info->modif.dpl_y -= FACTOR;
 	else if (keysym == XK_s)
-		info->iso.dpl_y += FACTOR;
+		info->modif.dpl_y += FACTOR;
 	else if (keysym == XK_d)
-		info->iso.dpl_x += FACTOR;
+		info->modif.dpl_x += FACTOR;
 	else if (keysym == XK_a)
-		info->iso.dpl_x -= FACTOR;
+		info->modif.dpl_x -= FACTOR;
 	ft_draw_map(info);
 }
 
 void	ft_zoom_events(int keysym, t_fdf *info)
 {
-	double center_x;
-	double center_y;
-
-	center_x = WINDOW_WIDTH / 2;
-	center_y = WINDOW_HEIGHT / 2;
 	if (keysym == XK_KP_Add)
-	{
-		info->zoom *= 1.1;
-		info->iso.iso_x = (info->iso.iso_x - center_x) * 1.1 + center_x;
-		info->iso.iso_y = (info->iso.iso_y - center_y) * 1.1 + center_y;
-	}
+		info->modif.zoom *= 1.1;
 	else if (keysym == XK_KP_Subtract)
-	{
-		info->zoom /= 1.1;
-		info->iso.iso_x = (info->iso.iso_x - center_x) / 1.1 + center_x;
-		info->iso.iso_y = (info->iso.iso_y - center_y) / 1.1 + center_y;
-	}
+		info->modif.zoom /= 1.1;
 	ft_draw_map(info);
 }
 
@@ -53,17 +40,17 @@ void ft_rotate_events(int keysym, t_fdf *info)
 
 	angle = M_PI / 18;
 	if (keysym == XK_Up)
-		info->iso.rotation_x += angle;
+		info->modif.rotation_x += angle;
 	else if (keysym == XK_Down)
-		info->iso.rotation_x += -angle;
+		info->modif.rotation_x += -angle;
 	else if (keysym == XK_Left)
-		info->iso.rotation_y += angle;
+		info->modif.rotation_y += angle;
 	else if (keysym == XK_Right)
-		info->iso.rotation_y += -angle;
+		info->modif.rotation_y += -angle;
 	else if (keysym == XK_q)
-		info->iso.rotation_z += angle;
+		info->modif.rotation_z += angle;
 	else if (keysym == XK_e)
-		info->iso.rotation_z += -angle;
+		info->modif.rotation_z += -angle;
 	ft_draw_map(info);
 }
 
@@ -110,6 +97,7 @@ void	ft_reset_events(t_fdf *info)
 		}
 		y++;
 	}
-	ft_init_iso(info);
+	ft_init_modif_view(info);
+	info->modif.active_para = 0;
 	ft_draw_map(info);
 }
