@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/05 16:22:07 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/11 01:48:29 by gmarquis         ###   ########.fr       */
+/*   Created: 2023/11/21 14:10:30 by gmarquis          #+#    #+#             */
+/*   Updated: 2024/04/11 01:29:21 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk.h"
+#include "../includes/libft.h"
 
-int	main(int argc, char **argv)
+char	*ft_strjoin(char *s1, char *s2, int flag)
 {
-	pid_t	pid;
-	int		i;
+	char	*str;
+	size_t	i;
+	size_t	j;
 
-	if (argc != 3)
-		return (ft_printf("The correct format is ./client pid array\n"), 0);
-	pid = ft_atoi(argv[1]);
-	if (pid < 1)
-		return (ft_printf("Invalide pid !\n"), 0);
-	i = 0;
-	while (argv[2][i])
-		client_send_char(argv[2][i++], pid);
-	client_send_char('\0', pid);
-	return (0);
+	i = -1;
+	j = 0;
+	if (!s1 || !s2)
+		return (0);
+	str = malloc(((ft_strlen(s1) + ft_strlen(s2)) + 1) * sizeof(char));
+	if (!str)
+		return (0);
+	while (s1[++i])
+		str[i] = s1[i];
+	while (s2[j])
+		str[i++] = s2[j++];
+	str[i] = '\0';
+	if (flag > 0)
+		free(s1);
+	if (flag == 2)
+		free(s2);
+	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:22:07 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/01/24 21:32:09 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/11 01:49:37 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int argc, char **argv)
 	if (argc != 3)
 		return (ft_printf("The correct format is ./client pid array\n"), 0);
 	pid = ft_atoi(argv[1]);
-	if (pid <= 0)
+	if (pid < 1)
 		return (ft_printf("Invalide pid !\n"), 0);
 	signal(SIGUSR1, valid_send);
 	i = 0;

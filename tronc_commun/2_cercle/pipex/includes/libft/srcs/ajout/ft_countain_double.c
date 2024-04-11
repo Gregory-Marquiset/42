@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_countain_double.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/05 16:22:07 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/11 01:48:29 by gmarquis         ###   ########.fr       */
+/*   Created: 2024/03/14 00:48:45 by gmarquis          #+#    #+#             */
+/*   Updated: 2024/03/14 00:50:45 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk.h"
+#include "../../includes/libft.h"
 
-int	main(int argc, char **argv)
+int	ft_countain_double(char **input)
 {
-	pid_t	pid;
-	int		i;
+	int	i;
+	int	j;
+	int	nbr1;
+	int	nbr2;
 
-	if (argc != 3)
-		return (ft_printf("The correct format is ./client pid array\n"), 0);
-	pid = ft_atoi(argv[1]);
-	if (pid < 1)
-		return (ft_printf("Invalide pid !\n"), 0);
+	if (!input || !input[0])
+		return (0);
 	i = 0;
-	while (argv[2][i])
-		client_send_char(argv[2][i++], pid);
-	client_send_char('\0', pid);
+	while (input[i])
+	{
+		j = 1;
+		nbr1 = ft_atoi(input[i]);
+		while (input[j] && ft_input_is_digit(input[j]))
+		{
+			nbr2 = ft_atoi(input[j]);
+			if (i != j && nbr1 == nbr2)
+				return (1);
+			j++;
+		}
+		i++;
+	}
 	return (0);
 }

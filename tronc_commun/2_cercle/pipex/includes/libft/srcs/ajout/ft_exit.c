@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/05 16:22:07 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/11 01:48:29 by gmarquis         ###   ########.fr       */
+/*   Created: 2024/04/10 15:51:41 by gmarquis          #+#    #+#             */
+/*   Updated: 2024/04/10 16:06:43 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk.h"
+#include "../../includes/libft.h"
 
-int	main(int argc, char **argv)
+void	ft_exit(int out, char *message)
 {
-	pid_t	pid;
-	int		i;
+	int	len;
 
-	if (argc != 3)
-		return (ft_printf("The correct format is ./client pid array\n"), 0);
-	pid = ft_atoi(argv[1]);
-	if (pid < 1)
-		return (ft_printf("Invalide pid !\n"), 0);
-	i = 0;
-	while (argv[2][i])
-		client_send_char(argv[2][i++], pid);
-	client_send_char('\0', pid);
-	return (0);
+	len = ft_strlen(message);
+	if (len == 0 || out > 2 || out < 1)
+	{
+		write(2, "Error and undefined message.\n", 29);
+		exit(EXIT_FAILURE);
+	}
+	if (out == 2)
+	{
+		write(out, message, len);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		write(out, message, len);
+		exit(EXIT_SUCCESS);
+	}
 }
