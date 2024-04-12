@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:12:37 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/12 09:51:41 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:45:05 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_modif
 	double	zoom;
 	double	dpl_x;
 	double	dpl_y;
+	double	dpl_z;
 	double	tmp_x;
 	double	tmp_y;
 	double	tmp_z;
@@ -73,6 +74,7 @@ typedef struct s_point
 	double	y_ori;
 	double	z_ori;
 	int		c_ori;
+	int		v;
 }			t_point;
 
 typedef struct s_fdf

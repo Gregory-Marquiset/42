@@ -6,11 +6,33 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 06:24:27 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/12 12:33:00 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:07:23 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
+void	ft_move_z(int keysym, t_fdf *info)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < info->height)
+	{
+		x = 0;
+		while (x < info->width)
+		{
+			if (keysym == XK_q)
+				info->map[y][x].z += FACTOR / 2;
+			if (keysym == XK_e)
+				info->map[y][x].z -= FACTOR / 2;
+			x++;
+		}
+		y++;
+	}
+	ft_draw_map(info);
+}
 
 void	ft_move_events(int keysym, t_fdf *info)
 {
@@ -22,6 +44,8 @@ void	ft_move_events(int keysym, t_fdf *info)
 		info->modif.dpl_x += FACTOR;
 	else if (keysym == XK_a)
 		info->modif.dpl_x -= FACTOR;
+	else if (keysym == XK_q || keysym == XK_e)
+		ft_move_z(keysym, info);
 	ft_draw_map(info);
 }
 

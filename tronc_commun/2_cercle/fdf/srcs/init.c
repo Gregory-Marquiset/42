@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 14:06:15 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/12 10:27:07 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:45:51 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_init_drawl(t_fdf *info, int y, int x, int flag)
 	info->drawl.step_x = 1;
 	info->drawl.error = info->drawl.delta_x - info->drawl.delta_y;
 	info->drawl.error2 = 0;
+	info->modif.dpl_z = 0;
 }
 
 void	ft_init_modif_view(t_fdf *info)
@@ -44,6 +45,7 @@ void	ft_init_modif_view(t_fdf *info)
 	info->modif.active_para = 0;
 	info->modif.dpl_x = 0;
 	info->modif.dpl_y = 0;
+	info->modif.dpl_z = 0;
 	info->modif.tmp_x = 0;
 	info->modif.tmp_y = 0;
 	info->modif.tmp_z = 0;
@@ -80,6 +82,7 @@ t_point	ft_init_point(int x, int y, char *str)
 	new.c = ft_get_color(str);
 	new.z_ori = new.z;
 	new.c_ori = new.c;
+	new.v = 1;
 	return (new);
 }
 

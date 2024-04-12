@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:05:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/12 11:01:01 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/12 21:36:10 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@ static void	ft_pixel_put(t_img *img, int x, int y, int color)
 {
 	int	offset;
 
-	offset = (y * img->line_len) + (x * (img->bits_per_pixel / 8))
-		+ (img->line_len / WINDOW_WIDTH);
-	*((unsigned int *)(offset + img->img_pixels_ptr)) = color;
+	if(y <= WINDOW_HEIGHT && y >= 0 && x <= WINDOW_WIDTH && x >= MENU_WIDTH - 1)
+	{
+		offset = (y * img->line_len) + (x * (img->bits_per_pixel / 8))
+			+ (img->line_len / WINDOW_WIDTH);
+		*((unsigned int *)(offset + img->img_pixels_ptr)) = color;
+	}
 }
 
 static void	ft_draw_background(t_fdf *info)
@@ -43,6 +46,7 @@ static void	ft_draw_background(t_fdf *info)
 void	ft_draw_line(t_fdf *info, int y, int x, int flag)
 {
 	ft_init_drawl(info, y, x, flag);
+	ft_get_color_modif(info, y, x, flag);
 	if (info->drawl.x0 > info->drawl.x1)
 		info->drawl.step_x = -1;
 	if (info->drawl.y0 > info->drawl.y1)
@@ -84,10 +88,9 @@ void	ft_draw_map(t_fdf *info)
 				ft_coordo_iso(info, y, x);
 			else if (info->modif.active_para == 1)
 				ft_coordo_para(info, y, x);
-			ft_verif_in_window(info, y, x);
 			if (x > 0)
 				ft_draw_line(info, y, x, 0);
-			if (y > 0)
+			if (y > 0 && info->map[y][x].v == 1)
 				ft_draw_line(info, y, x, 1);
 			x++;
 		}

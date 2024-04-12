@@ -6,20 +6,28 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:17:46 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/12 10:23:38 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/12 21:44:28 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 //		a finir		//
-void	ft_get_color_modif(t_fdf *info, int y, int x)
+void	ft_get_color_modif(t_fdf *info, int y, int x, int flag)
 {
-	if (info->map[y][x].z > 0)
-		info->map[y][x].c += 10;
-	if (info->map[y][x].z < 0)
-		info->map[y][x].c -= 10;
-	if (info->map[y][x].c == BACKGROUND)
-		info->map[y][x].c = info->map[y][x].c_ori;
+	if (y < info->height - 1 && flag == 1)
+	{
+		if (info->map[y][x].z_ori > info->map[y + 1][x + 1].z_ori)
+			info->map[y + 1][x].c = info->map[y][x].c;
+		else
+			info->map[y][x].c = info->map[y + 1][x].c;
+	}
+	if (x < info->width && flag == 0)
+	{
+		if (info->map[y][x].z_ori > info->map[y][x + 1].z_ori)
+			info->map[y][x + 1].c = info->map[y][x].c;
+		else
+			info->map[y][x].c = info->map[y][x + 1].c;
+	}
 }
 
 int	ft_get_color(char *str)

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 07:17:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/12 12:45:32 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:04:09 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	ft_handle_input(int keysym, t_fdf *info)
 		|| keysym == XK_KP_Multiply || keysym == XK_KP_Divide)
 		ft_zoom_events(keysym, info);
 	else if (keysym == XK_w || keysym == XK_d || keysym == XK_a
-		|| keysym == XK_s)
+		|| keysym == XK_s || keysym == XK_q || keysym == XK_e)
 		ft_move_events(keysym, info);
 	else if (keysym == XK_KP_Up || keysym == XK_KP_Down || keysym == XK_KP_Left
 		|| keysym == XK_KP_Right || keysym == XK_KP_Home
@@ -107,7 +107,6 @@ int	ft_handle_input(int keysym, t_fdf *info)
 		ft_flat_event(info);
 	else if (keysym == XK_KP_Delete)
 		ft_hoist_event(info);
-	ft_printf("%p\n", keysym);
 	return (0);
 }
 /*
