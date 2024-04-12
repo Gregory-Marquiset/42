@@ -6,11 +6,35 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 14:06:15 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/10 22:04:28 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/12 10:27:07 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
+void	ft_init_drawl(t_fdf *info, int y, int x, int flag)
+{
+	if (flag == 0)
+	{
+		info->drawl.x0 = info->map[y][x - 1].x;
+		info->drawl.y0 = info->map[y][x - 1].y;
+		info->drawl.x1 = info->map[y][x].x;
+		info->drawl.y1 = info->map[y][x].y;
+	}
+	else
+	{
+		info->drawl.x0 = info->map[y - 1][x].x;
+		info->drawl.y0 = info->map[y - 1][x].y;
+		info->drawl.x1 = info->map[y][x].x;
+		info->drawl.y1 = info->map[y][x].y;
+	}
+	info->drawl.delta_x = abs(info->drawl.x1 - info->drawl.x0);
+	info->drawl.delta_y = abs(info->drawl.y1 - info->drawl.y0);
+	info->drawl.step_y = 1;
+	info->drawl.step_x = 1;
+	info->drawl.error = info->drawl.delta_x - info->drawl.delta_y;
+	info->drawl.error2 = 0;
+}
 
 void	ft_init_modif_view(t_fdf *info)
 {
@@ -35,7 +59,8 @@ void	ft_init_window(t_fdf *info)
 {
 	info->mlx_ptr = mlx_init();
 	if (info->mlx_ptr == NULL)
-		ft_free_and_out(info, 5, 2, "Error: Unable to initialize the connection with the graphics server.\n");
+		ft_free_and_out(info, 5, 2,
+			"Error: Unable to initialize connection with graphics server.\n");
 	info->win_ptr = mlx_new_window(info->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT,
 			WINDOW_TITLE);
 	if (info->win_ptr == NULL)
@@ -43,7 +68,7 @@ void	ft_init_window(t_fdf *info)
 	ft_init_modif_view(info);
 }
 
-t_point	ft_new_point(int x, int y, char *str)
+t_point	ft_init_point(int x, int y, char *str)
 {
 	t_point	new;
 
@@ -51,56 +76,19 @@ t_point	ft_new_point(int x, int y, char *str)
 	new.y = y;
 	new.x_ori = x;
 	new.y_ori = y;
-	if (!str || !ft_strncmp(str, "V", 1))
-	{
-		new.z = 0;
-		new.c = 0;
-		new.v = 0;
-	}
-	else
-	{
-		new.z = ft_verif_cordo(str);
-		new.c = ft_get_color(str);
-		new.v = 1;
-	}
+	new.z = ft_verif_cordo(str);
+	new.c = ft_get_color(str);
 	new.z_ori = new.z;
 	new.c_ori = new.c;
 	return (new);
 }
 
-void	ft_make_map(t_fdf *info)
-{
-	int	w;
-	int	h;
-	int	i;
-
-	info->map = malloc((info->height) * sizeof(t_point *));
-	if (!info->map)
-		ft_free_and_out(info, 1, 2, "Error: map malloc failure.\n");
-	h = 0;
-	i = 0;
-	while (h < info->height)
-	{
-		info->map[h] = malloc((info->width) * sizeof(t_point));
-		if (!info->map[h])
-			ft_free_and_out(info, 4, 2, "Error: malloc of map[h] failed.\n");
-		w = 0;
-		while (w < info->width && info->map_2d[i])
-		{
-			info->map[h][w] = ft_new_point(w, h, info->map_2d[i]);
-			w++;
-			i++;
-		}
-		h++;
-	}
-}
-
-void	ft_new_fdf(t_fdf *info)
+void	ft_init_fdf(t_fdf *info)
 {
 	info->height = ft_countwords(info->one_line, '\n', '\n', '\0');
 	info->width = ft_countwords(info->one_line, ' ', ' ', '\n');
 	info->map_2d = ft_split(info->one_line, ' ', '\n');
 	if (!info->map_2d)
 		ft_free_and_out(info, 1, 2, "Error: failed creation of map_2d.\n");
-	ft_make_map(info);
+	ft_get_map(info);
 }

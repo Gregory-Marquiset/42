@@ -6,18 +6,18 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:05:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/10 19:51:23 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/12 11:01:01 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static void	ft_pixel_put(t_img *img, int x, int y, int z, int color)
+static void	ft_pixel_put(t_img *img, int x, int y, int color)
 {
 	int	offset;
 
-	offset = (y * img->line_len) + (x * (img->bits_per_pixel / 8)) + (z
-			* (img->line_len / WINDOW_WIDTH));
+	offset = (y * img->line_len) + (x * (img->bits_per_pixel / 8))
+		+ (img->line_len / WINDOW_WIDTH);
 	*((unsigned int *)(offset + img->img_pixels_ptr)) = color;
 }
 
@@ -40,13 +40,41 @@ static void	ft_draw_background(t_fdf *info)
 	}
 }
 
-void ft_draw_map(t_fdf *info)
+void	ft_draw_line(t_fdf *info, int y, int x, int flag)
 {
-	int y;
-	int x;
+	ft_init_drawl(info, y, x, flag);
+	if (info->drawl.x0 > info->drawl.x1)
+		info->drawl.step_x = -1;
+	if (info->drawl.y0 > info->drawl.y1)
+		info->drawl.step_y = -1;
+	while (1)
+	{
+		ft_pixel_put(&info->img, info->drawl.x0, info->drawl.y0,
+			info->map[y][x].c);
+		if (info->drawl.x0 == info->drawl.x1
+			&& info->drawl.y0 == info->drawl.y1)
+			break ;
+		info->drawl.error2 = 2 * info->drawl.error;
+		if (info->drawl.error2 > -info->drawl.delta_y)
+		{
+			info->drawl.error -= info->drawl.delta_y;
+			info->drawl.x0 += info->drawl.step_x;
+		}
+		if (info->drawl.error2 < info->drawl.delta_x)
+		{
+			info->drawl.error += info->drawl.delta_x;
+			info->drawl.y0 += info->drawl.step_y;
+		}
+	}
+}
 
-	y = 0;
+void	ft_draw_map(t_fdf *info)
+{
+	int	y;
+	int	x;
+
 	ft_draw_background(info);
+	y = 0;
 	while (y < info->height)
 	{
 		x = 0;
@@ -57,12 +85,14 @@ void ft_draw_map(t_fdf *info)
 			else if (info->modif.active_para == 1)
 				ft_coordo_para(info, y, x);
 			ft_verif_in_window(info, y, x);
-			ft_pixel_put(&info->img, info->map[y][x].x, info->map[y][x].y,
-							info->map[y][x].z, info->map[y][x].c);
+			if (x > 0)
+				ft_draw_line(info, y, x, 0);
+			if (y > 0)
+				ft_draw_line(info, y, x, 1);
 			x++;
 		}
 		y++;
 	}
 	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, info->img.img_ptr, 0,
-							0);
+		0);
 }

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:48:55 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/10 19:51:08 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/12 12:33:12 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FDF_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 50
+#  define BUFFER_SIZE 4096
 # endif
 
 # define WINDOW_WIDTH 1000
@@ -44,16 +44,18 @@ void	ft_free_info(t_fdf *info);
 void	ft_free_and_out(t_fdf *info, int flag, int out, char *message);
 
 //		get_info.c		//
+void	ft_get_color_modif(t_fdf *info, int y, int x);
 int		ft_get_color(char *str);
 void	ft_get_one_line(t_fdf *info);
 void	ft_get_info(char *filename, t_fdf *info);
+void	ft_get_map(t_fdf *info);
 
 //		init.c			//
+void	ft_init_drawl(t_fdf *info, int y, int x, int flag);
 void	ft_init_modif_view(t_fdf *info);
 void	ft_init_window(t_fdf *info);
-t_point	ft_new_point(int x, int y, char *str);
-void	ft_make_map(t_fdf *info);
-void	ft_new_fdf(t_fdf *info);
+t_point	ft_init_point(int x, int y, char *str);
+void	ft_init_fdf(t_fdf *info);
 
 //		input.c			//
 int		ft_handle_cross(t_fdf *info);
@@ -63,11 +65,15 @@ int		ft_handle_input(int keysym, t_fdf *info);
 void	ft_move_events(int keysym, t_fdf *info);
 void	ft_zoom_events(int keysym, t_fdf *info);
 void	ft_rotate_events(int keysym, t_fdf *info);
-void	ft_z_events(int keysym, t_fdf *info);
-void	ft_reset_events(t_fdf *info);
+void	ft_reset_events(int keysym, t_fdf *info);
 
 //		verif.c			//
 void	ft_verif_in_window(t_fdf *info, int y, int x);
 int		ft_verif_cordo(char *str);
+
+//		z_events.c		//
+void	ft_flat_event(t_fdf *info);
+void	ft_hoist_event(t_fdf *info);
+void	ft_z_events(int keysym, t_fdf *info);
 
 #endif

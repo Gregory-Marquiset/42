@@ -6,7 +6,7 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/17 13:36:33 by gmarquis          #+#    #+#              #
-#    Updated: 2024/04/10 17:07:04 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/04/12 12:19:44 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ srcs/init.c $\
 srcs/input.c $\
 srcs/keys_events.c $\
 srcs/main.c $\
-srcs/verif.c
+srcs/verif.c $\
+srcs/z_events.c
 
 LIBFT_PATH = includes/libft/
 MINILIBX_PATH = includes/minilibx-linux/

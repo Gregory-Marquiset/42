@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 08:27:20 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/28 21:43:21 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/12 07:38:35 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,4 @@ void	ft_free_tab2d(char **input)
 		i++;
 	}
 	free(input);
-	return ;
 }

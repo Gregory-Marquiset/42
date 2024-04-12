@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 00:48:45 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/14 00:50:45 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/12 04:32:44 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_countain_double(char **input)
 	{
 		j = 1;
 		nbr1 = ft_atoi(input[i]);
-		while (input[j] && ft_input_is_digit(input[j]))
+		while (input[j] && ft_isnbr(input[j]))
 		{
 			nbr2 = ft_atoi(input[j]);
 			if (i != j && nbr1 == nbr2)

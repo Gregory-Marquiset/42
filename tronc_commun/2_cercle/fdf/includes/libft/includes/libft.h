@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:11:44 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/10 15:53:08 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/12 04:11:47 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int					ft_countain_double(char **input);
 int					ft_countwords(char *str, char set, char set2, char end);
 void				ft_exit(int out, char *message);
 void				ft_free_tab2d(char **input);
-int					ft_input_is_digit(char *input);
+int					ft_isnbr(char *input);
 int					ft_isexa(char *code);
 int					ft_isint(char *clean_input);
 char				*ft_strndup(char *s, int len);

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 22:26:52 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/11 03:41:02 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/12 00:44:44 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,19 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 5)
 		return (ft_exit(2,
 				"Error: Bad argument format (./pipex file cmd cmd file)\n"), 0);
+
 	ft_init_data(&data);
+
 	data.fd_1 = open(argv[1], O_RDONLY);
 	if (data.fd_1 == -1)
 		return (ft_out(&data, "Error: invalid fd_1\n", 0), 0);
+
 	data.fd_2 = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (data.fd_2 == -1)
 		return (ft_out(&data, "Error: invalid fd_2\n", 1), 0);
+
 	data.pipe = malloc(2 * sizeof(int));
+
 	if (pipe(data.pipe) == -1)
 		return (ft_out(&data, "Error: echec pipe\n", 2), 0);
 	i = 0;
@@ -98,6 +103,7 @@ int	main(int argc, char **argv, char **envp)
 		pid = fork();
 		if (pid == 0 && i == 0)
 			ft_child(&data, argv[2], envp, i);
+
 		else if (pid == 0 && i == 1)
 			ft_child(&data, argv[3], envp, i);
 		i++;
