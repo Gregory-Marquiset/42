@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 14:06:15 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/12 15:45:51 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/17 07:20:57 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	ft_init_drawl(t_fdf *info, int y, int x, int flag)
 		info->drawl.y0 = info->map[y][x - 1].y;
 		info->drawl.x1 = info->map[y][x].x;
 		info->drawl.y1 = info->map[y][x].y;
+		info->drawl.c_start = info->map[y][x].c;
+		info->drawl.c_end = info->map[y][x - 1].c;
 	}
 	else
 	{
@@ -27,6 +29,8 @@ void	ft_init_drawl(t_fdf *info, int y, int x, int flag)
 		info->drawl.y0 = info->map[y - 1][x].y;
 		info->drawl.x1 = info->map[y][x].x;
 		info->drawl.y1 = info->map[y][x].y;
+		info->drawl.c_start = info->map[y][x].c;
+		info->drawl.c_end = info->map[y - 1][x].c;
 	}
 	info->drawl.delta_x = abs(info->drawl.x1 - info->drawl.x0);
 	info->drawl.delta_y = abs(info->drawl.y1 - info->drawl.y0);
@@ -39,7 +43,7 @@ void	ft_init_drawl(t_fdf *info, int y, int x, int flag)
 
 void	ft_init_modif_view(t_fdf *info)
 {
-	info->modif.zoom = 1;
+	ft_get_zoom(info);
 	info->modif.colors_modif = 0;
 	info->modif.active_iso = 1;
 	info->modif.active_para = 0;

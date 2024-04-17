@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:48:55 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/12 21:35:32 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/17 03:25:55 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #  define BUFFER_SIZE 4096
 # endif
 
-# define WINDOW_WIDTH 1000
-# define WINDOW_HEIGHT 600
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
 # define MENU_WIDTH WINDOW_WIDTH / 5
 # define WINDOW_TITLE "Projet_FdF"
 # define FACTOR 10
@@ -44,7 +44,7 @@ void	ft_free_info(t_fdf *info);
 void	ft_free_and_out(t_fdf *info, int flag, int out, char *message);
 
 //		get_info.c		//
-void	ft_get_color_modif(t_fdf *info, int y, int x, int flag);
+void	ft_get_zoom(t_fdf *info);
 int		ft_get_color(char *str);
 void	ft_get_one_line(t_fdf *info);
 void	ft_get_info(char *filename, t_fdf *info);

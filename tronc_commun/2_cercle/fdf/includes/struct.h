@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:12:37 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/12 15:45:05 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/17 07:19:37 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct s_drawl
 	int		step_y;
 	int		error;
 	int		error2;
+	int		c_start;
+	int		c_end;
 }			t_drawl;
 
 typedef struct s_iso

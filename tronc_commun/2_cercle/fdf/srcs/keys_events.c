@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 06:24:27 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/12 17:07:23 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/17 06:22:55 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,26 @@ void	ft_zoom_events(int keysym, t_fdf *info)
 		info->modif.zoom /= 1.1;
 	else if (keysym == XK_KP_Divide)
 		info->modif.zoom /= 2.0;
+
+	if ((info->height < 50 || info->width < 50) && info->modif.zoom > 50)
+		info->modif.zoom = 50;
+	if ((info->height < 50 || info->width < 50) && info->modif.zoom < 10)
+		info->modif.zoom = 10;
+
+	if ((info->height > 50 || info->width > 50) && info->modif.zoom > 8)
+		info->modif.zoom = 8;
+	if ((info->height > 50 || info->width > 50) && info->modif.zoom < 1)
+		info->modif.zoom = 1;
+
+	if ((info->height > 100 || info->width > 100) && info->modif.zoom > 4)
+		info->modif.zoom = 4;
+	if ((info->height > 100 || info->width > 100) && info->modif.zoom < 1)
+		info->modif.zoom = 1;
+
+	if ((info->height > 200 || info->width > 200) && info->modif.zoom > 1.5)
+		info->modif.zoom = 1.5;
+	if ((info->height > 200 || info->width > 200) && info->modif.zoom < 1)
+		info->modif.zoom = 1;
 	ft_draw_map(info);
 }
 

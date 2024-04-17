@@ -6,28 +6,22 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:17:46 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/12 21:44:28 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/17 06:22:32 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-//		a finir		//
-void	ft_get_color_modif(t_fdf *info, int y, int x, int flag)
+
+void	ft_get_zoom(t_fdf *info)
 {
-	if (y < info->height - 1 && flag == 1)
-	{
-		if (info->map[y][x].z_ori > info->map[y + 1][x + 1].z_ori)
-			info->map[y + 1][x].c = info->map[y][x].c;
-		else
-			info->map[y][x].c = info->map[y + 1][x].c;
-	}
-	if (x < info->width && flag == 0)
-	{
-		if (info->map[y][x].z_ori > info->map[y][x + 1].z_ori)
-			info->map[y][x + 1].c = info->map[y][x].c;
-		else
-			info->map[y][x].c = info->map[y][x + 1].c;
-	}
+	if (info->height < 50 || info->width < 50)
+		info->modif.zoom = 50;
+	if (info->height > 50 || info->width > 50)
+		info->modif.zoom = 8;
+	if (info->height > 100 || info->width > 100)
+		info->modif.zoom = 4;
+	if (info->height > 200 || info->width > 200)
+		info->modif.zoom = 1.5;
 }
 
 int	ft_get_color(char *str)
