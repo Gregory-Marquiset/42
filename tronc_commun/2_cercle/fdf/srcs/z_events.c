@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 12:17:24 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/12 12:48:35 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/19 01:25:08 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	ft_hoist_event(t_fdf *info)
 		y++;
 	}
 	ft_draw_map(info);
-
 }
+
 void	ft_z_revert(t_fdf *info)
 {
 	int	y;

@@ -6,7 +6,7 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/17 13:36:33 by gmarquis          #+#    #+#              #
-#    Updated: 2024/04/12 12:19:44 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/04/19 01:20:15 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ srcs/init.c $\
 srcs/input.c $\
 srcs/keys_events.c $\
 srcs/main.c $\
+srcs/pixel_color.c $\
 srcs/verif.c $\
 srcs/z_events.c
 

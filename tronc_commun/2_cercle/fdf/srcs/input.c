@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 07:17:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/12 16:04:09 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/19 01:23:39 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ void	ft_change_color(int color, t_fdf *info)
 
 void	ft_colors_events(int keysym, t_fdf *info)
 {
+	int	y;
+	int	x;
+
 	if (keysym == XK_r)
 		ft_change_color(C_RED, info);
 	else if (keysym == XK_g)
@@ -63,9 +66,6 @@ void	ft_colors_events(int keysym, t_fdf *info)
 		ft_change_color(C_BLUE, info);
 	else if (keysym == XK_n)
 	{
-		int	y;
-		int	x;
-
 		y = 0;
 		while (y < info->height)
 		{
@@ -94,7 +94,8 @@ int	ft_handle_input(int keysym, t_fdf *info)
 		|| keysym == XK_KP_Right || keysym == XK_KP_Home
 		|| keysym == XK_KP_Prior)
 		ft_rotate_events(keysym, info);
-	else if (keysym == XK_KP_Next || keysym == XK_KP_End || keysym == XK_KP_Begin)
+	else if (keysym == XK_KP_Next || keysym == XK_KP_End
+		|| keysym == XK_KP_Begin)
 		ft_z_events(keysym, info);
 	else if (keysym == XK_space || keysym == XK_Escape)
 		ft_reset_events(keysym, info);
@@ -109,47 +110,3 @@ int	ft_handle_input(int keysym, t_fdf *info)
 		ft_hoist_event(info);
 	return (0);
 }
-/*
-z event
-0 XK_KP_Insert
-. XK_KP_Delete
-1 XK_KP_End
-3 XK_KP_Next
-5 XK_KP_Begin
-
-rota
-2 XK_KP_Down
-4 XK_KP_Left
-6 XK_KP_Right
-7 XK_KP_Home
-8 XK_KP_Up
-9 XK_KP_Prior
-
-zoom
-+
--
-*
-/
-
-reset
-space
-
-exit
-escape
-
-nouve
-w
-a
-s
-d
-
-couleur
-r
-g
-b
-n
-
-view
-i
-p
-*/

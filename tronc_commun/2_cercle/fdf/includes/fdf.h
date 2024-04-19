@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:48:55 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/17 03:25:55 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/19 01:19:58 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ void	ft_move_events(int keysym, t_fdf *info);
 void	ft_zoom_events(int keysym, t_fdf *info);
 void	ft_rotate_events(int keysym, t_fdf *info);
 void	ft_reset_events(int keysym, t_fdf *info);
+
+//		pixel_color.c	//
+void	ft_pixel_put(t_img *img, int x, int y, int color);
 
 //		verif.c			//
 int		ft_verif_cordo(char *str);
