@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:11:44 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/12 04:11:47 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/19 07:18:14 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void				ft_verif_extention(char *filename, char *exe);
 
 //_______________________get next line
 
-//		get_next_line_bonus.c		//
+//		get_next_line.c			//
 char				*print_line(char **tempo);
 char				*get_next_line(int fd);
 

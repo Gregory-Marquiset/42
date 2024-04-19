@@ -6,7 +6,7 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 17:10:22 by gmarquis          #+#    #+#              #
-#    Updated: 2024/04/12 04:33:26 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/04/19 07:18:33 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,7 @@ srcs/bonus/ft_lstmap_bonus.c $\
 srcs/bonus/ft_lstnew_bonus.c $\
 srcs/bonus/ft_lstsize_bonus.c
 
-SRCS_GNL = srcs/gnl/get_next_line_bonus.c
+SRCS_GNL = srcs/gnl/get_next_line.c
 
 SRCS_PRINTF = srcs/printf/fonction_1_bonus.c $\
 srcs/printf/fonction_2_bonus.c $\

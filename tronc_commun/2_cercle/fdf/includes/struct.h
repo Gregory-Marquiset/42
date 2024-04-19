@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:12:37 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/17 07:19:37 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/19 03:43:41 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@
 #ifndef STRUCT_H
 
 # define STRUCT_H
+
+typedef struct s_grad
+{
+	double	progress;
+	int		delta_red;
+	int		delta_green;
+	int		delta_blue;
+	int		intermediate_red;
+	int		intermediate_green;
+	int		intermediate_blue;
+	int		intermediate_color;
+}			t_grad;
 
 typedef struct s_drawl
 {
@@ -93,6 +105,7 @@ typedef struct s_fdf
 	t_iso	iso;
 	t_img	img;
 	t_drawl	drawl;
+	t_grad	grad;
 }			t_fdf;
 
 #endif

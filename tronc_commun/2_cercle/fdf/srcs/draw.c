@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:05:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/19 02:02:10 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/19 06:13:14 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,80 +80,31 @@ static void	ft_draw_background(t_fdf *info)
 static void	ft_draw_line(t_fdf *info, int y, int x, int flag)
 {
 	ft_init_drawl(info, y, x, flag);
-	if (info->drawl.x0 > info->drawl.x1)
-		info->drawl.step_x = -1;
-	if (info->drawl.y0 > info->drawl.y1)
-		info->drawl.step_y = -1;
-
-	// Calculer la variation de couleur par pixel
-	int delta_red = (info->drawl.c_start >> 16) - (info->drawl.c_end >> 16);
-	int delta_green = ((info->drawl.c_start >> 8) & 0xFF) - ((info->drawl.c_end >> 8) & 0xFF);
-	int delta_blue = (info->drawl.c_start & 0xFF) - (info->drawl.c_end & 0xFF);
-
-	// Nombre total de pixels dans la ligne
-	int num_pixels = ft_absolute_nbr(info->drawl.x1 - info->drawl.x0);
-	if (num_pixels == 0) // Si la ligne est verticale, le nombre de pixels est la différence sur l'axe y
-		num_pixels = ft_absolute_nbr(info->drawl.y1 - info->drawl.y0);
-
-	int i = 1;
-	while (i < num_pixels)
-	{
-		// Calculer la proportion du chemin parcouru le long de la ligne
-		double progress = (double)i / num_pixels;
-
-		// Calculer la couleur intermédiaire
-		int intermediate_red = (info->drawl.c_start >> 16) + (delta_red * progress);
-		int intermediate_green = (info->drawl.c_start >> 8 & 0xFF) + (delta_green * progress);
-		int intermediate_blue = (info->drawl.c_start & 0xFF) + (delta_blue * progress);
-		int intermediate_color = (intermediate_red << 16) | (intermediate_green << 8) | intermediate_blue;
-
-		// Dessiner le pixel avec la couleur intermédiaire
-		ft_pixel_put(&info->img, info->drawl.x0, info->drawl.y0, intermediate_color);
-
-		// Mise à jour des coordonnées pour le prochain pixel
-		info->drawl.error2 = 2 * info->drawl.error;
-		if (info->drawl.error2 > -info->drawl.delta_y)
-		{
-			info->drawl.error -= info->drawl.delta_y;
-			info->drawl.x0 += info->drawl.step_x;
-		}
-		if (info->drawl.error2 < info->drawl.delta_x)
-		{
-			info->drawl.error += info->drawl.delta_x;
-			info->drawl.y0 += info->drawl.step_y;
-		}
-
-		i++;
-	}
-}
-
-/*static void	ft_draw_line(t_fdf *info, int y, int x, int flag)
-{
-	ft_init_drawl(info, y, x, flag);
-	if (info->drawl.x0 > info->drawl.x1)
-		info->drawl.step_x = -1;
-	if (info->drawl.y0 > info->drawl.y1)
-		info->drawl.step_y = -1;
+	ft_init_grad(info);
 	while (1)
 	{
+		ft_get_grad(info);
+		if (info->drawl.delta_x == 0)
+			if (info->grad.intermediate_color == -2147483648)
+				info->grad.intermediate_color = info->drawl.c_start;
 		ft_pixel_put(&info->img, info->drawl.x0, info->drawl.y0,
-			info->map[y][x].c);
+			info->grad.intermediate_color);
 		if (info->drawl.x0 == info->drawl.x1
 			&& info->drawl.y0 == info->drawl.y1)
 			break ;
-		info->drawl.error2 = 2 * info->drawl.error;
-		if (info->drawl.error2 > -info->drawl.delta_y)
+		info->drawl.error2 = info->drawl.error;
+		if (info->drawl.error2 > -info->drawl.delta_x)
 		{
 			info->drawl.error -= info->drawl.delta_y;
 			info->drawl.x0 += info->drawl.step_x;
 		}
-		if (info->drawl.error2 < info->drawl.delta_x)
+		if (info->drawl.error2 < info->drawl.delta_y)
 		{
 			info->drawl.error += info->drawl.delta_x;
 			info->drawl.y0 += info->drawl.step_y;
 		}
 	}
-}*/
+}
 
 void	ft_draw_map(t_fdf *info)
 {

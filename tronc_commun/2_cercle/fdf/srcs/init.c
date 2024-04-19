@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 14:06:15 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/17 07:20:57 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/19 04:54:13 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	ft_init_drawl(t_fdf *info, int y, int x, int flag)
 	}
 	info->drawl.delta_x = abs(info->drawl.x1 - info->drawl.x0);
 	info->drawl.delta_y = abs(info->drawl.y1 - info->drawl.y0);
-	info->drawl.step_y = 1;
-	info->drawl.step_x = 1;
-	info->drawl.error = info->drawl.delta_x - info->drawl.delta_y;
+	info->drawl.step_y = -1;
+	info->drawl.step_x = -1;
+	info->drawl.error = -info->drawl.delta_y / 2;
 	info->drawl.error2 = 0;
 	info->modif.dpl_z = 0;
 }

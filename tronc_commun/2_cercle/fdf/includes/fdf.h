@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:48:55 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/19 01:19:58 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/19 08:13:28 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
-# define MENU_WIDTH WINDOW_WIDTH / 5
 # define WINDOW_TITLE "Projet_FdF"
 # define FACTOR 10
 
@@ -49,6 +48,10 @@ int		ft_get_color(char *str);
 void	ft_get_one_line(t_fdf *info);
 void	ft_get_info(char *filename, t_fdf *info);
 void	ft_get_map(t_fdf *info);
+
+//		gradient.c		//
+void	ft_get_grad(t_fdf *info);
+void	ft_init_grad(t_fdf *info);
 
 //		init.c			//
 void	ft_init_drawl(t_fdf *info, int y, int x, int flag);
