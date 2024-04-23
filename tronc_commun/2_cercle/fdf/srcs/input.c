@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 07:17:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/19 01:23:39 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/23 00:09:23 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_view_events(int keysym, t_fdf *info)
 	ft_draw_map(info);
 }
 
-void	ft_change_color(int color, t_fdf *info)
+void	ft_change_color(int color, int color_d, int color_i, t_fdf *info)
 {
 	int	y;
 	int	x;
@@ -44,7 +44,12 @@ void	ft_change_color(int color, t_fdf *info)
 		x = 0;
 		while (x < info->width)
 		{
-			info->map[y][x].c = color;
+			if (info->map[y][x].z == 0)
+				info->map[y][x].c = color;
+			else if (info->map[y][x].z > 0)
+				info->map[y][x].c = color_i;
+			else if (info->map[y][x].z < 0)
+				info->map[y][x].c = color_d;
 			x++;
 		}
 		y++;
@@ -59,11 +64,11 @@ void	ft_colors_events(int keysym, t_fdf *info)
 	int	x;
 
 	if (keysym == XK_r)
-		ft_change_color(C_RED, info);
+		ft_change_color(C_RED, C_RED_D, C_RED_I, info);
 	else if (keysym == XK_g)
-		ft_change_color(C_GREEN, info);
+		ft_change_color(C_GREEN, C_GREEN_D, C_GREEN_I, info);
 	else if (keysym == XK_b)
-		ft_change_color(C_BLUE, info);
+		ft_change_color(C_BLUE, C_BLUE_D, C_BLUE_I, info);
 	else if (keysym == XK_n)
 	{
 		y = 0;

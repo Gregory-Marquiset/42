@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:05:38 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/19 06:13:14 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/22 23:11:59 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	ft_draw_instructs(t_fdf *info)
 	void	*mlx;
 	void	*win;
 
-	x = WINDOW_WIDTH - 285;
+	x = info->w_width - 285;
 	y = 0;
 	mlx = info->mlx_ptr;
 	win = info->win_ptr;
@@ -45,13 +45,13 @@ static void	ft_draw_instructs_bg(t_fdf *info)
 	int	i;
 	int	j;
 
-	i = WINDOW_WIDTH - 300;
-	while (i < WINDOW_WIDTH - 10)
+	i = info->w_width - 300;
+	while (i < info->w_width - 10)
 	{
 		j = 15;
 		while (j < 265)
 		{
-			ft_pixel_put(&info->img, i, j, MENU_BACKGROUND);
+			ft_pixel_put(info, i, j, MENU_BACKGROUND);
 			j++;
 		}
 		i++;
@@ -66,11 +66,11 @@ static void	ft_draw_background(t_fdf *info)
 	int	*image;
 	int	i;
 
-	ft_bzero(info->img.img_pixels_ptr, WINDOW_WIDTH * WINDOW_HEIGHT
+	ft_bzero(info->img.img_pixels_ptr, info->w_width * info->w_height
 		* (info->img.bits_per_pixel / 8));
 	image = (int *)(info->img.img_pixels_ptr);
 	i = 0;
-	while (i < WINDOW_HEIGHT * WINDOW_WIDTH)
+	while (i < info->w_height * info->w_width)
 	{
 		image[i] = BACKGROUND;
 		i++;
@@ -87,7 +87,7 @@ static void	ft_draw_line(t_fdf *info, int y, int x, int flag)
 		if (info->drawl.delta_x == 0)
 			if (info->grad.intermediate_color == -2147483648)
 				info->grad.intermediate_color = info->drawl.c_start;
-		ft_pixel_put(&info->img, info->drawl.x0, info->drawl.y0,
+		ft_pixel_put(info, info->drawl.x0, info->drawl.y0,
 			info->grad.intermediate_color);
 		if (info->drawl.x0 == info->drawl.x1
 			&& info->drawl.y0 == info->drawl.y1)

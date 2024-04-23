@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:48:55 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/19 08:13:28 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/23 00:07:38 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #  define BUFFER_SIZE 4096
 # endif
 
-# define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1080
+# define WINDOW_WIDTH 2000
+# define WINDOW_HEIGHT 2000
 # define WINDOW_TITLE "Projet_FdF"
 # define FACTOR 10
 
@@ -62,6 +62,9 @@ void	ft_init_fdf(t_fdf *info);
 
 //		input.c			//
 int		ft_handle_cross(t_fdf *info);
+void	ft_view_events(int keysym, t_fdf *info);
+void	ft_change_color(int color, int color_d, int color_i, t_fdf *info);
+void	ft_colors_events(int keysym, t_fdf *info);
 int		ft_handle_input(int keysym, t_fdf *info);
 
 //		keys_events.c	//
@@ -71,10 +74,11 @@ void	ft_rotate_events(int keysym, t_fdf *info);
 void	ft_reset_events(int keysym, t_fdf *info);
 
 //		pixel_color.c	//
-void	ft_pixel_put(t_img *img, int x, int y, int color);
+void	ft_pixel_put(t_fdf *info, int x, int y, int color);
 
 //		verif.c			//
 int		ft_verif_cordo(char *str);
+void	ft_verif_h(t_fdf *info);
 
 //		z_events.c		//
 void	ft_flat_event(t_fdf *info);

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 14:06:15 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/19 04:54:13 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/22 23:41:36 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_init_window(t_fdf *info)
 	if (info->mlx_ptr == NULL)
 		ft_free_and_out(info, 5, 2,
 			"Error: Unable to initialize connection with graphics server.\n");
-	info->win_ptr = mlx_new_window(info->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT,
+	info->win_ptr = mlx_new_window(info->mlx_ptr, info->w_width, info->w_height,
 			WINDOW_TITLE);
 	if (info->win_ptr == NULL)
 		ft_free_and_out(info, 6, 2, "Error: window not initialized.\n");

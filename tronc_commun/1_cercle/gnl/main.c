@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:23:29 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/13 12:11:32 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:24:29 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int	main(void)
 	printf("\033[36;01m| vv | le texte demarre a la ligne d'en dessou en blanc | vv |\033[00m\n");
 	while (trigger == 1)
 	{
-		line = get_next_line(fd);
+		line = get_next_line_modif(fd, '\n');
 		printf("\033[36;01m| %2d |\033[00m%s\033[36;01m|\033[00m\n", i, line);
-		if (line == NULL)
+		if (line == NULL || i == 1)
 			trigger = 0;
-		free(line);
+//		free(line);
 		i++;
 	}
 	printf("\033[36;01m| ^^ | le texte prend fin a la ligne du dessus en blanc | ^^ |\033[00m\n");

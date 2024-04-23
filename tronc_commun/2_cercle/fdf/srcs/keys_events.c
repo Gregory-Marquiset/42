@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 06:24:27 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/19 01:22:18 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/22 23:07:12 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	ft_move_z(int keysym, t_fdf *info)
 		while (x < info->width)
 		{
 			if (keysym == XK_q)
-				info->map[y][x].z += FACTOR / 2;
+				info->map[y][x].z += (double)info->factor / 2;
 			if (keysym == XK_e)
-				info->map[y][x].z -= FACTOR / 2;
+				info->map[y][x].z -= (double)info->factor / 2;
 			x++;
 		}
 		y++;
@@ -37,13 +37,13 @@ void	ft_move_z(int keysym, t_fdf *info)
 void	ft_move_events(int keysym, t_fdf *info)
 {
 	if (keysym == XK_w)
-		info->modif.dpl_y -= FACTOR;
+		info->modif.dpl_y -= (double)info->factor;
 	else if (keysym == XK_s)
-		info->modif.dpl_y += FACTOR;
+		info->modif.dpl_y += (double)info->factor;
 	else if (keysym == XK_d)
-		info->modif.dpl_x += FACTOR;
+		info->modif.dpl_x += (double)info->factor;
 	else if (keysym == XK_a)
-		info->modif.dpl_x -= FACTOR;
+		info->modif.dpl_x -= (double)info->factor;
 	else if (keysym == XK_q || keysym == XK_e)
 		ft_move_z(keysym, info);
 	ft_draw_map(info);

@@ -6,23 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 04:57:16 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/03/13 12:19:34 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/23 06:12:14 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/get_next_line_bonus.h"
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
-}
 
 char	*ft_strdup(char *s, int len)
 {

@@ -6,7 +6,7 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/17 13:36:33 by gmarquis          #+#    #+#              #
-#    Updated: 2024/04/19 08:54:58 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/04/23 00:06:00 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,11 +30,13 @@ NAME = fdf
 
 MK = mkdir
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror
 
 OBJS_DIR = objs/
 OBJS = $(notdir $(SRCS:>C=.o))
 OBJS_PREF = $(addprefix $(OBJS_DIR), $(OBJS:.c=.o))
+
+all : libft minilibx $(NAME)
 
 libft :
 	@make bonus -C $(LIBFT_PATH)
@@ -42,11 +44,9 @@ libft :
 minilibx :
 	@make all -C $(MINILIBX_PATH)
 
-all : libft minilibx $(NAME)
+bonus : libft minilibx $(NAME)
 
-bonus : all
-
-$(OBJS_DIR)%.o : srcs/%.c
+$(OBJS_DIR)%.o : srcs/%.c $(LIBFT_PATH)libft_bns.a $(MINILIBX_PATH)libmlx.a
 	$(MK) -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
