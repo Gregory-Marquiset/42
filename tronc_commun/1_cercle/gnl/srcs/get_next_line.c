@@ -6,69 +6,92 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 04:56:48 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/04/23 14:42:35 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/04/26 03:14:01 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/get_next_line.h"
 
-// static void	ft_print_line_modif(t_gnl *gnl)
-// {
-// 	int		until;
-
-// 	if (!gnl->tempo)
-// 		return (NULL);
-// 	until = ft_countuntil(gnl->tempo, gnl->n);
-// 	ft_strlcpy(gnl->l_to_print, gnl->tempo, until);
-// 	*gnl->static_l[gnl->fd] = ft_memlcpy(gnl->tempo, until);
-// }
-
-static void	ft_verif_and_init_gnl(int fd, char n, t_gnl *gnl)
+int	ft_find_n(char *s, ssize_t *len, char n)
 {
-	gnl->fd = fd;
-	gnl->n = n;
-	if (gnl->fd < 0)
-		ft_exit(2, "Error : failure to open fd.\n");
-	if (BUFFER_SIZE < 1)
-		ft_exit(2, "Error : failure BUFFER_SIZE smaller than 1.\n");
-	if (read(gnl->fd, 0, 0) < 0)
-		ft_exit(2, "Error : read failure.\n");
-	gnl->static_l[gnl->fd][0] = '1';
-	gnl->static_l[gnl->fd][1] = '2';
-	gnl->static_l[gnl->fd][2] = '3';
-	gnl->static_l[gnl->fd][3] = '\n';
-	gnl->static_l[gnl->fd][4] = '5';
-	gnl->tempo = gnl->static_l[gnl->fd];
-	gnl->o_read = 1;
-	gnl->l_to_print[0] = 'O';
-	gnl->l_to_print[1] = 'K';
-	gnl->l_to_print[2] = '.';
-	gnl->l_to_print[3] = '\0';
+	size_t	i;
+
+	i = 0;
+	while (s[i] && s[i] != n)
+		i++;
+	if (s[i] == n)
+		return (*len += i + 1, 1);
+	*len += i;
+	return (0);
 }
 
-char	*get_next_line_modif(int fd, char n)
+void	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	static t_gnl	gnl;
+	size_t	i;
 
-	ft_verif_and_init_gnl(fd, n, &gnl);
-	if (ft_contain_n(gnl.static_l[fd], n))
+	i = 0;
+	while (src[i] && i + 1 < size)
 	{
-//		ft_print_line_modif(&gnl);
-		return (gnl.l_to_print);
+		dst[i] = src[i];
+		++i;
 	}
-	// if (gnl.static_l[fd])
-	// 	gnl.tempo = ft_strdup(gnl.static_l[fd]);
-	// else
-	// 	gnl.tempo = ft_calloc(0, 0);
-	// while (o_read > 0)
-	// {
-	// 	o_read = read(fd, buffer, BUFFER_SIZE);
-	// 	buffer[o_read] = '\0';
-	// 	tempo = ft_strjoin(tempo, buffer, 1);
-	// 	if (ft_contain_n(tempo, n))
-	// 		break ;
-	// }
-	ft_printf("tempo = |%s|\nstatic = |%s|\n", gnl.tempo, gnl.static_l[gnl.fd]);
-	return (0);
-	// return (ft_print_line_modif(&stat[fd], tempo, n));
+	if (size)
+		dst[i] = 0;
+}
+
+int	ft_read_file(int fd, t_string *string, char n)
+{
+	ssize_t	read_return;
+	ssize_t	return_l;
+	char	*tmp;
+
+	return_l = 0;
+	read_return = BUFFER_SIZE;
+	while (!ft_find_n(string->content + return_l, &return_l, n) && read_return == BUFFER_SIZE)
+	{
+		if (string->len + BUFFER_SIZE >= string->max_size)
+		{
+			tmp = malloc(string->max_size * 2);
+			if (!tmp)
+				return (-1);
+			ft_strlcpy(tmp, string->content, string->len + 1);
+			free(string->content);
+			string->content = tmp;
+			string->max_size *= 2;
+		}
+		read_return = read(fd, string->content + string->len, BUFFER_SIZE);
+		if (read_return == -1)
+			return (-1);
+		string->len += read_return;
+		string->content[string->len] = 0;
+	}
+	return (return_l);
+}
+
+char	*get_next_line(int fd, char n)
+{
+	ssize_t		line_len;
+	char		*return_l;
+	t_string	string;
+	static char	static_l[FD][BUFFER_SIZE] = {0};
+
+	if (fd >= FD || fd < 0 || BUFFER_SIZE < 1)
+		return (NULL);
+	string.max_size = BUFFER_SIZE + 1;
+	string.content = malloc(string.max_size);
+	if (!string.content)
+		return (NULL);
+	string.len = 0;
+	while (static_l[fd][string.len])
+		string.len++;
+	ft_strlcpy(string.content, static_l[fd], string.len + 1);
+	line_len = ft_read_file(fd, &string, n);
+	if (line_len == -1 || !*string.content)
+		return (free(string.content), NULL);
+	return_l = malloc(line_len + 1);
+	if (!return_l)
+		return (free(string.content), NULL);
+	ft_strlcpy(return_l, string.content, line_len + 1);
+	ft_strlcpy(static_l[fd], string.content + line_len, string.len - line_len + 1);
+	return (free(string.content), return_l);
 }
